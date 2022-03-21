@@ -3,18 +3,18 @@ import { Dimensions } from "react-native";
 
 const window = Dimensions.get("window");
 
-const colorBackgroundTheme = "#E0B9BB";
+const colorBackgroundTheme = "#ffec33";
 const colorBackgroundLight = "rgba(250,250,250,1)";
 const colorBackgroundDark = "#35364B";
 
-const colorTextLight = "rgba(255, 255, 255, 0.9)";
+const colorTextLight = "rgba(0, 0, 0, 0.9)";
 const colorTextDark = "rgba(0, 0, 0, 0.9)";
 
 export const styleConstants = {
   windowWidth: window.width,
   windowHeight: window.height,
   colorBackgroundTheme,
-  colorBackgroundAccent: "#ba0000",
+  colorBackgroundAccent: "#000000",
   colorBackgroundLight,
   colorBackgroundDark,
   colorBackgroundDanger: "#ff4444",
@@ -52,7 +52,7 @@ export const styleConstants = {
     .string(2),
 
   colorTextTheme: "#308CC3",
-  colorTextAccent: "#ba0000",
+  colorTextAccent: "#000000",
   colorTextLight,
   colorTextDark,
   colorTextDanger: "#ff4444",

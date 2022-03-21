@@ -45,7 +45,7 @@ export const Router = observer(function Router({
                 <Tabs.Screen
                   name="HomeScreen"
                   component={HomeScreen}
-                  options={{ title: "HomeScreen" }}
+                  options={{ title: "llacan" }}
                 />
               </Tabs.Navigator>
             );
