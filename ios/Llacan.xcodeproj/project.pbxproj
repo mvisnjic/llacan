@@ -83,9 +83,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0C76A02127E85F4D000FB526 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* Llacan */ = {
 			isa = PBXGroup;
 			children = (
+				0C76A02127E85F4D000FB526 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -145,7 +153,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-Llacan-LlacanTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-Llacan-LlacanTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
