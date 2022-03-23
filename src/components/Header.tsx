@@ -47,6 +47,7 @@ type HeaderProps = NativeStackHeaderProps | BottomTabHeaderProps;
 export const Header = observer(
   ({ options, navigation, ...props }: HeaderProps) => {
     const canGoBack = "back" in props && !!props.back;
+    const isLoggedIn = "route" in props && props.route.name !== "HomeScreen";
     const insets = useSafeAreaInsets();
     const insetTop = insets.top;
 
@@ -108,22 +109,24 @@ export const Header = observer(
               {t(title as any)}
             </Text>
           </View>
-          <View justifyContentCenter flexDirectionRow style={S.headerRight}>
-            {HeaderRight}
-            <View style={styles.circle} />
-            <Text
-              colorLight
-              sizeMedium
-              ellipsizeMode="tail"
-              numberOfLines={1}
-              style={{
-                paddingRight: 32,
-                paddingLeft: 21,
-              }}
-            >
-              User
-            </Text>
-          </View>
+          {isLoggedIn && (
+            <View justifyContentCenter flexDirectionRow style={S.headerRight}>
+              {HeaderRight}
+              <View style={styles.circle} />
+              <Text
+                colorLight
+                sizeMedium
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={{
+                  paddingRight: 32,
+                  paddingLeft: 21,
+                }}
+              >
+                User
+              </Text>
+            </View>
+          )}
         </View>
       </View>
     );
