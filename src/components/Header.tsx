@@ -30,7 +30,15 @@ const S = StyleSheet.create({
     alignItems: "center",
   },
   headerLeft: { position: "absolute", top: 0, left: 0, bottom: 0 },
-  headerRight: { position: "absolute", top: 0, right: 0, bottom: 0 },
+  headerRight: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    maxWidth: 170,
+  },
   titleText: { flex: 1 },
 });
 
@@ -78,7 +86,7 @@ export const Header = observer(
               />
             )}
             {HeaderLeft}
-            {!hasLeftComponent && <Spacer large />}
+            {!hasLeftComponent && <Spacer extraLarge />}
             <Text
               colorLight
               sizeExtraLarge
@@ -100,12 +108,33 @@ export const Header = observer(
               {t(title as any)}
             </Text>
           </View>
-
-          <View justifyContentCenter flexDirectionRow>
+          <View justifyContentCenter flexDirectionRow style={S.headerRight}>
             {HeaderRight}
+            <View style={styles.circle} />
+            <Text
+              colorLight
+              sizeMedium
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={{
+                paddingRight: 32,
+                paddingLeft: 21,
+              }}
+            >
+              User
+            </Text>
           </View>
         </View>
       </View>
     );
   }
 );
+
+const styles = StyleSheet.create({
+  circle: {
+    width: 40,
+    height: 40,
+    borderRadius: 100 / 2,
+    backgroundColor: C.colorBackgroundTheme,
+  },
+});
