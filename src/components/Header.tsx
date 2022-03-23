@@ -12,7 +12,7 @@ import { Spacer } from "./Spacer";
 import { Text } from "./Text";
 import { View } from "./View";
 
-const headerHeight = 52;
+const headerHeight = 56;
 
 const S = StyleSheet.create({
   container: {
@@ -20,7 +20,7 @@ const S = StyleSheet.create({
   },
   headerContainer: {
     height: headerHeight,
-    backgroundColor: C.colorBackgroundTheme,
+    backgroundColor: C.colorBackgroundDark,
     justifyContent: "space-between",
   },
   backButton: {
@@ -30,7 +30,15 @@ const S = StyleSheet.create({
     alignItems: "center",
   },
   headerLeft: { position: "absolute", top: 0, left: 0, bottom: 0 },
-  headerRight: { position: "absolute", top: 0, right: 0, bottom: 0 },
+  headerRight: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    maxWidth: 170,
+  },
   titleText: { flex: 1 },
 });
 
@@ -39,21 +47,23 @@ type HeaderProps = NativeStackHeaderProps | BottomTabHeaderProps;
 export const Header = observer(
   ({ options, navigation, ...props }: HeaderProps) => {
     const canGoBack = "back" in props && !!props.back;
+    const isLoggedIn = "route" in props && props.route.name !== "HomeScreen";
     const insets = useSafeAreaInsets();
     const insetTop = insets.top;
 
-    const HeaderRight = options?.headerRight?.({});
+    const HeaderRight = options?.headerRight?.({ canGoBack });
     const HeaderLeft = options?.headerLeft?.({ canGoBack });
     const hasLeftComponent = canGoBack || Boolean(HeaderLeft);
 
-    const { title } = options;
+    // const { title } = options;
+    const title = "lačan";
 
     const store = useStore();
     const statusBarBackground = (
       <View
         style={{
           height: insetTop,
-          backgroundColor: store.uiStore.safeAreaBackgroundColor,
+          backgroundColor: C.colorBackgroundDark,
         }}
       />
     );
@@ -77,7 +87,7 @@ export const Header = observer(
               />
             )}
             {HeaderLeft}
-            {!hasLeftComponent && <Spacer large />}
+            {!hasLeftComponent && <Spacer extraLarge />}
             <Text
               colorLight
               sizeExtraLarge
@@ -86,15 +96,48 @@ export const Header = observer(
               ellipsizeMode="tail"
               numberOfLines={1}
             >
+              <Text
+                colorTheme
+                sizeExtraLarge
+                weightBold
+                style={S.titleText}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+              >
+                l
+              </Text>
               {t(title as any)}
             </Text>
           </View>
-
-          <View justifyContentCenter flexDirectionRow>
-            {HeaderRight}
-          </View>
+          {isLoggedIn && (
+            <View justifyContentCenter flexDirectionRow style={S.headerRight}>
+              {HeaderRight}
+              <View style={styles.circle} />
+              <Text
+                colorLight
+                sizeMedium
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={{
+                  paddingRight: 32,
+                  paddingLeft: 21,
+                }}
+              >
+                User
+              </Text>
+            </View>
+          )}
         </View>
       </View>
     );
   }
 );
+
+const styles = StyleSheet.create({
+  circle: {
+    width: 40,
+    height: 40,
+    borderRadius: 100 / 2,
+    backgroundColor: C.colorBackgroundTheme,
+  },
+});

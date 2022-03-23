@@ -5,35 +5,20 @@ const window = Dimensions.get("window");
 
 const colorBackgroundTheme = "#ffec33";
 const colorBackgroundLight = "rgba(250,250,250,1)";
-const colorBackgroundDark = "#35364B";
+const colorBackgroundDark = "#070707";
 
-const colorTextLight = "rgba(0, 0, 0, 0.9)";
+const colorTextLight = "rgba(255, 255, 255, 0.9)";
 const colorTextDark = "rgba(0, 0, 0, 0.9)";
 
 export const styleConstants = {
   windowWidth: window.width,
   windowHeight: window.height,
-  colorBackgroundTheme,
   colorBackgroundAccent: "#000000",
-  colorBackgroundLight,
-  colorBackgroundDark,
   colorBackgroundDanger: "#ff4444",
-  colorBackgroundThemeSoft: Color(colorBackgroundTheme)
-    .lighten(0.25)
-    .rgb()
-    .string(2),
-  colorBackgroundThemeSofter: Color(colorBackgroundTheme)
-    .lighten(0.5)
-    .rgb()
-    .string(2),
-  colorBackgroundThemeHard: Color(colorBackgroundTheme)
-    .darken(0.25)
-    .rgb()
-    .string(2),
-  colorBackgroundThemeHarder: Color(colorBackgroundTheme)
-    .darken(0.5)
-    .rgb()
-    .string(2),
+  colorBackgroundDark,
+  colorBackgroundDarkLight: Color("#070707").lighten(0.15).rgb().string(2),
+  colorBackgroundDarkLighter: Color("#070707").lighten(0.25).rgb().string(2),
+  colorBackgroundLight,
   colorBackgroundLightDark: Color(colorBackgroundLight)
     .darken(0.015)
     .rgb()
@@ -42,16 +27,25 @@ export const styleConstants = {
     .darken(0.25)
     .rgb()
     .string(2),
-  colorBackgroundDarkLight: Color(colorBackgroundDark)
-    .lighten(0.15)
+  colorBackgroundTheme,
+  colorBackgroundThemeHard: Color(colorBackgroundTheme)
+    .darken(0.25)
     .rgb()
     .string(2),
-  colorBackgroundDarkLighter: Color(colorBackgroundDark)
+  colorBackgroundThemeHarder: Color(colorBackgroundTheme)
+    .darken(0.5)
+    .rgb()
+    .string(2),
+  colorBackgroundThemeSoft: Color(colorBackgroundTheme)
     .lighten(0.25)
     .rgb()
     .string(2),
+  colorBackgroundThemeSofter: Color(colorBackgroundTheme)
+    .lighten(0.5)
+    .rgb()
+    .string(2),
 
-  colorTextTheme: "#308CC3",
+  colorTextTheme: "#ffec33",
   colorTextAccent: "#000000",
   colorTextLight,
   colorTextDark,

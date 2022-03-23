@@ -84,7 +84,7 @@ export const Button = forwardRef<TouchableOpacity, ButtonProps>(
         else if (colorAccent) style.color = C.colorTextAccent;
         else style.color = C.colorTextTheme;
       } else {
-        style.color = C.colorTextLight;
+        style.color = C.colorTextDark;
       }
 
       return style;
