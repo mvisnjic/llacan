@@ -8,9 +8,7 @@ import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
 import { shadow } from "~/utils/shadow";
 import { IconButton } from "./IconButton";
-// import { Spacer } from "./Spacer";
-// import { IconButton } from "./IconButton";
-// import { Spacer } from "./Spacer";
+import { Spacer } from "./Spacer";
 import { Text } from "./Text";
 import { View } from "./View";
 
@@ -45,8 +43,8 @@ export const Header = observer(
     const insetTop = insets.top;
 
     const HeaderRight = options?.headerRight?.({ canGoBack });
-    // const HeaderLeft = options?.headerLeft?.({ canGoBack });
-    // const hasLeftComponent = canGoBack || Boolean(HeaderLeft);
+    const HeaderLeft = options?.headerLeft?.({ canGoBack });
+    const hasLeftComponent = canGoBack || Boolean(HeaderLeft);
 
     // const { title } = options;
     const title = "lačan";
@@ -67,12 +65,7 @@ export const Header = observer(
       <View style={S.container}>
         {statusBarBackground}
         <View flexDirectionRow alignItemsCenter style={S.headerContainer}>
-          <View
-            alignItemsCenter
-            flexDirectionRow
-            flex
-            paddingHorizontalExtraLarge
-          >
+          <View alignItemsCenter flexDirectionRow flex>
             {canGoBack && (
               <IconButton
                 style={S.backButton}
@@ -84,8 +77,8 @@ export const Header = observer(
                 iconColor={C.colorTextLight}
               />
             )}
-            {/* {HeaderLeft} */}
-            {/* {!hasLeftComponent && <Spacer large />} */}
+            {HeaderLeft}
+            {!hasLeftComponent && <Spacer large />}
             <Text
               colorLight
               sizeExtraLarge
