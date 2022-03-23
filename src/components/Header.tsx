@@ -8,11 +8,13 @@ import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
 import { shadow } from "~/utils/shadow";
 import { IconButton } from "./IconButton";
-import { Spacer } from "./Spacer";
+// import { Spacer } from "./Spacer";
+// import { IconButton } from "./IconButton";
+// import { Spacer } from "./Spacer";
 import { Text } from "./Text";
 import { View } from "./View";
 
-const headerHeight = 52;
+const headerHeight = 56;
 
 const S = StyleSheet.create({
   container: {
@@ -20,7 +22,7 @@ const S = StyleSheet.create({
   },
   headerContainer: {
     height: headerHeight,
-    backgroundColor: C.colorBackgroundTheme,
+    backgroundColor: C.colorBackgroundDark,
     justifyContent: "space-between",
   },
   backButton: {
@@ -42,18 +44,19 @@ export const Header = observer(
     const insets = useSafeAreaInsets();
     const insetTop = insets.top;
 
-    const HeaderRight = options?.headerRight?.({});
-    const HeaderLeft = options?.headerLeft?.({ canGoBack });
-    const hasLeftComponent = canGoBack || Boolean(HeaderLeft);
+    const HeaderRight = options?.headerRight?.({ canGoBack });
+    // const HeaderLeft = options?.headerLeft?.({ canGoBack });
+    // const hasLeftComponent = canGoBack || Boolean(HeaderLeft);
 
-    const { title } = options;
+    // const { title } = options;
+    const title = "lačan";
 
     const store = useStore();
     const statusBarBackground = (
       <View
         style={{
           height: insetTop,
-          backgroundColor: store.uiStore.safeAreaBackgroundColor,
+          backgroundColor: C.colorBackgroundDark,
         }}
       />
     );
@@ -64,7 +67,12 @@ export const Header = observer(
       <View style={S.container}>
         {statusBarBackground}
         <View flexDirectionRow alignItemsCenter style={S.headerContainer}>
-          <View alignItemsCenter flexDirectionRow flex>
+          <View
+            alignItemsCenter
+            flexDirectionRow
+            flex
+            paddingHorizontalExtraLarge
+          >
             {canGoBack && (
               <IconButton
                 style={S.backButton}
@@ -76,8 +84,8 @@ export const Header = observer(
                 iconColor={C.colorTextLight}
               />
             )}
-            {HeaderLeft}
-            {!hasLeftComponent && <Spacer large />}
+            {/* {HeaderLeft} */}
+            {/* {!hasLeftComponent && <Spacer large />} */}
             <Text
               colorLight
               sizeExtraLarge
@@ -86,6 +94,16 @@ export const Header = observer(
               ellipsizeMode="tail"
               numberOfLines={1}
             >
+              <Text
+                colorTheme
+                sizeExtraLarge
+                weightBold
+                style={S.titleText}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+              >
+                l
+              </Text>
               {t(title as any)}
             </Text>
           </View>
