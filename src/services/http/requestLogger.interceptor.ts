@@ -21,7 +21,7 @@ export function requestLogger(config: AxiosRequestConfig) {
   );
 
   const token = config?.headers?.Authorization;
-  const tokenShort = token ? `${token.substr(0, 40)}...` : "No JWT set";
+  const tokenShort = token ? `${String(token).substr(0, 40)}...` : "No JWT set";
   lines.push(`Token: ${tokenShort}`);
 
   const maxLines = 320;

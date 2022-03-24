@@ -42,7 +42,7 @@ export const Header = observer(
     const insets = useSafeAreaInsets();
     const insetTop = insets.top;
 
-    const HeaderRight = options?.headerRight?.({});
+    const HeaderRight = options?.headerRight?.({ canGoBack });
     const HeaderLeft = options?.headerLeft?.({ canGoBack });
     const hasLeftComponent = canGoBack || Boolean(HeaderLeft);
 
