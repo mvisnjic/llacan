@@ -54,7 +54,7 @@ const PersonListItem = observer(function PersonListItem({
           {person.birth_year}
         </Text>
         <Spacer extraLarge />
-        <Button title="Menu i info" />
+        <Button outline title="Menu i info" />
         <Spacer />
         <Button title="Nova narudžba" />
       </View>
