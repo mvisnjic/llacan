@@ -105,7 +105,7 @@ export const Button = forwardRef<TouchableOpacity, ButtonProps>(
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const borderRadius = 8; // shared between the button and the spinner overlay
+    const borderRadius = 0; // shared between the button and the spinner overlay
     const style: TouchableOpacityProps["style"] = {
       flexDirection: "row",
       justifyContent: "center", // ideja kod dodavanja ikona -> children != null ? "flex-start" : "center"
