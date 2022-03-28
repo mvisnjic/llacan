@@ -111,22 +111,22 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>(
     else if (colorLightSofter) color = C.colorTextLightSofter;
 
     let fontWeight: TextStyle["fontWeight"] = C.fontWeightRegular;
-    const fontFamily: TextStyle["fontFamily"] = undefined; // "OpenSans-Regular";
+    const fontFamily: TextStyle["fontFamily"] = "TTNorms-Regular";
     if (weightLight) {
       fontWeight = C.fontWeightLight;
-      // fontFamily = "OpenSans-Light";
+      // fontFamily = "TTNorms-Light";
     } else if (weightRegular) {
       fontWeight = C.fontWeightRegular;
-      // fontFamily = "OpenSans-Regular";
+      // fontFamily = "TTNorms-Regular";
     } else if (weightSemiBold) {
       fontWeight = C.fontWeightSemiBold;
-      // fontFamily = "OpenSans-SemiBold";
+      // fontFamily = "TTNorms-Medium";
     } else if (weightBold) {
       fontWeight = C.fontWeightBold;
-      // fontFamily = "OpenSans-Bold";
+      // fontFamily = "TTNorms-Bold";
     } else if (weightExtraBold) {
       fontWeight = C.fontWeightExtraBold;
-      // fontFamily = "OpenSans-ExtraBold";
+      // fontFamily = "TTNorms-ExtraBold";
     }
 
     const editable = props.editable ?? true;

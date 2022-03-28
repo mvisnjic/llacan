@@ -13,7 +13,7 @@ export const LoginForm = observer(function LoginForm() {
 
   return (
     <View flex paddingExtraLarge>
-      <Text style={{ fontFamily: "TTNorms-Bold" }}>PRIJAVI SE</Text>
+      <Text weightBold>PRIJAVI SE</Text>
       <Spacer />
 
       <TextInput
