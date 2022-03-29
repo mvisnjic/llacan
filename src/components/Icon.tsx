@@ -13,7 +13,8 @@ export interface IconProps {
     | "radio-button-off"
     | "phone-outline"
     | "clock-outline"
-    | "home-outline";
+    | "home-outline"
+    | "circle-outline";
 
   color?: string;
   size?: number;

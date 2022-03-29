@@ -20,6 +20,7 @@ interface PersonListItemProps {
 }
 
 const allOrdersAreActive = false;
+const successColor = allOrdersAreActive ? "#2DCB48" : C.colorBackgroundLight;
 
 function useStyle() {
   return StyleSheet.create({
@@ -70,6 +71,21 @@ const PersonListItem = observer(function PersonListItem({
             <Spacer />
             <Text sizeMedium weightLight>
               {person.birth_year}
+            </Text>
+          </View>
+          <View flexDirectionRow alignItemsCenter>
+            <Icon size={24} name="circle-outline" color={successColor} />
+            <Spacer />
+            <Text
+              sizeMedium
+              weightLight
+              style={{
+                color: allOrdersAreActive
+                  ? C.colorBackgroundDark
+                  : C.colorBackgroundLight,
+              }}
+            >
+              Aktivna narudžba
             </Text>
           </View>
         </View>
