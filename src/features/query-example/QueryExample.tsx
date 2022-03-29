@@ -38,6 +38,7 @@ const PersonListItem = observer(function PersonListItem({
   return (
     <View paddingHorizontalMedium paddingVerticalSmall>
       <View paddingLarge style={S.container}>
+        <Spacer />
         <Text sizeExtraLarge weightBold>
           {person.name}
         </Text>
@@ -49,7 +50,6 @@ const PersonListItem = observer(function PersonListItem({
         <Text sizeMedium weightLight>
           {person.hair_color}, {person.skin_color}, {person.eye_color}
         </Text>
-        <Spacer small />
         <Text sizeMedium weightLight>
           {person.birth_year}
         </Text>
@@ -84,7 +84,7 @@ export const QueryExample = observer(function QueryExample() {
       </Text>
       <Spacer extraLarge />
 
-      <Spacer extraLarge />
+      <Button outline title="Prošle narudžbe" />
 
       <StandardFlatList
         query={query}
