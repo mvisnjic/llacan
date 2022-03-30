@@ -11,6 +11,7 @@ import { DropdownExample } from "~/features/dropdown/DropdownExample";
 import { HomeScreen } from "~/features/home-screen/HomeScreen";
 import { LoginScreen } from "~/features/login/LoginScreen";
 import { QueryExample } from "~/features/query-example/QueryExample";
+import { RestaurantMenuScreen } from "~/features/query-example/RestaurantMenuScreen";
 import { useStore } from "~/mobx/utils/useStore";
 import { MainTabParams, TopLevelStackParams } from "./RouterTypes";
 
@@ -56,6 +57,12 @@ export const Router = observer(function Router({
           name="QueryExample"
           component={QueryExample}
           options={{ title: "QueryExample" }}
+        />
+
+        <Stack.Screen
+          name="RestaurantMenuScreen"
+          component={RestaurantMenuScreen}
+          options={{ title: "RestaurantMenuScreen" }}
         />
 
         <Stack.Screen

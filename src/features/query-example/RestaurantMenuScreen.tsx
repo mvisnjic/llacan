@@ -105,7 +105,7 @@ const PersonListItem = observer(function PersonListItem({
   );
 });
 
-export const QueryExample = observer(function QueryExample() {
+export const RestaurantMenuScreen = observer(function QueryExample() {
   const store = useStore();
   const query = useInfiniteQuery(["peopleList"], ({ pageParam }) => {
     return store.personStore.readPersonList({ page: pageParam });
@@ -140,17 +140,17 @@ export const QueryExample = observer(function QueryExample() {
       <Spacer large />
 
       <View>
-        <StandardFlatList
-          query={query}
-          contentContainerStyle={{ paddingBottom: insets.bottom }}
-          keyExtractor={(person) => String(person)}
-          renderItem={({ item }) => <PersonListItem person={item} />}
-        />
         <LinearGradient
           colors={[C.colorBackgroundLight, "rgba(255,255,255, 0)"]}
           style={{ width: "100%", height: 5, position: "absolute", top: 0 }}
           start={{ x: 0.5, y: 0.0 }}
           end={{ x: 0.5, y: 1.0 }}
+        />
+        <StandardFlatList
+          query={query}
+          contentContainerStyle={{ paddingBottom: insets.bottom }}
+          keyExtractor={(person) => String(person)}
+          renderItem={({ item }) => <PersonListItem person={item} />}
         />
       </View>
     </Screen>

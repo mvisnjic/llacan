@@ -30,6 +30,13 @@ export const HomeScreen = observer(function HomeScreen() {
           title="Form example"
           onPress={() => navigation.navigate("FormExample")}
         />
+
+        <Spacer />
+
+        <Button
+          title="Restaurant Menu Screen"
+          onPress={() => navigation.navigate("RestaurantMenuScreen")}
+        />
       </View>
     </Screen>
   );
