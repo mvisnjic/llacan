@@ -37,11 +37,11 @@ export const styleConstants = {
     .rgb()
     .string(2),
   colorBackgroundThemeSoft: Color(colorBackgroundTheme)
-    .lighten(0.25)
+    .lighten(0.5)
     .rgb()
     .string(2),
   colorBackgroundThemeSofter: Color(colorBackgroundTheme)
-    .lighten(0.5)
+    .lighten(0.75)
     .rgb()
     .string(2),
 

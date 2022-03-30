@@ -19,8 +19,9 @@ interface PersonListItemProps {
   person: PersonInstance;
 }
 
-const allOrdersAreActive = false;
-const successColor = allOrdersAreActive ? "#2DCB48" : C.colorBackgroundLight;
+const allOrdersAreActive = true;
+const iconSize = 24;
+const userName = "User";
 
 function useStyle() {
   return StyleSheet.create({
@@ -56,26 +57,34 @@ const PersonListItem = observer(function PersonListItem({
 
         <View>
           <View flexDirectionRow alignItemsCenter>
-            <Icon size={24} name="home-outline" color={C.colorBackgroundDark} />
-            <Spacer />
+            <Icon
+              size={iconSize}
+              name="home-outline"
+              color={C.colorBackgroundDark}
+            />
+            <Spacer large />
             <Text sizeMedium weightLight>
               {person.hair_color}, {person.skin_color}, {person.eye_color}
             </Text>
           </View>
           <View flexDirectionRow alignItemsCenter>
             <Icon
-              size={24}
+              size={iconSize}
               name="phone-outline"
               color={C.colorBackgroundDark}
             />
-            <Spacer />
+            <Spacer large />
             <Text sizeMedium weightLight>
               {person.birth_year}
             </Text>
           </View>
           <View flexDirectionRow alignItemsCenter>
-            <Icon size={24} name="circle-outline" color={successColor} />
-            <Spacer />
+            <Icon
+              size={iconSize}
+              name="circle-outline"
+              color={allOrdersAreActive ? "#2DCB48" : C.colorBackgroundLight}
+            />
+            <Spacer large />
             <Text
               sizeMedium
               weightLight
@@ -89,10 +98,10 @@ const PersonListItem = observer(function PersonListItem({
             </Text>
           </View>
         </View>
-        <Spacer extraLarge />
+        <Spacer large />
         <Button outline title="Menu i info" />
         <Spacer />
-        <Button title="Nova narudžba" />
+        <Button title={allOrdersAreActive ? "Pridruži se" : "Nova narudžba"} />
       </View>
     </View>
   );
@@ -112,7 +121,7 @@ export const QueryExample = observer(function QueryExample() {
 
       <View paddingHorizontalLarge>
         <Text sizeExtraLarge weightBold>
-          User, odaberite željeni restoran
+          {userName}, odaberite željeni restoran
         </Text>
       </View>
       <Spacer extraLarge />
@@ -122,8 +131,12 @@ export const QueryExample = observer(function QueryExample() {
         centerContent
         style={{ alignItems: "flex-end" }}
       >
-        <Button outline title="Prošle narudžbe">
-          <Icon size={24} name="clock-outline" color={C.colorBackgroundDark} />
+        <Button outline title="Prošle narudžbe" paddingHorizontalLarge>
+          <Icon
+            size={iconSize}
+            name="clock-outline"
+            color={C.colorBackgroundDark}
+          />
         </Button>
       </View>
       <Spacer large />
