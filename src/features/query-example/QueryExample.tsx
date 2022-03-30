@@ -1,8 +1,13 @@
+import MaskedView from "@react-native-masked-view/masked-view";
 import { observer } from "mobx-react";
 import React from "react";
 import { StyleSheet } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Button } from "~/components/Button";
+import { Icon } from "~/components/Icon";
 import { Screen } from "~/components/Screen";
+import { Spacer } from "~/components/Spacer";
 import { StandardFlatList } from "~/components/StandardFlatList";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
@@ -16,14 +21,17 @@ interface PersonListItemProps {
   person: PersonInstance;
 }
 
+const allOrdersAreActive = true;
+const iconSize = 24;
+const userName = "User";
+
 function useStyle() {
   return StyleSheet.create({
     container: {
-      borderRadius: 4,
-      borderWidth: 1,
-      borderColor: C.colorTextAccent,
-      backgroundColor: C.colorBackgroundThemeSofter,
-      ...shadow(2),
+      backgroundColor: allOrdersAreActive
+        ? C.colorBackgroundThemeSofter
+        : C.colorBackgroundLight,
+      ...shadow(5),
     },
   });
 }
@@ -35,35 +43,64 @@ const PersonListItem = observer(function PersonListItem({
 
   return (
     <View paddingHorizontalMedium paddingVerticalSmall>
-      <View paddingMedium style={S.container} flexDirectionRow>
-        <View flex>
-          <Text>
-            <Text colorDarkSoft>Name:</Text> {person.name}
-          </Text>
-          <Text>
-            <Text colorDarkSoft>Gender:</Text> {person.gender}
-          </Text>
-          <Text>
-            <Text colorDarkSoft>Height (cm):</Text> {person.height}
-          </Text>
-          <Text>
-            <Text colorDarkSoft>Mass (kg):</Text> {person.mass}
-          </Text>
+      <View paddingLarge style={S.container}>
+        <Spacer />
+        <Text sizeExtraLarge weightBold>
+          {person.name}
+        </Text>
+        <Spacer small />
+        <Text sizeSmall weightLight>
+          {person.gender}, {person.height}, {person.mass}
+        </Text>
+        <Spacer />
+
+        <View>
+          <View flexDirectionRow alignItemsCenter>
+            <Icon
+              size={iconSize}
+              name="home-outline"
+              color={C.colorBackgroundDark}
+            />
+            <Spacer large />
+            <Text sizeMedium weightLight>
+              {person.hair_color}, {person.skin_color}, {person.eye_color}
+            </Text>
+          </View>
+          <View flexDirectionRow alignItemsCenter>
+            <Icon
+              size={iconSize}
+              name="phone-outline"
+              color={C.colorBackgroundDark}
+            />
+            <Spacer large />
+            <Text sizeMedium weightLight>
+              {person.birth_year}
+            </Text>
+          </View>
+          <View flexDirectionRow alignItemsCenter>
+            <Icon
+              size={iconSize}
+              name="circle-outline"
+              color={allOrdersAreActive ? "#2DCB48" : C.colorBackgroundLight}
+            />
+            <Spacer large />
+            <Text
+              sizeMedium
+              weightLight
+              style={{
+                color: allOrdersAreActive
+                  ? C.colorBackgroundDark
+                  : C.colorBackgroundLight,
+              }}
+            >
+              Aktivna narudžba
+            </Text>
+          </View>
         </View>
-        <View flex>
-          <Text>
-            <Text colorDarkSoft>Hair color:</Text> {person.hair_color}
-          </Text>
-          <Text>
-            <Text colorDarkSoft>Skin color:</Text> {person.skin_color}
-          </Text>
-          <Text>
-            <Text colorDarkSoft>Eye color:</Text> {person.eye_color}
-          </Text>
-          <Text>
-            <Text colorDarkSoft>Birth year:</Text> {person.birth_year}
-          </Text>
-        </View>
+        <Spacer large />
+        <Button outline title="Menu i info" />
+        <Spacer />
+        <Button title={allOrdersAreActive ? "Pridruži se" : "Nova narudžba"} />
       </View>
     </View>
   );
@@ -79,12 +116,47 @@ export const QueryExample = observer(function QueryExample() {
 
   return (
     <Screen preventScroll>
-      <StandardFlatList
-        query={query}
-        contentContainerStyle={{ paddingBottom: insets.bottom }}
-        keyExtractor={(person) => String(person)}
-        renderItem={({ item }) => <PersonListItem person={item} />}
-      />
+      <Spacer extraLarge />
+
+      <View paddingHorizontalLarge>
+        <Text sizeExtraLarge weightBold>
+          {userName}, odaberite željeni restoran
+        </Text>
+      </View>
+      <Spacer extraLarge />
+
+      <View
+        paddingHorizontalMedium
+        centerContent
+        style={{ alignItems: "flex-end" }}
+      >
+        <Button outline title="Prošle narudžbe" paddingHorizontalLarge>
+          <Icon
+            size={iconSize}
+            name="clock-outline"
+            color={C.colorBackgroundDark}
+          />
+        </Button>
+      </View>
+      <Spacer large />
+
+      <MaskedView
+        maskElement={
+          <LinearGradient
+            colors={["black", "transparent"]}
+            style={{ flex: 1 }}
+            start={{ x: 0.5, y: 0.01 }}
+            end={{ x: 0.5, y: 0.0 }}
+          />
+        }
+      >
+        <StandardFlatList
+          query={query}
+          contentContainerStyle={{ paddingBottom: insets.bottom }}
+          keyExtractor={(person) => String(person)}
+          renderItem={({ item }) => <PersonListItem person={item} />}
+        />
+      </MaskedView>
     </Screen>
   );
 });
