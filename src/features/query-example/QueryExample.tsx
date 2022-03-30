@@ -1,6 +1,8 @@
+import MaskedView from "@react-native-masked-view/masked-view";
 import { observer } from "mobx-react";
 import React from "react";
 import { StyleSheet } from "react-native";
+import LinearGradient from "react-native-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "~/components/Button";
 import { Icon } from "~/components/Icon";
@@ -26,9 +28,6 @@ const userName = "User";
 function useStyle() {
   return StyleSheet.create({
     container: {
-      // borderRadius: 4,
-      // borderWidth: 1,
-      // borderColor: C.colorBackgroundLight,
       backgroundColor: allOrdersAreActive
         ? C.colorBackgroundThemeSofter
         : C.colorBackgroundLight,
@@ -141,12 +140,23 @@ export const QueryExample = observer(function QueryExample() {
       </View>
       <Spacer large />
 
-      <StandardFlatList
-        query={query}
-        contentContainerStyle={{ paddingBottom: insets.bottom }}
-        keyExtractor={(person) => String(person)}
-        renderItem={({ item }) => <PersonListItem person={item} />}
-      />
+      <MaskedView
+        maskElement={
+          <LinearGradient
+            colors={["black", "transparent"]}
+            style={{ flex: 1 }}
+            start={{ x: 0.5, y: 0.01 }}
+            end={{ x: 0.5, y: 0.0 }}
+          />
+        }
+      >
+        <StandardFlatList
+          query={query}
+          contentContainerStyle={{ paddingBottom: insets.bottom }}
+          keyExtractor={(person) => String(person)}
+          renderItem={({ item }) => <PersonListItem person={item} />}
+        />
+      </MaskedView>
     </Screen>
   );
 });
