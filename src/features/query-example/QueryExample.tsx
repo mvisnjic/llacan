@@ -141,6 +141,7 @@ export const QueryExample = observer(function QueryExample() {
       <Spacer large />
 
       <MaskedView
+        style={{ flex: 1 }}
         maskElement={
           <LinearGradient
             colors={["black", "transparent"]}
