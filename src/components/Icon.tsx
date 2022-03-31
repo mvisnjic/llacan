@@ -10,7 +10,11 @@ export interface IconProps {
     | "checkbox-marked-outline"
     | "checkbox-blank-outline"
     | "radio-button-on"
-    | "radio-button-off";
+    | "radio-button-off"
+    | "phone-outline"
+    | "clock-outline"
+    | "home-outline"
+    | "circle-outline";
 
   color?: string;
   size?: number;
