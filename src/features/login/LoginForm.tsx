@@ -1,5 +1,6 @@
 import { observer } from "mobx-react";
 import React from "react";
+import { StyleSheet } from "react-native";
 import { Button } from "~/components/Button";
 import { Modal } from "~/components/ModalProvider";
 import { Spacer } from "~/components/Spacer";
@@ -8,71 +9,109 @@ import { TextInput } from "~/components/TextInput";
 import { View } from "~/components/View";
 import { useLoginForm } from "./useLoginForm";
 
+function useStyle() {
+  return StyleSheet.create({
+    slogan: {
+      marginTop: 32,
+      marginBottom: 140,
+    },
+    containerTextLlacan: {
+      marginEnd: 237,
+    },
+    textLlacan: {
+      fontSize: 32,
+      lineHeight: 38,
+      backgroundColor: "#000",
+      color: "#fff",
+      padding: 3,
+    },
+    textYellowL: {
+      fontSize: 32,
+      lineHeight: 38,
+      backgroundColor: "#000",
+      padding: 2,
+    },
+  });
+}
+
 export const LoginForm = observer(function LoginForm() {
   const { fields, isSubmitting, isValid, submitForm } = useLoginForm();
-
+  const S = useStyle();
   return (
-    <View flex paddingExtraLarge>
-      <Text weightBold>PRIJAVI SE</Text>
-      <Spacer />
+    <View>
+      <View style={S.slogan} paddingExtraLarge>
+        <Text weightBold style={{ fontSize: 32, lineHeight: 38 }}>
+          S ovom aplikacijom nikad nećeš ostati
+        </Text>
+        <View style={S.containerTextLlacan}>
+          <Text weightBold style={S.textLlacan}>
+            <Text colorTheme weightBold style={S.textYellowL}>
+              l
+            </Text>
+            lačan
+          </Text>
+        </View>
+      </View>
+      <View style={{ backgroundColor: "#070707" }} paddingExtraLarge>
+        <Text
+          weightBold
+          alignCenter
+          colorTheme
+          style={{ fontSize: 40, lineHeight: 40 }}
+        >
+          Prijavi se
+        </Text>
+        <Spacer extraLarge />
 
-      <TextInput
-        label="Email"
-        placeholder="john.doe@email.com"
-        returnKeyType="next"
-        keyboardType="email-address"
-        textContentType="emailAddress"
-        autoCapitalize="none"
-        spellCheck={false}
-        blurOnSubmit={false}
-        maxLength={50}
-        value={fields.email.value}
-        onChangeText={fields.email.onChangeText}
-        onBlur={fields.email.onBlur}
-        caption={fields.email.caption}
-        error={fields.email.error}
-        onSubmitEditing={fields.email.onSubmitEditing}
-      />
-      <Spacer small />
+        <TextInput
+          label="Email"
+          placeholder="john.doe@email.com"
+          returnKeyType="next"
+          keyboardType="email-address"
+          textContentType="emailAddress"
+          autoCapitalize="none"
+          spellCheck={false}
+          blurOnSubmit={false}
+          maxLength={50}
+          value={fields.email.value}
+          onChangeText={fields.email.onChangeText}
+          onBlur={fields.email.onBlur}
+          caption={fields.email.caption}
+          error={fields.email.error}
+          onSubmitEditing={fields.email.onSubmitEditing}
+        />
+        <Spacer small />
 
-      <TextInput
-        label="Password"
-        placeholder="********"
-        secureTextEntry
-        returnKeyType="go"
-        autoCapitalize="none"
-        spellCheck={false}
-        textContentType="password"
-        ref={fields.password.ref}
-        value={fields.password.value}
-        onChangeText={fields.password.onChangeText}
-        onBlur={fields.password.onBlur}
-        caption={fields.password.caption}
-        error={fields.password.error}
-        onSubmitEditing={fields.password.onSubmitEditing}
-      />
-      <Spacer extraLarge />
+        <TextInput
+          label="Password"
+          placeholder="********"
+          secureTextEntry
+          returnKeyType="go"
+          autoCapitalize="none"
+          spellCheck={false}
+          textContentType="password"
+          ref={fields.password.ref}
+          value={fields.password.value}
+          onChangeText={fields.password.onChangeText}
+          onBlur={fields.password.onBlur}
+          caption={fields.password.caption}
+          error={fields.password.error}
+          onSubmitEditing={fields.password.onSubmitEditing}
+        />
+        <Spacer extraLarge />
 
-      <Button onPress={submitForm} disabled={!isValid} title="Sign in" />
-      {isSubmitting && <Modal />}
+        <Button onPress={submitForm} disabled={!isValid} title="Sign in" />
+        {isSubmitting && <Modal />}
 
-      <Spacer large />
+        <Spacer large />
 
-      <Button
-        onPress={() => {
-          console.warn("TODO");
-        }}
-        title="Forgot password?"
-      />
-
-      <Spacer />
-
-      <Button
-        onPress={() => {
-          console.warn("TODO");
-        }}
-        title="Register"
-      />
+        <Button
+          onPress={() => {
+            console.warn("TODO");
+          }}
+          title="Forgot password?"
+        />
+      </View>
     </View>
   );
 });

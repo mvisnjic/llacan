@@ -139,7 +139,7 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>(
       <View>
         {!!label && (
           <>
-            <Text sizeSmall weightBold>
+            <Text sizeMedium weightBold colorLight>
               {label}
             </Text>
             <View style={S.spacer} />
