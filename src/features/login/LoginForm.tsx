@@ -12,8 +12,7 @@ import { useLoginForm } from "./useLoginForm";
 function useStyle() {
   return StyleSheet.create({
     slogan: {
-      marginTop: 32,
-      marginBottom: 140,
+      padding: 32,
     },
     containerTextLlacan: {
       marginEnd: 237,
@@ -21,14 +20,14 @@ function useStyle() {
     textLlacan: {
       fontSize: 32,
       lineHeight: 38,
-      backgroundColor: "#000",
-      color: "#fff",
+      backgroundColor: "#000000",
+      color: "#ffffff",
       padding: 3,
     },
     textYellowL: {
       fontSize: 32,
       lineHeight: 38,
-      backgroundColor: "#000",
+      backgroundColor: "#000000",
       padding: 2,
     },
   });
@@ -39,7 +38,7 @@ export const LoginForm = observer(function LoginForm() {
   const S = useStyle();
   return (
     <View>
-      <View style={S.slogan} paddingExtraLarge>
+      <View style={S.slogan}>
         <Text weightBold style={{ fontSize: 32, lineHeight: 38 }}>
           S ovom aplikacijom nikad nećeš ostati
         </Text>
@@ -52,12 +51,12 @@ export const LoginForm = observer(function LoginForm() {
           </Text>
         </View>
       </View>
-      <View style={{ backgroundColor: "#070707" }} paddingExtraLarge>
+      <View style={{ backgroundColor: "#070707" }} paddingLarge>
         <Text
           weightBold
           alignCenter
           colorTheme
-          style={{ fontSize: 40, lineHeight: 40 }}
+          style={{ fontSize: 40, lineHeight: 40, marginTop: 48 }}
         >
           Prijavi se
         </Text>
@@ -98,7 +97,7 @@ export const LoginForm = observer(function LoginForm() {
           error={fields.password.error}
           onSubmitEditing={fields.password.onSubmitEditing}
         />
-        <Spacer extraLarge />
+        <Spacer small />
 
         <Button onPress={submitForm} disabled={!isValid} title="Sign in" />
         {isSubmitting && <Modal />}
