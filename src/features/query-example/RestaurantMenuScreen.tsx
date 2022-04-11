@@ -1,7 +1,6 @@
 import { observer } from "mobx-react";
 import React from "react";
-import { StyleSheet } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+import { Image, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "~/components/Button";
 import { Icon } from "~/components/Icon";
@@ -22,7 +21,6 @@ interface PersonListItemProps {
 
 const allOrdersAreActive = true;
 const iconSize = 24;
-const userName = "User";
 
 function useStyle() {
   return StyleSheet.create({
@@ -105,6 +103,80 @@ const PersonListItem = observer(function PersonListItem({
   );
 });
 
+const FlatlistHeader = observer(() => {
+  return (
+    <>
+      <Image
+        source={require("~/assets/street-fast-food-hamburger-with-bbq-grilled-steak-PE2NUQB 1.png")}
+      />
+
+      <Spacer extraLarge />
+
+      <View paddingLarge>
+        <Text sizeExtraLarge weightBold>
+          Fast food Forever
+        </Text>
+      </View>
+
+      <View
+        paddingHorizontalLarge
+        style={{ borderBottomWidth: 1, borderBottomColor: "#EEEEEE" }}
+      >
+        <View flexDirectionRow alignItemsCenter>
+          <Icon
+            size={iconSize}
+            name="home-outline"
+            color={C.colorBackgroundDark}
+          />
+          <Spacer />
+          <Text sizeMedium weightLight>
+            prilaz Kikova 5, 52220, Labin
+          </Text>
+        </View>
+        <View flexDirectionRow alignItemsCenter>
+          <Icon
+            size={iconSize}
+            name="phone-outline"
+            color={C.colorBackgroundDark}
+          />
+          <Spacer />
+          <Text sizeMedium weightLight>
+            092-246-0606
+          </Text>
+        </View>
+        <Spacer large />
+      </View>
+      <View paddingMedium>
+        <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingMedium>
+          <Text weightSemiBold sizeLarge>
+            Dodaci
+          </Text>
+        </View>
+        <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingMedium>
+          <Text>
+            kečap, ajvar, majoneza, kiseli krastavci, zelena salata, rajčica,
+            luk, chilli
+          </Text>
+        </View>
+      </View>
+      <View
+        paddingMedium
+        style={{ borderBottomWidth: 1, borderBottomColor: "#EEEEEE" }}
+      >
+        <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingMedium>
+          <Text weightSemiBold sizeLarge>
+            Kategorije
+          </Text>
+        </View>
+        <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingMedium>
+          <Text weightSemiBold>BURGER</Text>
+          <Text weightSemiBold>POMMES</Text>
+        </View>
+      </View>
+    </>
+  );
+});
+
 export const RestaurantMenuScreen = observer(function QueryExample() {
   const store = useStore();
   const query = useInfiniteQuery(["peopleList"], ({ pageParam }) => {
@@ -115,42 +187,13 @@ export const RestaurantMenuScreen = observer(function QueryExample() {
 
   return (
     <Screen preventScroll>
-      <Spacer extraLarge />
-
-      <View paddingHorizontalLarge>
-        <Text sizeExtraLarge weightBold>
-          {userName}, odaberite željeni restoran
-        </Text>
-      </View>
-      <Spacer extraLarge />
-
-      <View
-        paddingHorizontalMedium
-        centerContent
-        style={{ alignItems: "flex-end" }}
-      >
-        <Button outline title="Prošle narudžbe" paddingHorizontalLarge>
-          <Icon
-            size={iconSize}
-            name="clock-outline"
-            color={C.colorBackgroundDark}
-          />
-        </Button>
-      </View>
-      <Spacer large />
-
       <View>
-        <LinearGradient
-          colors={[C.colorBackgroundLight, "rgba(255,255,255, 0)"]}
-          style={{ width: "100%", height: 5, position: "absolute", top: 0 }}
-          start={{ x: 0.5, y: 0.0 }}
-          end={{ x: 0.5, y: 1.0 }}
-        />
         <StandardFlatList
           query={query}
           contentContainerStyle={{ paddingBottom: insets.bottom }}
           keyExtractor={(person) => String(person)}
           renderItem={({ item }) => <PersonListItem person={item} />}
+          ListHeaderComponent={FlatlistHeader}
         />
       </View>
     </Screen>
