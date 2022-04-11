@@ -21,7 +21,6 @@ interface PersonListItemProps {
 }
 
 const allOrdersAreActive = true;
-const iconSize = 24;
 const userName = "User";
 
 function useStyle() {
@@ -44,7 +43,7 @@ const PersonListItem = observer(function PersonListItem({
     <View paddingHorizontalMedium paddingVerticalSmall>
       <View paddingLarge style={S.container}>
         <Spacer />
-        <Text sizeExtraLarge weightBold>
+        <Text sizeLarge weightBold>
           {person.name}
         </Text>
         <Spacer small />
@@ -56,7 +55,7 @@ const PersonListItem = observer(function PersonListItem({
         <View>
           <View flexDirectionRow alignItemsCenter>
             <Icon
-              size={iconSize}
+              size={C.fontSizeLarge}
               name="home-outline"
               color={C.colorBackgroundDark}
             />
@@ -67,7 +66,7 @@ const PersonListItem = observer(function PersonListItem({
           </View>
           <View flexDirectionRow alignItemsCenter>
             <Icon
-              size={iconSize}
+              size={C.fontSizeLarge}
               name="phone-outline"
               color={C.colorBackgroundDark}
             />
@@ -78,7 +77,7 @@ const PersonListItem = observer(function PersonListItem({
           </View>
           <View flexDirectionRow alignItemsCenter>
             <Icon
-              size={iconSize}
+              size={C.fontSizeLarge}
               name="circle-outline"
               color={allOrdersAreActive ? "#2DCB48" : C.colorBackgroundLight}
             />
@@ -118,7 +117,7 @@ export const QueryExample = observer(function QueryExample() {
       <Spacer extraLarge />
 
       <View paddingHorizontalLarge>
-        <Text sizeExtraLarge weightBold>
+        <Text sizeLarge weightBold>
           {userName}, odaberite željeni restoran
         </Text>
       </View>
@@ -131,7 +130,7 @@ export const QueryExample = observer(function QueryExample() {
       >
         <Button outline title="Prošle narudžbe" paddingHorizontalLarge>
           <Icon
-            size={iconSize}
+            size={C.fontSizeLarge}
             name="clock-outline"
             color={C.colorBackgroundDark}
           />

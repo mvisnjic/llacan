@@ -20,7 +20,6 @@ interface PersonListItemProps {
 }
 
 const allOrdersAreActive = true;
-const iconSize = 24;
 
 function useStyle() {
   return StyleSheet.create({
@@ -54,7 +53,7 @@ const PersonListItem = observer(function PersonListItem({
         <View>
           <View flexDirectionRow alignItemsCenter>
             <Icon
-              size={iconSize}
+              size={C.fontSizeLarge}
               name="home-outline"
               color={C.colorBackgroundDark}
             />
@@ -65,7 +64,7 @@ const PersonListItem = observer(function PersonListItem({
           </View>
           <View flexDirectionRow alignItemsCenter>
             <Icon
-              size={iconSize}
+              size={C.fontSizeLarge}
               name="phone-outline"
               color={C.colorBackgroundDark}
             />
@@ -76,7 +75,7 @@ const PersonListItem = observer(function PersonListItem({
           </View>
           <View flexDirectionRow alignItemsCenter>
             <Icon
-              size={iconSize}
+              size={C.fontSizeLarge}
               name="circle-outline"
               color={allOrdersAreActive ? "#2DCB48" : C.colorBackgroundLight}
             />
@@ -113,7 +112,7 @@ const FlatlistHeader = observer(() => {
       <Spacer extraLarge />
 
       <View paddingLarge>
-        <Text sizeExtraLarge weightBold>
+        <Text sizeLarge weightBold>
           Fast food Forever
         </Text>
       </View>
@@ -124,23 +123,23 @@ const FlatlistHeader = observer(() => {
       >
         <View flexDirectionRow alignItemsCenter>
           <Icon
-            size={iconSize}
+            size={C.fontSizeLarge}
             name="home-outline"
             color={C.colorBackgroundDark}
           />
           <Spacer />
-          <Text sizeMedium weightLight>
+          <Text sizeMediumSmall weightLight>
             prilaz Kikova 5, 52220, Labin
           </Text>
         </View>
         <View flexDirectionRow alignItemsCenter>
           <Icon
-            size={iconSize}
+            size={C.fontSizeLarge}
             name="phone-outline"
             color={C.colorBackgroundDark}
           />
           <Spacer />
-          <Text sizeMedium weightLight>
+          <Text sizeMediumSmall weightLight>
             092-246-0606
           </Text>
         </View>
@@ -148,12 +147,12 @@ const FlatlistHeader = observer(() => {
       </View>
       <View paddingMedium>
         <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingMedium>
-          <Text weightSemiBold sizeLarge>
+          <Text weightSemiBold sizeMediumLarge>
             Dodaci
           </Text>
         </View>
         <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingMedium>
-          <Text>
+          <Text sizeMediumSmall>
             kečap, ajvar, majoneza, kiseli krastavci, zelena salata, rajčica,
             luk, chilli
           </Text>
@@ -164,7 +163,7 @@ const FlatlistHeader = observer(() => {
         style={{ borderBottomWidth: 1, borderBottomColor: "#EEEEEE" }}
       >
         <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingMedium>
-          <Text weightSemiBold sizeLarge>
+          <Text weightSemiBold sizeMediumLarge>
             Kategorije
           </Text>
         </View>
