@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
 import { StyleSheet } from "react-native";
@@ -38,6 +39,7 @@ const PersonListItem = observer(function PersonListItem({
   person,
 }: PersonListItemProps) {
   const S = useStyle();
+  const navigation = useNavigation();
 
   return (
     <View paddingHorizontalLarge paddingVerticalMedium>
@@ -96,7 +98,11 @@ const PersonListItem = observer(function PersonListItem({
           </View>
         </View>
         <Spacer large />
-        <Button outline title="Menu i info" />
+        <Button
+          outline
+          title="Menu i info"
+          onPress={() => navigation.navigate("RestaurantMenuScreen")}
+        />
         <Spacer />
         <Button title={allOrdersAreActive ? "Pridruži se" : "Nova narudžba"} />
       </View>
