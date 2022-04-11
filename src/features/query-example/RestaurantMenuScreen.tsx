@@ -109,7 +109,7 @@ const FlatlistHeader = observer(() => {
         source={require("~/assets/street-fast-food-hamburger-with-bbq-grilled-steak-PE2NUQB 1.png")}
       />
 
-      <Spacer extraLarge />
+      <Spacer large />
 
       <View paddingLarge>
         <Text sizeLarge weightBold>
@@ -144,14 +144,19 @@ const FlatlistHeader = observer(() => {
           </Text>
         </View>
         <Spacer large />
+        <Spacer />
       </View>
-      <View paddingMedium>
-        <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingMedium>
+      <View paddingHorizontalLarge paddingVerticalMedium>
+        <View
+          style={{ borderColor: "#EEEEEE", borderWidth: 1 }}
+          paddingHorizontalLarge
+          paddingVerticalMedium
+        >
           <Text weightSemiBold sizeMediumLarge>
             Dodaci
           </Text>
         </View>
-        <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingMedium>
+        <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingLarge>
           <Text sizeMediumSmall>
             kečap, ajvar, majoneza, kiseli krastavci, zelena salata, rajčica,
             luk, chilli
@@ -159,15 +164,20 @@ const FlatlistHeader = observer(() => {
         </View>
       </View>
       <View
-        paddingMedium
+        paddingHorizontalLarge
+        paddingVerticalMedium
         style={{ borderBottomWidth: 1, borderBottomColor: "#EEEEEE" }}
       >
-        <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingMedium>
+        <View
+          style={{ borderColor: "#EEEEEE", borderWidth: 1 }}
+          paddingHorizontalLarge
+          paddingVerticalMedium
+        >
           <Text weightSemiBold sizeMediumLarge>
             Kategorije
           </Text>
         </View>
-        <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingMedium>
+        <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingLarge>
           <Text weightSemiBold>BURGER</Text>
           <Text weightSemiBold>POMMES</Text>
         </View>

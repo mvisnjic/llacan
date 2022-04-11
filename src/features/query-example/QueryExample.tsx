@@ -40,7 +40,7 @@ const PersonListItem = observer(function PersonListItem({
   const S = useStyle();
 
   return (
-    <View paddingHorizontalMedium paddingVerticalSmall>
+    <View paddingHorizontalLarge paddingVerticalMedium>
       <View paddingLarge style={S.container}>
         <Spacer />
         <Text sizeLarge weightBold>
@@ -50,7 +50,7 @@ const PersonListItem = observer(function PersonListItem({
         <Text sizeSmall weightLight>
           {person.gender}, {person.height}, {person.mass}
         </Text>
-        <Spacer />
+        <Spacer large />
 
         <View>
           <View flexDirectionRow alignItemsCenter>
@@ -114,17 +114,19 @@ export const QueryExample = observer(function QueryExample() {
 
   return (
     <Screen preventScroll>
-      <Spacer extraLarge />
+      <Spacer large />
+      <Spacer small />
 
-      <View paddingHorizontalLarge>
+      <View paddingLarge>
         <Text sizeLarge weightBold>
           {userName}, odaberite željeni restoran
         </Text>
       </View>
       <Spacer extraLarge />
+      <Spacer medium />
 
       <View
-        paddingHorizontalMedium
+        paddingHorizontalLarge
         centerContent
         style={{ alignItems: "flex-end" }}
       >
@@ -136,7 +138,7 @@ export const QueryExample = observer(function QueryExample() {
           />
         </Button>
       </View>
-      <Spacer large />
+      <Spacer extraLarge />
 
       <View>
         <StandardFlatList
