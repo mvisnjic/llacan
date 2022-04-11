@@ -106,10 +106,9 @@ const FlatlistHeader = observer(() => {
   return (
     <>
       <Image
-        source={require("~/assets/street-fast-food-hamburger-with-bbq-grilled-steak-PE2NUQB 1.png")}
+        source={require("~/assets/street-fast-food-hamburger-with-bbq-grilled-steak-PE2NUQB1.png")}
+        style={{ width: "100%" }}
       />
-
-      <Spacer large />
 
       <View paddingLarge>
         <Text sizeLarge weightBold>
