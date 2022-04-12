@@ -1,24 +1,33 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useQuery } from "react-query";
 import { Button } from "~/components/Button";
 import { Icon } from "~/components/Icon";
 import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
-import { StandardFlatList } from "~/components/StandardFlatList";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
-import { useInfiniteQuery } from "~/hooks/useInfiniteQuery";
 import { PersonInstance } from "~/mobx/entities/person/Person";
-import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
 import { shadow } from "~/utils/shadow";
+import { restaurantData } from "./restaurantData";
 
 interface PersonListItemProps {
   person: PersonInstance;
+}
+
+interface Restaurant {
+  id: string;
+  title: string;
+  phone: string;
+  address: string;
+  sms_accept: boolean;
+  hasPommes: number;
+  tags: any;
 }
 
 const allOrdersAreActive = true;
@@ -46,11 +55,11 @@ const PersonListItem = observer(function PersonListItem({
       <View paddingLarge style={S.container}>
         <Spacer />
         <Text sizeLarge weightBold>
-          {person.name}
+          {person.title}
         </Text>
         <Spacer small />
         <Text sizeSmall weightLight>
-          {person.gender}, {person.height}, {person.mass}
+          {person.tags.join(", ")}
         </Text>
         <Spacer large />
 
@@ -63,7 +72,7 @@ const PersonListItem = observer(function PersonListItem({
             />
             <Spacer large />
             <Text sizeMedium weightLight>
-              {person.hair_color}, {person.skin_color}, {person.eye_color}
+              {person.address}
             </Text>
           </View>
           <View flexDirectionRow alignItemsCenter>
@@ -74,7 +83,7 @@ const PersonListItem = observer(function PersonListItem({
             />
             <Spacer large />
             <Text sizeMedium weightLight>
-              {person.birth_year}
+              {person.phone.replace(/ /g, "-")}
             </Text>
           </View>
           <View flexDirectionRow alignItemsCenter>
@@ -111,10 +120,11 @@ const PersonListItem = observer(function PersonListItem({
 });
 
 export const QueryExample = observer(function QueryExample() {
-  const store = useStore();
-  const query = useInfiniteQuery(["peopleList"], ({ pageParam }) => {
-    return store.personStore.readPersonList({ page: pageParam });
+  const query = useQuery(["peopleList"], () => {
+    return Promise.resolve<Restaurant[]>(restaurantData);
   });
+
+  const restaurants = query.data;
 
   const insets = useSafeAreaInsets();
 
@@ -144,13 +154,14 @@ export const QueryExample = observer(function QueryExample() {
           />
         </Button>
       </View>
+      {/* <Text>{JSON.stringify(restaurants)}</Text> */}
       <Spacer extraLarge />
 
-      <View>
-        <StandardFlatList
-          query={query}
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={restaurants}
           contentContainerStyle={{ paddingBottom: insets.bottom }}
-          keyExtractor={(person) => String(person)}
+          keyExtractor={(person) => String(person.id)}
           renderItem={({ item }) => <PersonListItem person={item} />}
         />
         <LinearGradient
