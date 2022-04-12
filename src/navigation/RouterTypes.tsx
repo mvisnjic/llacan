@@ -14,6 +14,7 @@ export type TopLevelStackParams = {
   QueryExample: undefined;
   DropdownExample: undefined;
   FormExample: undefined;
+  RestaurantMenuScreen: undefined;
 };
 
 // End navigator params definitions

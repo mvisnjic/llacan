@@ -60,11 +60,14 @@ export const styleConstants = {
   spacingLarge: 16,
   spacingExtraLarge: 32,
 
-  fontSizeExtraSmall: 8,
-  fontSizeSmall: 10,
+  fontSizeExtraSmall: 10,
+  fontSizeSmall: 12,
+  fontSizeMediumSmall: 14,
   fontSizeMedium: 16,
-  fontSizeLarge: 20,
-  fontSizeExtraLarge: 24,
+  fontSizeMediumLarge: 18,
+  fontSizeLarge: 24,
+  fontSizeExtraLarge: 32,
+  fontSizeExtraExtraLarge: 40,
 
   fontWeightLight: "300" as const,
   fontWeightRegular: "400" as const,

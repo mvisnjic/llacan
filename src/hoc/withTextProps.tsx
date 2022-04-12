@@ -3,16 +3,22 @@ import { TextStyle } from "react-native";
 import { styleConstants as C } from "~/style/styleConstants";
 
 export interface WithTextProps {
-  /** extraSmall=8, small=10, medium=16, large=20, extraLarge=24 */
+  /** extraSmall=10, small=12, mediumSmall=14, medium=16, mediumLarge=18, large=24, extraLarge=32, extraExtraLarge=40 */
   sizeExtraSmall?: boolean;
-  /** extraSmall=8, small=10, medium=16, large=20, extraLarge=24 */
+  /** extraSmall=10, small=12, mediumSmall=14, medium=16, mediumLarge=18, large=24, extraLarge=32, extraExtraLarge=40 */
   sizeSmall?: boolean;
-  /** extraSmall=8, small=10, medium=16, large=20, extraLarge=24 */
+  /** extraSmall=10, small=12, mediumSmall=14, medium=16, mediumLarge=18, large=24, extraLarge=32, extraExtraLarge=40 */
+  sizeMediumSmall?: boolean;
+  /** extraSmall=10, small=12, mediumSmall=14, medium=16, mediumLarge=18, large=24, extraLarge=32, extraExtraLarge=40 */
   sizeMedium?: boolean;
-  /** extraSmall=8, small=10, medium=16, large=20, extraLarge=24 */
+  /** extraSmall=10, small=12, mediumSmall=14, medium=16, mediumLarge=18, large=24, extraLarge=32, extraExtraLarge=40 */
+  sizeMediumLarge?: boolean;
+  /** extraSmall=10, small=12, mediumSmall=14, medium=16, mediumLarge=18, large=24, extraLarge=32, extraExtraLarge=40 */
   sizeLarge?: boolean;
-  /** extraSmall=8, small=10, medium=16, large=20, extraLarge=24 */
+  /** extraSmall=10, small=12, mediumSmall=14, medium=16, mediumLarge=18, large=24, extraLarge=32, extraExtraLarge=40 */
   sizeExtraLarge?: boolean;
+  /** extraSmall=10, small=12, mediumSmall=14, medium=16, mediumLarge=18, large=24, extraLarge=32, extraExtraLarge=40 */
+  sizeExtraExtraLarge?: boolean;
 
   colorTheme?: boolean;
   colorAccent?: boolean;
@@ -55,9 +61,12 @@ export function withTextProps<Props extends { style?: any }>(
       {
         sizeExtraSmall,
         sizeSmall,
+        sizeMediumSmall,
         sizeMedium,
+        sizeMediumLarge,
         sizeLarge,
         sizeExtraLarge,
+        sizeExtraExtraLarge,
 
         colorTheme,
         colorAccent,
@@ -93,19 +102,28 @@ export function withTextProps<Props extends { style?: any }>(
 
       if (sizeExtraSmall) {
         style.fontSize = C.fontSizeExtraSmall;
-        style.lineHeight = 11;
+        style.lineHeight = 20;
       } else if (sizeSmall) {
         style.fontSize = C.fontSizeSmall;
-        style.lineHeight = 17;
+        style.lineHeight = 20;
+      } else if (sizeMediumSmall) {
+        style.fontSize = C.fontSizeMediumSmall;
+        style.lineHeight = 20;
       } else if (sizeMedium) {
         style.fontSize = C.fontSizeMedium;
+        style.lineHeight = 24;
+      } else if (sizeMediumLarge) {
+        style.fontSize = C.fontSizeMediumLarge;
         style.lineHeight = 28;
       } else if (sizeLarge) {
         style.fontSize = C.fontSizeLarge;
-        style.lineHeight = 30;
+        style.lineHeight = 32;
       } else if (sizeExtraLarge) {
         style.fontSize = C.fontSizeExtraLarge;
-        style.lineHeight = 32;
+        style.lineHeight = 38;
+      } else if (sizeExtraExtraLarge) {
+        style.fontSize = C.fontSizeExtraExtraLarge;
+        style.lineHeight = 48;
       }
 
       style.color = C.colorTextDark;
