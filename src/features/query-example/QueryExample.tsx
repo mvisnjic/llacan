@@ -11,13 +11,13 @@ import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
-import { PersonInstance } from "~/mobx/entities/person/Person";
+import { RestaurantInstance } from "~/mobx/entities/restaurant/Restaurant";
 import { styleConstants as C } from "~/style/styleConstants";
 import { shadow } from "~/utils/shadow";
 import { restaurantData } from "./restaurantData";
 
-interface PersonListItemProps {
-  person: PersonInstance;
+interface RestaurantListItemProps {
+  restaurant: RestaurantInstance;
 }
 
 interface Restaurant {
@@ -44,9 +44,9 @@ function useStyle() {
   });
 }
 
-const PersonListItem = observer(function PersonListItem({
-  person,
-}: PersonListItemProps) {
+const RestaurantListItem = observer(function RestaurantListItem({
+  restaurant,
+}: RestaurantListItemProps) {
   const S = useStyle();
   const navigation = useNavigation();
 
@@ -55,12 +55,12 @@ const PersonListItem = observer(function PersonListItem({
       <View paddingLarge style={S.container}>
         <Spacer />
         <Text sizeLarge weightBold>
-          {person.title}
+          {restaurant.title}
         </Text>
         <Spacer small />
         <Text sizeSmall weightLight>
-          {person.tags.join(", ").toLowerCase()}
-          {person.hasPommes && ", pommes"}
+          {restaurant.tags.join(", ").toLowerCase()}
+          {restaurant.hasPommes && ", pommes"}
         </Text>
         <Spacer large />
 
@@ -73,7 +73,7 @@ const PersonListItem = observer(function PersonListItem({
             />
             <Spacer large />
             <Text sizeMedium weightLight>
-              {person.address}
+              {restaurant.address}
             </Text>
           </View>
           <View flexDirectionRow alignItemsCenter>
@@ -84,7 +84,7 @@ const PersonListItem = observer(function PersonListItem({
             />
             <Spacer large />
             <Text sizeMedium weightLight>
-              {person.phone.replace(/ /g, "-")}
+              {restaurant.phone.replace(/ /g, "-")}
             </Text>
           </View>
           <View flexDirectionRow alignItemsCenter>
@@ -162,8 +162,8 @@ export const QueryExample = observer(function QueryExample() {
         <FlatList
           data={restaurants}
           contentContainerStyle={{ paddingBottom: insets.bottom }}
-          keyExtractor={(person) => String(person.id)}
-          renderItem={({ item }) => <PersonListItem person={item} />}
+          keyExtractor={(restaurant) => String(restaurant.id)}
+          renderItem={({ item }) => <RestaurantListItem restaurant={item} />}
         />
         <LinearGradient
           colors={[C.colorBackgroundLight, "rgba(255,255,255, 0)"]}
