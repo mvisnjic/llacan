@@ -84,7 +84,7 @@ const RestaurantListItem = observer(function RestaurantListItem({
             />
             <Spacer large />
             <Text sizeMedium weightLight>
-              {restaurant.phone.replace(/ /g, "-")}
+              {restaurant.phone.replace(/ /g, "-").replace(/385-/g, "0")}
             </Text>
           </View>
           <View flexDirectionRow alignItemsCenter>
@@ -111,7 +111,11 @@ const RestaurantListItem = observer(function RestaurantListItem({
         <Button
           outline
           title="Menu i info"
-          onPress={() => navigation.navigate("RestaurantMenuScreen")}
+          onPress={() =>
+            navigation.navigate("RestaurantMenuScreen", {
+              restaurant: restaurant,
+            })
+          }
         />
         <Spacer />
         <Button title={allOrdersAreActive ? "Pridruži se" : "Nova narudžba"} />

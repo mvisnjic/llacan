@@ -47,7 +47,7 @@ const PersonListItem = observer(function PersonListItem({
   );
 });
 
-const FlatlistHeader = observer(() => {
+const FlatlistHeader = observer((props: { restaurant: any }) => {
   return (
     <>
       <Image
@@ -57,7 +57,7 @@ const FlatlistHeader = observer(() => {
 
       <View paddingLarge>
         <Text sizeLarge weightBold>
-          Fast food Forever
+          {props.restaurant.title}
         </Text>
       </View>
 
@@ -73,7 +73,7 @@ const FlatlistHeader = observer(() => {
           />
           <Spacer />
           <Text sizeMediumSmall weightLight>
-            prilaz Kikova 5, 52220, Labin
+            {props.restaurant.address}
           </Text>
         </View>
         <View flexDirectionRow alignItemsCenter>
@@ -84,7 +84,7 @@ const FlatlistHeader = observer(() => {
           />
           <Spacer />
           <Text sizeMediumSmall weightLight>
-            092-246-0606
+            {props.restaurant.phone.replace(/ /g, "-").replace(/385-/g, "0")}
           </Text>
         </View>
         <Spacer large />
@@ -122,42 +122,51 @@ const FlatlistHeader = observer(() => {
           </Text>
         </View>
         <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingLarge>
-          <Text weightSemiBold>BURGER</Text>
-          <Text weightSemiBold>POMMES</Text>
+          {props.restaurant.tags.map((tag: string) => (
+            <Text weightSemiBold key={tag}>
+              {tag.toUpperCase()}
+            </Text>
+          ))}
         </View>
       </View>
-      <View
-        paddingHorizontalLarge
-        paddingVerticalMedium
-        style={{ borderBottomWidth: 1, borderBottomColor: "#EEEEEE" }}
-        flexDirectionRow
-        alignItemsCenter
-      >
-        <Text sizeLarge weightBold>
-          Burger
-        </Text>
+      {props.restaurant.tags.map((tag: string) => (
         <View
-          style={{
-            flex: 1,
-            alignItems: "flex-end",
-          }}
+          key={tag}
+          paddingHorizontalLarge
+          paddingVerticalMedium
+          style={{ borderBottomWidth: 1, borderBottomColor: "#EEEEEE" }}
+          flexDirectionRow
+          alignItemsCenter
         >
-          <Icon
-            size={C.fontSizeLarge}
-            name="menu-down-outline"
-            color={C.colorBackgroundDark}
-          />
+          <Text sizeLarge weightBold>
+            {tag}
+          </Text>
+          <View
+            style={{
+              flex: 1,
+              alignItems: "flex-end",
+            }}
+          >
+            <Icon
+              size={C.fontSizeLarge}
+              name="menu-down-outline"
+              color={C.colorBackgroundDark}
+            />
+          </View>
         </View>
-      </View>
+      ))}
     </>
   );
 });
 
-export const RestaurantMenuScreen = observer(function QueryExample() {
+export const RestaurantMenuScreen = observer(function RestaurantMenuScreen({
+  route,
+}) {
   const store = useStore();
   const query = useInfiniteQuery(["peopleList"], ({ pageParam }) => {
     return store.personStore.readPersonList({ page: pageParam });
   });
+  const { restaurant } = route.params;
 
   const insets = useSafeAreaInsets();
 
@@ -171,7 +180,7 @@ export const RestaurantMenuScreen = observer(function QueryExample() {
           }}
           keyExtractor={(person) => String(person)}
           renderItem={({ item }) => <PersonListItem person={item} />}
-          ListHeaderComponent={FlatlistHeader}
+          ListHeaderComponent={<FlatlistHeader restaurant={restaurant} />}
         />
       </View>
     </Screen>
