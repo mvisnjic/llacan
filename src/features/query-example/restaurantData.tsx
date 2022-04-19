@@ -5,7 +5,7 @@ export const restaurantData = [
     phone: "385 92 246 0606",
     address: "Prilaz Kikova 5, Labin",
     sms_accept: true,
-    hasPommes: 12,
+    hasPommes: true,
     tags: ["Burger", "Hotdog", "Sendvič"],
   },
   {
@@ -14,7 +14,7 @@ export const restaurantData = [
     phone: "385 52 852 261",
     address: "Ul. Paola Sfecija 1, Labin",
     sms_accept: false,
-    hasPommes: 12,
+    hasPommes: false,
     tags: ["Pizza", "Tjestenina", "Salata"],
   },
   {
@@ -23,7 +23,7 @@ export const restaurantData = [
     phone: "385 98 587 457",
     address: "Zelenice ul. 18, Labin",
     sms_accept: true,
-    hasPommes: 12,
+    hasPommes: true,
     tags: ["Burger", "Kebab", "Hotdog"],
   },
   {
@@ -32,7 +32,7 @@ export const restaurantData = [
     phone: "385 52 851 840",
     address: "D66 184, Štrmac",
     sms_accept: false,
-    hasPommes: 12,
+    hasPommes: false,
     tags: ["Pizza", "Tjestenina", "Salata"],
   },
   {
@@ -41,7 +41,7 @@ export const restaurantData = [
     phone: "385 52 856 280",
     address: "Emerelgida Stembergera 1 B, Labin",
     sms_accept: true,
-    hasPommes: 12,
+    hasPommes: true,
     tags: ["Grill", "Burger", "Pizza", "Tjestenina"],
   },
   {
@@ -50,7 +50,7 @@ export const restaurantData = [
     phone: "052 421 201",
     address: "Zelenice ul. 18, Labin",
     sms_accept: true,
-    hasPommes: 12,
+    hasPommes: false,
     tags: ["Pizza", "Tortilja", "Salata"],
   },
 ];

@@ -4,7 +4,7 @@ export interface PersonInstance extends Instance<typeof Person> {}
 export interface PersonSnapshotIn extends SnapshotIn<typeof Person> {}
 export interface PersonSnapshotOut extends SnapshotOut<typeof Person> {}
 
-const { string, identifier, boolean, number, array } = types;
+const { string, identifier, boolean, array } = types;
 
 export const Person = types.model("Person", {
   id: identifier,
@@ -12,6 +12,6 @@ export const Person = types.model("Person", {
   phone: string,
   address: string,
   sms_accept: boolean,
-  hasPommes: number,
+  hasPommes: boolean,
   tags: array(string),
 });

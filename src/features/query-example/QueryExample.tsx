@@ -26,7 +26,7 @@ interface Restaurant {
   phone: string;
   address: string;
   sms_accept: boolean;
-  hasPommes: number;
+  hasPommes: boolean;
   tags: any;
 }
 
@@ -59,7 +59,8 @@ const PersonListItem = observer(function PersonListItem({
         </Text>
         <Spacer small />
         <Text sizeSmall weightLight>
-          {person.tags.join(", ")}
+          {person.tags.join(", ").toLowerCase()}
+          {person.hasPommes && ", pommes"}
         </Text>
         <Spacer large />
 
