@@ -18,7 +18,7 @@ const S = StyleSheet.create({
   spacer: { height: 8 },
   container: {
     flexDirection: "row",
-    borderRadius: 16,
+    // borderRadius: 16,
     borderWidth: 1,
     paddingHorizontal: C.spacingLarge,
   },
@@ -132,7 +132,7 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>(
     const editable = props.editable ?? true;
 
     const backgroundColor = editable
-      ? C.colorBackgroundLight
+      ? C.colorTextLoginInput
       : C.colorBackgroundLightDark;
 
     return (
