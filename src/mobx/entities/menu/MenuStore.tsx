@@ -34,7 +34,7 @@ export const MenuStore = types
   }))
   .actions((self) => ({
     readMenuList: flow<PaginatedResponse<MenuInstance>, [{ page: number }]>(
-      function* readMenuList(params): any {
+      function* readMenuItemList(params): any {
         const env = getEnv(self);
         const response: AxiosResponse = yield env.http.get("/people", {
           params,

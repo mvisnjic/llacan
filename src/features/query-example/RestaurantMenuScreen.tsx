@@ -1,25 +1,31 @@
 import { observer } from "mobx-react";
 import React from "react";
-import { Image } from "react-native";
+import { FlatList, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useQuery } from "react-query";
 import { Icon } from "~/components/Icon";
 import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
-import { StandardFlatList } from "~/components/StandardFlatList";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
-import { useInfiniteQuery } from "~/hooks/useInfiniteQuery";
-import { PersonInstance } from "~/mobx/entities/person/Person";
-import { useStore } from "~/mobx/utils/useStore";
+import { MenuInstance } from "~/mobx/entities/menu/Menu";
 import { styleConstants as C } from "~/style/styleConstants";
+import { menuData } from "./menuData";
 
-interface PersonListItemProps {
-  person: PersonInstance;
+interface MenuListItemProps {
+  menuItem: MenuInstance;
 }
 
-const PersonListItem = observer(function PersonListItem({
-  person,
-}: PersonListItemProps) {
+interface Menu {
+  category: string;
+  name: string;
+  price: number;
+  description?: string;
+}
+
+const MenuListItem = observer(function MenuListItem({
+  menuItem,
+}: MenuListItemProps) {
   return (
     <View
       paddingHorizontalLarge
@@ -33,15 +39,12 @@ const PersonListItem = observer(function PersonListItem({
     >
       <View>
         <Text sizeMedium weightSemiBold>
-          {person.name}
+          {menuItem.name}
         </Text>
-        <Text sizeExtraSmall>
-          {person.eye_color}, {person.gender}, {person.hair_color},{" "}
-          {person.skin_color}
-        </Text>
+        <Text sizeExtraSmall>{menuItem.description}</Text>
       </View>
       <View style={{ flex: 1, alignItems: "flex-end" }} centerContent>
-        <Text>{person.height},00</Text>
+        <Text>{menuItem.price},00</Text>
       </View>
     </View>
   );
@@ -162,24 +165,25 @@ const FlatlistHeader = observer((props: { restaurant: any }) => {
 export const RestaurantMenuScreen = observer(function RestaurantMenuScreen({
   route,
 }) {
-  const store = useStore();
-  const query = useInfiniteQuery(["peopleList"], ({ pageParam }) => {
-    return store.personStore.readPersonList({ page: pageParam });
-  });
   const { restaurant } = route.params;
+  const specificMenu = menuData.find((menu) => menu.title === restaurant.title);
+  const query = useQuery(["menuList"], () => {
+    return Promise.resolve<Menu[]>(specificMenu.menu);
+  });
+  const menus = query.data;
 
   const insets = useSafeAreaInsets();
 
   return (
     <Screen preventScroll>
       <View style={{ paddingBottom: 10 }}>
-        <StandardFlatList
-          query={query}
+        <FlatList
+          data={menus}
           contentContainerStyle={{
             paddingBottom: insets.bottom,
           }}
-          keyExtractor={(person) => String(person)}
-          renderItem={({ item }) => <PersonListItem person={item} />}
+          keyExtractor={(menu) => String(menu)}
+          renderItem={({ item }) => <MenuListItem menuItem={item} />}
           ListHeaderComponent={<FlatlistHeader restaurant={restaurant} />}
         />
       </View>
