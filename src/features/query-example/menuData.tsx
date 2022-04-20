@@ -1362,18 +1362,6 @@ export const menuData = [
       },
       {
         category: "Pizza",
-        name: "Funghi srednja",
-        description: "POLPA OD RAJČICE, MOZZARELLA, GLJIVE , MASLINE",
-        price: 40,
-      },
-      {
-        category: "Pizza",
-        name: "Funghi velika",
-        description: "POLPA OD RAJČICE, MOZZARELLA, GLJIVE , MASLINE",
-        price: 70,
-      },
-      {
-        category: "Pizza",
         name: "Mexicana srednja",
         description:
           "POLPA OD RAJČICE, MOZZARELLA, PIKANTNA SALAMA, ŠUNKA, KUKURUZ, LUK, LJUTI FEFERONI, MASLINE ",

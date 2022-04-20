@@ -182,7 +182,7 @@ export const RestaurantMenuScreen = observer(function RestaurantMenuScreen({
           contentContainerStyle={{
             paddingBottom: insets.bottom,
           }}
-          keyExtractor={(menu) => String(menu)}
+          keyExtractor={(menu) => String(JSON.stringify(menu))}
           renderItem={({ item }) => <MenuListItem menuItem={item} />}
           ListHeaderComponent={<FlatlistHeader restaurant={restaurant} />}
         />
