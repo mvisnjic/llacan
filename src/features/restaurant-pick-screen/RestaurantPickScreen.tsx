@@ -110,7 +110,7 @@ const PersonListItem = observer(function PersonListItem({
   );
 });
 
-export const QueryExample = observer(function QueryExample() {
+export const RestaurantPickScreen = observer(function RestaurantPickScreen() {
   const store = useStore();
   const query = useInfiniteQuery(["peopleList"], ({ pageParam }) => {
     return store.personStore.readPersonList({ page: pageParam });

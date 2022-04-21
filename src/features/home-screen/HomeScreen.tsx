@@ -14,7 +14,7 @@ export const HomeScreen = observer(function HomeScreen() {
       <View paddingMedium>
         <Button
           title="Query example"
-          onPress={() => navigation.navigate("QueryExample")}
+          onPress={() => navigation.navigate("RestaurantPickScreen")}
         />
 
         <Spacer />

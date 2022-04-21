@@ -1,5 +1,6 @@
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // import { MainTabParams, TopLevelStackParams } from "./RouterTypes";
+// import { HomeScreen } from "~/features/home-screen/HomeScreen";
 import {
   NavigationContainer,
   NavigationContainerProps,
@@ -9,10 +10,9 @@ import { observer } from "mobx-react";
 import React from "react";
 import { Header } from "~/components/Header";
 import { DropdownExample } from "~/features/dropdown/DropdownExample";
-import { HomeScreen } from "~/features/home-screen/HomeScreen";
 import { LoginScreen } from "~/features/login/LoginScreen";
-import { QueryExample } from "~/features/query-example/QueryExample";
-import { RestaurantMenuScreen } from "~/features/query-example/RestaurantMenuScreen";
+import { RestaurantMenuScreen } from "~/features/restaurant-menu-screen/RestaurantMenuScreen";
+import { RestaurantPickScreen } from "~/features/restaurant-pick-screen/RestaurantPickScreen";
 import { useStore } from "~/mobx/utils/useStore";
 import { TopLevelStackParams } from "./RouterTypes";
 
@@ -43,28 +43,16 @@ export const Router = observer(function Router({
         />
 
         <Stack.Screen
-          name="QueryExample"
-          component={QueryExample}
-          options={{ title: "QueryExample" }}
+          name="RestaurantPickScreen"
+          component={RestaurantPickScreen}
         />
 
         <Stack.Screen
           name="RestaurantMenuScreen"
           component={RestaurantMenuScreen}
-          options={{ title: "RestaurantMenuScreen" }}
         />
 
-        <Stack.Screen
-          name="DropdownExample"
-          component={DropdownExample}
-          options={{ title: "DropdownExample" }}
-        />
-
-        <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{ title: "HomeScreen" }}
-        />
+        <Stack.Screen name="DropdownExample" component={DropdownExample} />
       </Stack.Navigator>
     </NavigationContainer>
   );

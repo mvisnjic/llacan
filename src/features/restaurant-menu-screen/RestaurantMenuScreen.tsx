@@ -153,7 +153,7 @@ const FlatlistHeader = observer(() => {
   );
 });
 
-export const RestaurantMenuScreen = observer(function QueryExample() {
+export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
   const store = useStore();
   const query = useInfiniteQuery(["peopleList"], ({ pageParam }) => {
     return store.personStore.readPersonList({ page: pageParam });

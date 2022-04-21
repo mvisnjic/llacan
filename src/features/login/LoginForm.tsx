@@ -135,7 +135,7 @@ export const LoginForm = observer(function LoginForm() {
 
           <Button
             // onPress={submitForm}
-            onPress={() => navigation.navigate("HomeScreen")}
+            onPress={() => navigation.navigate("RestaurantPickScreen")}
             disabled={!isValid}
             title="Sign in"
           />
