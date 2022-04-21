@@ -1,4 +1,5 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { MainTabParams, TopLevelStackParams } from "./RouterTypes";
 import {
   NavigationContainer,
   NavigationContainerProps,
@@ -12,9 +13,9 @@ import { HomeScreen } from "~/features/home-screen/HomeScreen";
 import { LoginScreen } from "~/features/login/LoginScreen";
 import { QueryExample } from "~/features/query-example/QueryExample";
 import { useStore } from "~/mobx/utils/useStore";
-import { MainTabParams, TopLevelStackParams } from "./RouterTypes";
+import { TopLevelStackParams } from "./RouterTypes";
 
-const Tabs = createBottomTabNavigator<MainTabParams>();
+// const Tabs = createBottomTabNavigator<MainTabParams>();
 const Stack = createNativeStackNavigator<TopLevelStackParams>();
 
 export interface RouterProps {}
@@ -34,23 +35,11 @@ export const Router = observer(function Router({
       <Stack.Navigator
         screenOptions={{ header: (props) => <Header {...props} /> }}
       >
-        <Stack.Screen name="MainTab" options={{ headerShown: false }}>
-          {() => {
-            return (
-              <Tabs.Navigator
-                screenOptions={{
-                  header: (props) => <Header {...props} />,
-                }}
-              >
-                <Tabs.Screen
-                  name="HomeScreen"
-                  component={HomeScreen}
-                  options={{ title: "llacan" }}
-                />
-              </Tabs.Navigator>
-            );
-          }}
-        </Stack.Screen>
+        <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
 
         <Stack.Screen
           name="QueryExample"
@@ -65,9 +54,9 @@ export const Router = observer(function Router({
         />
 
         <Stack.Screen
-          name="FormExample"
-          component={LoginScreen}
-          options={{ title: "FormExample" }}
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{ title: "HomeScreen" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

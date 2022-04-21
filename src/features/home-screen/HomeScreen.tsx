@@ -25,11 +25,6 @@ export const HomeScreen = observer(function HomeScreen() {
         />
 
         <Spacer />
-
-        <Button
-          title="Form example"
-          onPress={() => navigation.navigate("FormExample")}
-        />
       </View>
     </Screen>
   );
