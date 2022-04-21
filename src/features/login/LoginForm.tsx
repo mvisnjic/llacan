@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
 import { Image, StyleSheet } from "react-native";
@@ -11,7 +12,7 @@ import { useLoginForm } from "./useLoginForm";
 
 function useStyle() {
   return StyleSheet.create({
-    slogan: {
+    sloganContainer: {
       paddingTop: 32,
       paddingLeft: 32,
       paddingRight: 32,
@@ -53,11 +54,12 @@ function useStyle() {
 }
 
 export const LoginForm = observer(function LoginForm() {
-  const { fields, isSubmitting, isValid, submitForm } = useLoginForm();
+  const { fields, isSubmitting, isValid /* submitForm */ } = useLoginForm();
+  const navigation = useNavigation();
   const S = useStyle();
   return (
     <View>
-      <View style={S.slogan}>
+      <View style={S.sloganContainer}>
         <Text weightBold style={{ fontSize: 32, lineHeight: 38 }}>
           S ovom aplikacijom nikad nećeš ostati
         </Text>
@@ -131,7 +133,12 @@ export const LoginForm = observer(function LoginForm() {
           />
           <Spacer small />
 
-          <Button onPress={submitForm} disabled={!isValid} title="Sign in" />
+          <Button
+            // onPress={submitForm}
+            onPress={() => navigation.navigate("HomeScreen")}
+            disabled={!isValid}
+            title="Sign in"
+          />
           {isSubmitting && <Modal />}
 
           <Spacer extraLarge />
@@ -147,10 +154,8 @@ export const LoginForm = observer(function LoginForm() {
             Zaboravili ste lozinku?
           </Text>
         </View>
-
-        <View style={{ width: 48 }}>
-          <Image source={require("./images/kico.png")} />
-        </View>
+        <Image style={{ width: 48 }} source={require("./images/kico.png")} />
+        <View />
       </View>
     </View>
   );
