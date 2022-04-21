@@ -14,7 +14,8 @@ export interface IconProps {
     | "phone-outline"
     | "clock-outline"
     | "home-outline"
-    | "circle-outline";
+    | "circle-outline"
+    | "menu-down-outline";
 
   color?: string;
   size?: number;

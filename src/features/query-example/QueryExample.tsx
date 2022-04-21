@@ -1,4 +1,4 @@
-import MaskedView from "@react-native-masked-view/masked-view";
+import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
 import { StyleSheet } from "react-native";
@@ -22,7 +22,6 @@ interface PersonListItemProps {
 }
 
 const allOrdersAreActive = true;
-const iconSize = 24;
 const userName = "User";
 
 function useStyle() {
@@ -40,24 +39,25 @@ const PersonListItem = observer(function PersonListItem({
   person,
 }: PersonListItemProps) {
   const S = useStyle();
+  const navigation = useNavigation();
 
   return (
-    <View paddingHorizontalMedium paddingVerticalSmall>
+    <View paddingHorizontalLarge paddingVerticalMedium>
       <View paddingLarge style={S.container}>
         <Spacer />
-        <Text sizeExtraLarge weightBold>
+        <Text sizeLarge weightBold>
           {person.name}
         </Text>
         <Spacer small />
         <Text sizeSmall weightLight>
           {person.gender}, {person.height}, {person.mass}
         </Text>
-        <Spacer />
+        <Spacer large />
 
         <View>
           <View flexDirectionRow alignItemsCenter>
             <Icon
-              size={iconSize}
+              size={C.fontSizeLarge}
               name="home-outline"
               color={C.colorBackgroundDark}
             />
@@ -68,7 +68,7 @@ const PersonListItem = observer(function PersonListItem({
           </View>
           <View flexDirectionRow alignItemsCenter>
             <Icon
-              size={iconSize}
+              size={C.fontSizeLarge}
               name="phone-outline"
               color={C.colorBackgroundDark}
             />
@@ -79,7 +79,7 @@ const PersonListItem = observer(function PersonListItem({
           </View>
           <View flexDirectionRow alignItemsCenter>
             <Icon
-              size={iconSize}
+              size={C.fontSizeLarge}
               name="circle-outline"
               color={allOrdersAreActive ? "#2DCB48" : C.colorBackgroundLight}
             />
@@ -98,7 +98,11 @@ const PersonListItem = observer(function PersonListItem({
           </View>
         </View>
         <Spacer large />
-        <Button outline title="Menu i info" />
+        <Button
+          outline
+          title="Menu i info"
+          onPress={() => navigation.navigate("RestaurantMenuScreen")}
+        />
         <Spacer />
         <Button title={allOrdersAreActive ? "Pridruži se" : "Nova narudžba"} />
       </View>
@@ -116,48 +120,46 @@ export const QueryExample = observer(function QueryExample() {
 
   return (
     <Screen preventScroll>
-      <Spacer extraLarge />
+      <Spacer large />
+      <Spacer small />
 
-      <View paddingHorizontalLarge>
-        <Text sizeExtraLarge weightBold>
+      <View paddingLarge>
+        <Text sizeLarge weightBold>
           {userName}, odaberite željeni restoran
         </Text>
       </View>
       <Spacer extraLarge />
+      <Spacer medium />
 
       <View
-        paddingHorizontalMedium
+        paddingHorizontalLarge
         centerContent
         style={{ alignItems: "flex-end" }}
       >
         <Button outline title="Prošle narudžbe" paddingHorizontalLarge>
           <Icon
-            size={iconSize}
+            size={C.fontSizeLarge}
             name="clock-outline"
             color={C.colorBackgroundDark}
           />
         </Button>
       </View>
-      <Spacer large />
+      <Spacer extraLarge />
 
-      <MaskedView
-        style={{ flex: 1 }}
-        maskElement={
-          <LinearGradient
-            colors={["black", "transparent"]}
-            style={{ flex: 1 }}
-            start={{ x: 0.5, y: 0.01 }}
-            end={{ x: 0.5, y: 0.0 }}
-          />
-        }
-      >
+      <View>
         <StandardFlatList
           query={query}
           contentContainerStyle={{ paddingBottom: insets.bottom }}
           keyExtractor={(person) => String(person)}
           renderItem={({ item }) => <PersonListItem person={item} />}
         />
-      </MaskedView>
+        <LinearGradient
+          colors={[C.colorBackgroundLight, "rgba(255,255,255, 0)"]}
+          style={{ width: "100%", height: 5, position: "absolute", top: 0 }}
+          start={{ x: 0.5, y: 0.0 }}
+          end={{ x: 0.5, y: 1.0 }}
+        />
+      </View>
     </Screen>
   );
 });
