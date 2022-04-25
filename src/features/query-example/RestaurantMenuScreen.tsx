@@ -10,6 +10,7 @@ import { Text } from "~/components/Text";
 import { View } from "~/components/View";
 import { MenuInstance } from "~/mobx/entities/menu/Menu";
 import { styleConstants as C } from "~/style/styleConstants";
+import { removeBracketsAroundText } from "~/utils/removeBracketsAroundText";
 import { titleCase } from "../../utils/titleCase";
 import { menuData } from "./menuData";
 
@@ -25,18 +26,24 @@ const MenuListItem = observer(function MenuListItem({
       paddingHorizontalLarge
       paddingVerticalSmall
       flexDirectionRow
+      centerContent
       style={{
         borderBottomWidth: 1,
         borderBottomColor: "#EEEEEE",
+        minHeight: 60,
       }}
     >
       <View style={{ maxWidth: "75%" }}>
         <Text sizeMedium weightSemiBold numberOfLines={1}>
-          {menuItem.name}
+          {menuItem.name.trim()}
         </Text>
         {menuItem.description && (
           <Text sizeExtraSmall numberOfLines={2}>
-            {titleCase(menuItem.description /*.replace(/,(?=[^\s])/g, ", ")*/)}
+            {titleCase(
+              removeBracketsAroundText(
+                menuItem.description.replace(/,(?=[^\s])/g, ", ").trim()
+              )
+            )}
           </Text>
         )}
       </View>
