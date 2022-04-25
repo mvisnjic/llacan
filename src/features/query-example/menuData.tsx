@@ -258,13 +258,13 @@ export const menuData = [
       },
       {
         price: 50,
-        name: "PIZZA “FERALI” - CAL\n\t\t\t\tZONE mala",
+        name: "PIZZA “FERALI” - CALZONE mala",
         category: "Pizza",
         description: "umak rajčica, škampi, gamberi, sir, salsa rosa",
       },
       {
         price: 55,
-        name: "PIZZA “FERALI” - CALZO\n\t\t\t\tNE velika",
+        name: "PIZZA “FERALI” - CALZONE velika",
         category: "Pizza",
         description: "umak rajčica, škampi, gamberi, sir, salsa rosa",
       },
@@ -1718,7 +1718,16 @@ export const menuData = [
         price: 40,
       },
       {
+        category: "Extra ponuda",
+        name: "Lignje na žaru sa blitvom i krumpirom",
+        description: "LIGNJE, KRUMPIR, BLITVA, ČEŠNJAK",
         price: 65,
+      },
+      {
+        category: "Extra ponuda",
+        name: "Lignje pržene i pommes",
+        description: "LIGNJE, POMMES FRITES, UMAK",
+        price: 60,
       },
       {
         category: "Extra ponuda",

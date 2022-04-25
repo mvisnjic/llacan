@@ -10,17 +10,11 @@ import { Text } from "~/components/Text";
 import { View } from "~/components/View";
 import { MenuInstance } from "~/mobx/entities/menu/Menu";
 import { styleConstants as C } from "~/style/styleConstants";
+import { titleCase } from "../../utils/titleCase";
 import { menuData } from "./menuData";
 
 interface MenuListItemProps {
   menuItem: MenuInstance;
-}
-
-interface Menu {
-  category: string;
-  name: string;
-  price: number;
-  description?: string;
 }
 
 const MenuListItem = observer(function MenuListItem({
@@ -34,17 +28,20 @@ const MenuListItem = observer(function MenuListItem({
       style={{
         borderBottomWidth: 1,
         borderBottomColor: "#EEEEEE",
-        marginBottom: -10,
       }}
     >
-      <View>
-        <Text sizeMedium weightSemiBold>
+      <View style={{ maxWidth: "75%" }}>
+        <Text sizeMedium weightSemiBold numberOfLines={1}>
           {menuItem.name}
         </Text>
-        <Text sizeExtraSmall>{menuItem.description}</Text>
+        {menuItem.description && (
+          <Text sizeExtraSmall numberOfLines={2}>
+            {titleCase(menuItem.description /*.replace(/,(?=[^\s])/g, ", ")*/)}
+          </Text>
+        )}
       </View>
       <View style={{ flex: 1, alignItems: "flex-end" }} centerContent>
-        <Text>{menuItem.price},00</Text>
+        <Text>{menuItem.price},00 kn</Text>
       </View>
     </View>
   );
@@ -168,21 +165,20 @@ export const RestaurantMenuScreen = observer(function RestaurantMenuScreen({
   const { restaurant } = route.params;
   const specificMenu = menuData.find((menu) => menu.title === restaurant.title);
   const query = useQuery(["menuList"], () => {
-    return Promise.resolve<Menu[]>(specificMenu.menu);
+    return Promise.resolve<MenuInstance[]>(specificMenu?.menu);
   });
-  const menus = query.data;
+  const menu = query.data;
 
   const insets = useSafeAreaInsets();
-
   return (
     <Screen preventScroll>
-      <View style={{ paddingBottom: 10 }}>
+      <View>
         <FlatList
-          data={menus}
+          data={menu}
           contentContainerStyle={{
             paddingBottom: insets.bottom,
           }}
-          keyExtractor={(menu) => String(JSON.stringify(menu))}
+          keyExtractor={(menuItem) => String(JSON.stringify(menuItem))}
           renderItem={({ item }) => <MenuListItem menuItem={item} />}
           ListHeaderComponent={<FlatlistHeader restaurant={restaurant} />}
         />

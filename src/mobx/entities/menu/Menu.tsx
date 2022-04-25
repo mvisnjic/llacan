@@ -6,14 +6,14 @@ export interface MenuSnapshotOut extends SnapshotOut<typeof Menu> {}
 
 const { string, number, optional, array } = types;
 
-export const MenuItem = types.model("MenuItem", {
+export const Menu = types.model("MenuItem", {
   category: string,
   price: number,
   name: string,
   description: optional(string, "default"),
 });
 
-export const Menu = types.model("Menu", {
+export const MenuItem = types.model("Menu", {
   title: string,
-  description: array(MenuItem),
+  description: array(Menu),
 });
