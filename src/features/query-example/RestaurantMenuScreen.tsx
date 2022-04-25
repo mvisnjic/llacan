@@ -1,3 +1,4 @@
+import { useRoute } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
 import { FlatList, Image } from "react-native";
@@ -54,7 +55,9 @@ const MenuListItem = observer(function MenuListItem({
   );
 });
 
-const FlatlistHeader = observer((props: { restaurant: any }) => {
+const FlatlistHeader = observer(function FlatlistHeader(props: {
+  restaurant: any;
+}) {
   return (
     <>
       <Image
@@ -166,17 +169,29 @@ const FlatlistHeader = observer((props: { restaurant: any }) => {
   );
 });
 
-export const RestaurantMenuScreen = observer(function RestaurantMenuScreen({
-  route,
-}) {
-  const { restaurant } = route.params;
-  const specificMenu = menuData.find((menu) => menu.title === restaurant.title);
-  const query = useQuery(["menuList"], () => {
-    return Promise.resolve<MenuInstance[]>(specificMenu?.menu);
-  });
-  const menu = query.data;
-
+export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
+  const route = useRoute();
   const insets = useSafeAreaInsets();
+
+  const { restaurant } = route.params as { restaurant: typeof menuData[0] };
+
+  const specificMenu = menuData.find((menu) => menu.title === restaurant.title);
+  if (!specificMenu) throw new Error("Missing specificMenu");
+
+  const query = useQuery(["menuList"], () => {
+    return Promise.resolve(specificMenu.menu);
+  });
+
+  // if (query.isLoading || query.isIdle) return "Loading state";
+  // if (query.isError) return "Loading state";
+
+  const menu = query.data as {
+    category: string;
+    name: string;
+    price: number;
+    description: string;
+  }[];
+
   return (
     <Screen preventScroll>
       <View>
