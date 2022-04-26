@@ -8,14 +8,16 @@ import { useQuery } from "react-query";
 import { Icon } from "~/components/Icon";
 import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
+import { Spinner } from "~/components/Spinner";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
 import { styleConstants as C } from "~/style/styleConstants";
 import { removeBracketsAroundText } from "~/utils/removeBracketsAroundText";
 import { titleCase } from "../../utils/titleCase";
 import { menuData } from "./menuData";
+import { restaurantData } from "./restaurantData";
 
-interface Menu {
+interface MenuItem {
   category: string;
   name: string;
   price: number;
@@ -23,16 +25,16 @@ interface Menu {
 }
 
 interface MenuListItemProps {
-  menuItem: { key: string; menu: [Menu] };
+  menuCategory: { category: string; categoryItems: [MenuItem] };
 }
 
 const MenuListItem = observer(function MenuListItem({
-  menuItem,
+  menuCategory,
 }: MenuListItemProps) {
   return (
     <View>
       <View
-        key={menuItem.key}
+        key={menuCategory.category}
         paddingHorizontalLarge
         paddingVerticalMedium
         style={{ borderBottomWidth: 1, borderBottomColor: "#EEEEEE" }}
@@ -40,7 +42,7 @@ const MenuListItem = observer(function MenuListItem({
         alignItemsCenter
       >
         <Text sizeLarge weightBold>
-          {menuItem.key}
+          {menuCategory.category}
         </Text>
         <View
           style={{
@@ -55,7 +57,7 @@ const MenuListItem = observer(function MenuListItem({
           />
         </View>
       </View>
-      {menuItem.menu.map((itemInCategory) => (
+      {menuCategory.categoryItems.map((itemInCategory) => (
         <View
           key={JSON.stringify(itemInCategory)}
           paddingHorizontalLarge
@@ -94,7 +96,7 @@ const MenuListItem = observer(function MenuListItem({
 });
 
 const FlatlistHeader = observer(function FlatlistHeader(props: {
-  restaurant: any;
+  restaurant: typeof restaurantData[0];
 }) {
   return (
     <>
@@ -185,21 +187,20 @@ export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
   const route = useRoute();
   const insets = useSafeAreaInsets();
 
-  const { restaurant } = route.params as { restaurant: typeof menuData[0] };
+  const { restaurant } = route.params as {
+    restaurant: typeof restaurantData[0];
+  };
 
   const specificMenu = menuData.find((menu) => menu.title === restaurant.title);
   if (!specificMenu) throw new Error("Missing specificMenu");
 
   const specificMenuGrouped = _.groupBy(specificMenu.menu, "category");
 
-  const menu2 = specificMenuGrouped as Dictionary<[Menu]>;
+  const menu2 = specificMenuGrouped as Dictionary<[MenuItem]>;
 
   const query = useQuery(["menuList"], () => {
     return Promise.resolve(menu2);
   });
-
-  // if (query.isLoading || query.isIdle) return "Loading state";
-  // if (query.isError) return "Error state";
 
   const menu = query.data; /*as {
     category: string;
@@ -213,24 +214,38 @@ export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
   const arr = [];
 
   for (const key in menu) {
-    arr.push({ key: key, menu: menu[key] });
+    arr.push({ category: key, categoryItems: menu[key] });
   }
 
-  const arr2 = arr as { key: string; menu: [Menu] }[];
+  const arr2 = arr as { category: string; categoryItems: [MenuItem] }[];
 
-  return (
-    <Screen preventScroll>
-      <View>
-        <FlatList
-          data={arr2}
-          contentContainerStyle={{
-            paddingBottom: insets.bottom,
-          }}
-          keyExtractor={(menuItem) => String(JSON.stringify(menuItem))}
-          renderItem={({ item }) => <MenuListItem menuItem={item} />}
-          ListHeaderComponent={<FlatlistHeader restaurant={restaurant} />}
-        />
+  if (query.isLoading || query.isIdle) {
+    return (
+      <View flex centerContent paddingExtraLarge>
+        <Spinner />
       </View>
-    </Screen>
-  );
+    );
+  } else if (query.isError) {
+    return (
+      <View flex centerContent paddingExtraLarge>
+        <Spinner />
+      </View>
+    );
+  } else {
+    return (
+      <Screen preventScroll>
+        <View>
+          <FlatList
+            data={arr2}
+            contentContainerStyle={{
+              paddingBottom: insets.bottom,
+            }}
+            keyExtractor={(menuItem) => String(JSON.stringify(menuItem))}
+            renderItem={({ item }) => <MenuListItem menuCategory={item} />}
+            ListHeaderComponent={<FlatlistHeader restaurant={restaurant} />}
+          />
+        </View>
+      </Screen>
+    );
+  }
 });
