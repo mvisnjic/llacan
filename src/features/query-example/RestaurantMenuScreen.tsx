@@ -10,14 +10,20 @@ import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
-import { MenuInstance } from "~/mobx/entities/menu/Menu";
 import { styleConstants as C } from "~/style/styleConstants";
 import { removeBracketsAroundText } from "~/utils/removeBracketsAroundText";
 import { titleCase } from "../../utils/titleCase";
 import { menuData } from "./menuData";
 
+interface Menu {
+  category: string;
+  name: string;
+  price: number;
+  description: string;
+}
+
 interface MenuListItemProps {
-  menuItem: MenuInstance;
+  menuItem: { key: string; menu: [Menu] };
 }
 
 const MenuListItem = observer(function MenuListItem({
@@ -184,13 +190,6 @@ export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
   const specificMenu = menuData.find((menu) => menu.title === restaurant.title);
   if (!specificMenu) throw new Error("Missing specificMenu");
 
-  interface Menu {
-    category: string;
-    name: string;
-    price: number;
-    description: string;
-  }
-
   const specificMenuGrouped = _.groupBy(specificMenu.menu, "category");
 
   const menu2 = specificMenuGrouped as Dictionary<[Menu]>;
@@ -200,7 +199,7 @@ export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
   });
 
   // if (query.isLoading || query.isIdle) return "Loading state";
-  // if (query.isError) return "Loading state";
+  // if (query.isError) return "Error state";
 
   const menu = query.data; /*as {
     category: string;
