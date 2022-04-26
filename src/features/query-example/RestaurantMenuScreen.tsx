@@ -1,4 +1,5 @@
 import { useRoute } from "@react-navigation/native";
+import _, { Dictionary } from "lodash";
 import { observer } from "mobx-react";
 import React from "react";
 import { FlatList, Image } from "react-native";
@@ -23,34 +24,65 @@ const MenuListItem = observer(function MenuListItem({
   menuItem,
 }: MenuListItemProps) {
   return (
-    <View
-      paddingHorizontalLarge
-      paddingVerticalSmall
-      flexDirectionRow
-      centerContent
-      style={{
-        borderBottomWidth: 1,
-        borderBottomColor: "#EEEEEE",
-        minHeight: 60,
-      }}
-    >
-      <View style={{ maxWidth: "75%" }}>
-        <Text sizeMedium weightSemiBold numberOfLines={1}>
-          {menuItem.name.trim()}
+    <View>
+      <View
+        key={menuItem.key}
+        paddingHorizontalLarge
+        paddingVerticalMedium
+        style={{ borderBottomWidth: 1, borderBottomColor: "#EEEEEE" }}
+        flexDirectionRow
+        alignItemsCenter
+      >
+        <Text sizeLarge weightBold>
+          {menuItem.key}
         </Text>
-        {menuItem.description && (
-          <Text sizeExtraSmall numberOfLines={2}>
-            {titleCase(
-              removeBracketsAroundText(
-                menuItem.description.replace(/,(?=[^\s])/g, ", ").trim()
-              )
+        <View
+          style={{
+            flex: 1,
+            alignItems: "flex-end",
+          }}
+        >
+          <Icon
+            size={C.fontSizeLarge}
+            name="menu-down-outline"
+            color={C.colorBackgroundDark}
+          />
+        </View>
+      </View>
+      {menuItem.menu.map((itemInCategory) => (
+        <View
+          key={JSON.stringify(itemInCategory)}
+          paddingHorizontalLarge
+          paddingVerticalSmall
+          flexDirectionRow
+          centerContent
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: "#EEEEEE",
+            minHeight: 60,
+          }}
+        >
+          <View style={{ maxWidth: "75%" }}>
+            <Text sizeMedium weightSemiBold numberOfLines={1}>
+              {itemInCategory.name.trim()}
+            </Text>
+            {itemInCategory.description && (
+              <Text sizeExtraSmall numberOfLines={2}>
+                {titleCase(
+                  removeBracketsAroundText(
+                    itemInCategory.description
+                      .replace(/,(?=[^\s])/g, ", ")
+                      .trim()
+                  )
+                )}
+              </Text>
             )}
-          </Text>
-        )}
-      </View>
-      <View style={{ flex: 1, alignItems: "flex-end" }} centerContent>
-        <Text>{menuItem.price},00 kn</Text>
-      </View>
+          </View>
+          <View style={{ flex: 1, alignItems: "flex-end" }} centerContent>
+            <Text>{itemInCategory.price},00 kn</Text>
+          </View>
+        </View>
+      ))}
     </View>
   );
 });
@@ -139,32 +171,6 @@ const FlatlistHeader = observer(function FlatlistHeader(props: {
           ))}
         </View>
       </View>
-      {props.restaurant.tags.map((tag: string) => (
-        <View
-          key={tag}
-          paddingHorizontalLarge
-          paddingVerticalMedium
-          style={{ borderBottomWidth: 1, borderBottomColor: "#EEEEEE" }}
-          flexDirectionRow
-          alignItemsCenter
-        >
-          <Text sizeLarge weightBold>
-            {tag}
-          </Text>
-          <View
-            style={{
-              flex: 1,
-              alignItems: "flex-end",
-            }}
-          >
-            <Icon
-              size={C.fontSizeLarge}
-              name="menu-down-outline"
-              color={C.colorBackgroundDark}
-            />
-          </View>
-        </View>
-      ))}
     </>
   );
 });
@@ -178,25 +184,46 @@ export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
   const specificMenu = menuData.find((menu) => menu.title === restaurant.title);
   if (!specificMenu) throw new Error("Missing specificMenu");
 
+  interface Menu {
+    category: string;
+    name: string;
+    price: number;
+    description: string;
+  }
+
+  const specificMenuGrouped = _.groupBy(specificMenu.menu, "category");
+
+  const menu2 = specificMenuGrouped as Dictionary<[Menu]>;
+
   const query = useQuery(["menuList"], () => {
-    return Promise.resolve(specificMenu.menu);
+    return Promise.resolve(menu2);
   });
 
   // if (query.isLoading || query.isIdle) return "Loading state";
   // if (query.isError) return "Loading state";
 
-  const menu = query.data as {
+  const menu = query.data; /*as {
     category: string;
     name: string;
     price: number;
     description: string;
-  }[];
+  }[];*/
+
+  // if (!menu) throw new Error("Missing menu");
+
+  const arr = [];
+
+  for (const key in menu) {
+    arr.push({ key: key, menu: menu[key] });
+  }
+
+  const arr2 = arr as { key: string; menu: [Menu] }[];
 
   return (
     <Screen preventScroll>
       <View>
         <FlatList
-          data={menu}
+          data={arr2}
           contentContainerStyle={{
             paddingBottom: insets.bottom,
           }}
