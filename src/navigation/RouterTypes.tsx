@@ -11,7 +11,7 @@ export type MainTabParams = {
 // TopLevelStack
 export type TopLevelStackParams = {
   MainTab: MainTabParams;
-  QueryExample: undefined;
+  RestaurantPickScreen: undefined;
   DropdownExample: undefined;
   FormExample: undefined;
   RestaurantMenuScreen: { restaurant: any };

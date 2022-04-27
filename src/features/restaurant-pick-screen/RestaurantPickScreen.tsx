@@ -124,7 +124,7 @@ const RestaurantListItem = observer(function RestaurantListItem({
   );
 });
 
-export const QueryExample = observer(function QueryExample() {
+export const RestaurantPickScreen = observer(function RestaurantPickScreen() {
   const query = useQuery(["peopleList"], () => {
     return Promise.resolve<Restaurant[]>(restaurantData);
   });

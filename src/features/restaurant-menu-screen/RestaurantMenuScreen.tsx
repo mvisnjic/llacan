@@ -14,8 +14,8 @@ import { View } from "~/components/View";
 import { styleConstants as C } from "~/style/styleConstants";
 import { removeBracketsAroundText } from "~/utils/removeBracketsAroundText";
 import { titleCase } from "../../utils/titleCase";
+import { restaurantData } from "../restaurant-pick-screen/restaurantData";
 import { menuData } from "./menuData";
-import { restaurantData } from "./restaurantData";
 
 interface MenuItem {
   category: string;

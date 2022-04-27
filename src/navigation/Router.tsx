@@ -10,8 +10,8 @@ import { Header } from "~/components/Header";
 import { DropdownExample } from "~/features/dropdown/DropdownExample";
 import { HomeScreen } from "~/features/home-screen/HomeScreen";
 import { LoginScreen } from "~/features/login/LoginScreen";
-import { QueryExample } from "~/features/query-example/QueryExample";
-import { RestaurantMenuScreen } from "~/features/query-example/RestaurantMenuScreen";
+import { RestaurantMenuScreen } from "~/features/restaurant-menu-screen/RestaurantMenuScreen";
+import { RestaurantPickScreen } from "~/features/restaurant-pick-screen/RestaurantPickScreen";
 import { useStore } from "~/mobx/utils/useStore";
 import { MainTabParams, TopLevelStackParams } from "./RouterTypes";
 
@@ -54,9 +54,9 @@ export const Router = observer(function Router({
         </Stack.Screen>
 
         <Stack.Screen
-          name="QueryExample"
-          component={QueryExample}
-          options={{ title: "QueryExample" }}
+          name="RestaurantPickScreen"
+          component={RestaurantPickScreen}
+          options={{ title: "RestaurantPickScreen" }}
         />
 
         <Stack.Screen

@@ -13,8 +13,8 @@ export const HomeScreen = observer(function HomeScreen() {
     <Screen>
       <View paddingMedium>
         <Button
-          title="Query example"
-          onPress={() => navigation.navigate("QueryExample")}
+          title="Restaurant Pick Screen"
+          onPress={() => navigation.navigate("RestaurantPickScreen")}
         />
 
         <Spacer />
