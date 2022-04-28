@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
 import { Image } from "react-native";
@@ -7,6 +8,7 @@ import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
 import { StandardFlatList } from "~/components/StandardFlatList";
 import { Text } from "~/components/Text";
+import { TouchableOpacity } from "~/components/TouchableOpacity";
 import { View } from "~/components/View";
 import { useInfiniteQuery } from "~/hooks/useInfiniteQuery";
 import { PersonInstance } from "~/mobx/entities/person/Person";
@@ -16,34 +18,36 @@ import { styleConstants as C } from "~/style/styleConstants";
 interface PersonListItemProps {
   person: PersonInstance;
 }
-
 const PersonListItem = observer(function PersonListItem({
   person,
 }: PersonListItemProps) {
+  const navigation = useNavigation();
   return (
-    <View
-      paddingHorizontalLarge
-      paddingVerticalSmall
-      flexDirectionRow
-      style={{
-        borderBottomWidth: 1,
-        borderBottomColor: "#EEEEEE",
-        marginBottom: -10,
-      }}
-    >
-      <View>
-        <Text sizeMedium weightSemiBold>
-          {person.name}
-        </Text>
-        <Text sizeExtraSmall>
-          {person.eye_color}, {person.gender}, {person.hair_color},{" "}
-          {person.skin_color}
-        </Text>
+    <TouchableOpacity onPress={() => navigation.navigate("SelectionScreen")}>
+      <View
+        paddingHorizontalLarge
+        paddingVerticalSmall
+        flexDirectionRow
+        style={{
+          borderBottomWidth: 1,
+          borderBottomColor: "#EEEEEE",
+          marginBottom: -10,
+        }}
+      >
+        <View>
+          <Text sizeMedium weightSemiBold>
+            {person.name}
+          </Text>
+          <Text sizeExtraSmall>
+            {person.eye_color}, {person.gender}, {person.hair_color},{" "}
+            {person.skin_color}
+          </Text>
+        </View>
+        <View style={{ flex: 1, alignItems: "flex-end" }} centerContent>
+          <Text>{person.height},00</Text>
+        </View>
       </View>
-      <View style={{ flex: 1, alignItems: "flex-end" }} centerContent>
-        <Text>{person.height},00</Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 });
 

@@ -90,7 +90,8 @@ export const LoginForm = observer(function LoginForm() {
             weightBold
             alignCenter
             colorTheme
-            style={{ fontSize: 40, lineHeight: 40, marginTop: 48 }}
+            sizeExtraExtraLarge
+            style={{ lineHeight: 40, marginTop: 48 }}
           >
             Prijavi se
           </Text>

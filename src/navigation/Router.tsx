@@ -10,9 +10,11 @@ import { observer } from "mobx-react";
 import React from "react";
 import { Header } from "~/components/Header";
 import { DropdownExample } from "~/features/dropdown/DropdownExample";
+import { HomeScreen } from "~/features/home-screen/HomeScreen";
 import { LoginScreen } from "~/features/login/LoginScreen";
 import { RestaurantMenuScreen } from "~/features/restaurant-menu-screen/RestaurantMenuScreen";
 import { RestaurantPickScreen } from "~/features/restaurant-pick-screen/RestaurantPickScreen";
+import { SelectionScreen } from "~/features/selection-screen/SelectionScreen";
 import { useStore } from "~/mobx/utils/useStore";
 import { TopLevelStackParams } from "./RouterTypes";
 
@@ -51,6 +53,8 @@ export const Router = observer(function Router({
           name="RestaurantMenuScreen"
           component={RestaurantMenuScreen}
         />
+        <Stack.Screen name="SelectionScreen" component={SelectionScreen} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
 
         <Stack.Screen name="DropdownExample" component={DropdownExample} />
       </Stack.Navigator>
