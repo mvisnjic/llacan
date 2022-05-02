@@ -1,4 +1,4 @@
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import _, { Dictionary } from "lodash";
 import { observer } from "mobx-react";
 import React from "react";
@@ -10,6 +10,7 @@ import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
 import { Spinner } from "~/components/Spinner";
 import { Text } from "~/components/Text";
+import { TouchableOpacity } from "~/components/TouchableOpacity";
 import { View } from "~/components/View";
 import { styleConstants as C } from "~/style/styleConstants";
 import { removeBracketsAroundText } from "~/utils/removeBracketsAroundText";
@@ -31,6 +32,7 @@ interface MenuListItemProps {
 const MenuListItem = observer(function MenuListItem({
   menuCategory,
 }: MenuListItemProps) {
+  const navigation = useNavigation();
   return (
     <View>
       <View
@@ -58,7 +60,7 @@ const MenuListItem = observer(function MenuListItem({
         </View>
       </View>
       {menuCategory.categoryItems.map((itemInCategory) => (
-        <View
+        <TouchableOpacity
           key={JSON.stringify(itemInCategory)}
           paddingHorizontalLarge
           paddingVerticalSmall
@@ -69,6 +71,7 @@ const MenuListItem = observer(function MenuListItem({
             borderBottomColor: "#EEEEEE",
             minHeight: 60,
           }}
+          onPress={() => navigation.navigate("SelectionScreen")}
         >
           <View style={{ maxWidth: "75%" }}>
             <Text sizeMedium weightSemiBold numberOfLines={1}>
@@ -89,7 +92,7 @@ const MenuListItem = observer(function MenuListItem({
           <View style={{ flex: 1, alignItems: "flex-end" }} centerContent>
             <Text>{itemInCategory.price},00 kn</Text>
           </View>
-        </View>
+        </TouchableOpacity>
       ))}
     </View>
   );
