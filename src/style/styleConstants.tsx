@@ -49,6 +49,7 @@ export const styleConstants = {
   colorTextAccent: "#000000",
   colorTextLight,
   colorTextDark,
+  colorTextLoginInput: "#404040", // added custom color for text inputs.
   colorTextDanger: "#ff4444",
   colorTextLightSoft: Color(colorTextLight).fade(0.3).rgb().string(2),
   colorTextLightSofter: Color(colorTextLight).fade(0.5).rgb().string(2),

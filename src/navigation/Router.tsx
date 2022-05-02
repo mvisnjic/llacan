@@ -1,4 +1,6 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { MainTabParams, TopLevelStackParams } from "./RouterTypes";
+// import { HomeScreen } from "~/features/home-screen/HomeScreen";
 import {
   NavigationContainer,
   NavigationContainerProps,
@@ -12,10 +14,11 @@ import { HomeScreen } from "~/features/home-screen/HomeScreen";
 import { LoginScreen } from "~/features/login/LoginScreen";
 import { RestaurantMenuScreen } from "~/features/restaurant-menu-screen/RestaurantMenuScreen";
 import { RestaurantPickScreen } from "~/features/restaurant-pick-screen/RestaurantPickScreen";
+import { SelectionScreen } from "~/features/selection-screen/SelectionScreen";
 import { useStore } from "~/mobx/utils/useStore";
-import { MainTabParams, TopLevelStackParams } from "./RouterTypes";
+import { TopLevelStackParams } from "./RouterTypes";
 
-const Tabs = createBottomTabNavigator<MainTabParams>();
+// const Tabs = createBottomTabNavigator<MainTabParams>();
 const Stack = createNativeStackNavigator<TopLevelStackParams>();
 
 export interface RouterProps {}
@@ -35,24 +38,6 @@ export const Router = observer(function Router({
       <Stack.Navigator
         screenOptions={{ header: (props) => <Header {...props} /> }}
       >
-        <Stack.Screen name="MainTab" options={{ headerShown: false }}>
-          {() => {
-            return (
-              <Tabs.Navigator
-                screenOptions={{
-                  header: (props) => <Header {...props} />,
-                }}
-              >
-                <Tabs.Screen
-                  name="HomeScreen"
-                  component={HomeScreen}
-                  options={{ title: "llacan" }}
-                />
-              </Tabs.Navigator>
-            );
-          }}
-        </Stack.Screen>
-
         <Stack.Screen
           name="RestaurantPickScreen"
           component={RestaurantPickScreen}
@@ -60,22 +45,24 @@ export const Router = observer(function Router({
         />
 
         <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="RestaurantPickScreen"
+          component={RestaurantPickScreen}
+        />
+
+        <Stack.Screen
           name="RestaurantMenuScreen"
           component={RestaurantMenuScreen}
-          options={{ title: "RestaurantMenuScreen" }}
         />
+        <Stack.Screen name="SelectionScreen" component={SelectionScreen} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
 
-        <Stack.Screen
-          name="DropdownExample"
-          component={DropdownExample}
-          options={{ title: "DropdownExample" }}
-        />
-
-        <Stack.Screen
-          name="FormExample"
-          component={LoginScreen}
-          options={{ title: "FormExample" }}
-        />
+        <Stack.Screen name="DropdownExample" component={DropdownExample} />
       </Stack.Navigator>
     </NavigationContainer>
   );

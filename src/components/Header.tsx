@@ -47,7 +47,7 @@ type HeaderProps = NativeStackHeaderProps | BottomTabHeaderProps;
 export const Header = observer(
   ({ options, navigation, ...props }: HeaderProps) => {
     const canGoBack = "back" in props && !!props.back;
-    const isLoggedIn = "route" in props && props.route.name !== "HomeScreen";
+    const isLoggedIn = "route" in props && props.route.name !== "LoginScreen";
     const insets = useSafeAreaInsets();
     const insetTop = insets.top;
 

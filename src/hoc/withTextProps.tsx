@@ -138,22 +138,22 @@ export function withTextProps<Props extends { style?: any }>(
       else if (colorDanger) style.color = C.colorTextDanger;
 
       style.fontWeight = C.fontWeightRegular;
-      style.fontFamily = undefined; // "OpenSans-Regular";
+      style.fontFamily = "TTNorms-Regular";
       if (weightLight) {
         style.fontWeight = C.fontWeightLight;
-        style.fontFamily = undefined; // "OpenSans-Light";
+        style.fontFamily = "TTNorms-Light";
       } else if (weightRegular) {
         style.fontWeight = C.fontWeightRegular;
-        style.fontFamily = undefined; // "OpenSans-Regular";
+        style.fontFamily = "TTNorms-Regular";
       } else if (weightSemiBold) {
         style.fontWeight = C.fontWeightSemiBold;
-        style.fontFamily = undefined; // "OpenSans-SemiBold";
+        style.fontFamily = "TTNorms-Medium";
       } else if (weightBold) {
         style.fontWeight = C.fontWeightBold;
-        style.fontFamily = undefined; // "OpenSans-Bold";
+        style.fontFamily = "TTNorms-Bold";
       } else if (weightExtraBold) {
         style.fontWeight = C.fontWeightExtraBold;
-        style.fontFamily = undefined; // "OpenSans-ExtraBold";
+        style.fontFamily = "TTNorms-ExtraBold";
       }
 
       style.textAlign = "auto";

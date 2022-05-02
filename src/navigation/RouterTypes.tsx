@@ -5,16 +5,19 @@ import { RouteProp as RNRouteProp } from "@react-navigation/native";
 
 //TopLevelStack > MainTab
 export type MainTabParams = {
-  HomeScreen: undefined;
+  LoginScreen: undefined;
 };
 
 // TopLevelStack
 export type TopLevelStackParams = {
   MainTab: MainTabParams;
-  RestaurantPickScreen: undefined;
-  DropdownExample: undefined;
   FormExample: undefined;
   RestaurantMenuScreen: { restaurant: any };
+  LoginScreen: MainTabParams;
+  RestaurantPickScreen: undefined;
+  DropdownExample: undefined;
+  HomeScreen: undefined;
+  SelectionScreen: undefined;
 };
 
 // End navigator params definitions
