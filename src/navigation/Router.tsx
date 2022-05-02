@@ -51,11 +51,6 @@ export const Router = observer(function Router({
         />
 
         <Stack.Screen
-          name="RestaurantPickScreen"
-          component={RestaurantPickScreen}
-        />
-
-        <Stack.Screen
           name="RestaurantMenuScreen"
           component={RestaurantMenuScreen}
         />
