@@ -4,16 +4,14 @@ export interface PersonInstance extends Instance<typeof Person> {}
 export interface PersonSnapshotIn extends SnapshotIn<typeof Person> {}
 export interface PersonSnapshotOut extends SnapshotOut<typeof Person> {}
 
-const { string, identifier } = types;
+const { string, identifier, boolean, array } = types;
 
 export const Person = types.model("Person", {
-  url: identifier,
-  name: string,
-  height: string,
-  mass: string,
-  hair_color: string,
-  skin_color: string,
-  eye_color: string,
-  birth_year: string,
-  gender: string,
+  id: identifier,
+  title: string,
+  phone: string,
+  address: string,
+  sms_accept: boolean,
+  hasPommes: boolean,
+  tags: array(string),
 });

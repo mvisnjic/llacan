@@ -74,6 +74,21 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>TTNorms-Black.otf</string>
+		<string>TTNorms-BlackItalic.otf</string>
+		<string>TTNorms-BoldItalic.otf</string>
+		<string>TTNorms-ExtraBold.otf</string>
+		<string>TTNorms-ExtraBoldItalic.otf</string>
+		<string>TTNorms-ExtraLight.otf</string>
+		<string>TTNorms-ExtraLightItalic.otf</string>
+		<string>TTNorms-Heavy.otf</string>
+		<string>TTNorms-HeavyItalic.otf</string>
+		<string>TTNorms-Italic.otf</string>
+		<string>TTNorms-Light.otf</string>
+		<string>TTNorms-LightItalic.otf</string>
+		<string>TTNorms-MediumItalic.otf</string>
+		<string>TTNorms-Thin.otf</string>
+		<string>TTNorms-ThinItalic.otf</string>
 	</array>
 </dict>
 </plist>

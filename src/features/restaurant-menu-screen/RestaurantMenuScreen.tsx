@@ -1,57 +1,106 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import _, { Dictionary } from "lodash";
 import { observer } from "mobx-react";
 import React from "react";
-import { Image } from "react-native";
+import { FlatList, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useQuery } from "react-query";
 import { Icon } from "~/components/Icon";
 import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
-import { StandardFlatList } from "~/components/StandardFlatList";
+import { Spinner } from "~/components/Spinner";
 import { Text } from "~/components/Text";
 import { TouchableOpacity } from "~/components/TouchableOpacity";
 import { View } from "~/components/View";
-import { useInfiniteQuery } from "~/hooks/useInfiniteQuery";
-import { PersonInstance } from "~/mobx/entities/person/Person";
-import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
+import { removeBracketsAroundText } from "~/utils/removeBracketsAroundText";
+import { titleCase } from "../../utils/titleCase";
+import { restaurantData } from "../restaurant-pick-screen/restaurantData";
+import { menuData } from "./menuData";
 
-interface PersonListItemProps {
-  person: PersonInstance;
+interface MenuItem {
+  category: string;
+  name: string;
+  price: number;
+  description: string;
 }
-const PersonListItem = observer(function PersonListItem({
-  person,
-}: PersonListItemProps) {
+
+interface MenuListItemProps {
+  menuCategory: { category: string; categoryItems: [MenuItem] };
+}
+
+const MenuListItem = observer(function MenuListItem({
+  menuCategory,
+}: MenuListItemProps) {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("SelectionScreen")}>
+    <View>
       <View
+        key={menuCategory.category}
         paddingHorizontalLarge
-        paddingVerticalSmall
+        paddingVerticalMedium
+        style={{ borderBottomWidth: 1, borderBottomColor: "#EEEEEE" }}
         flexDirectionRow
-        style={{
-          borderBottomWidth: 1,
-          borderBottomColor: "#EEEEEE",
-          marginBottom: -10,
-        }}
+        alignItemsCenter
       >
-        <View>
-          <Text sizeMedium weightSemiBold>
-            {person.name}
-          </Text>
-          <Text sizeExtraSmall>
-            {person.eye_color}, {person.gender}, {person.hair_color},{" "}
-            {person.skin_color}
-          </Text>
-        </View>
-        <View style={{ flex: 1, alignItems: "flex-end" }} centerContent>
-          <Text>{person.height},00</Text>
+        <Text sizeLarge weightBold>
+          {menuCategory.category}
+        </Text>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "flex-end",
+          }}
+        >
+          <Icon
+            size={C.fontSizeLarge}
+            name="menu-down-outline"
+            color={C.colorBackgroundDark}
+          />
         </View>
       </View>
-    </TouchableOpacity>
+      {menuCategory.categoryItems.map((itemInCategory) => (
+        <TouchableOpacity
+          key={JSON.stringify(itemInCategory)}
+          paddingHorizontalLarge
+          paddingVerticalSmall
+          flexDirectionRow
+          centerContent
+          style={{
+            borderBottomWidth: 1,
+            borderBottomColor: "#EEEEEE",
+            minHeight: 60,
+          }}
+          onPress={() => navigation.navigate("SelectionScreen")}
+        >
+          <View style={{ maxWidth: "75%" }}>
+            <Text sizeMedium weightSemiBold numberOfLines={1}>
+              {itemInCategory.name.trim()}
+            </Text>
+            {itemInCategory.description && (
+              <Text sizeExtraSmall numberOfLines={2}>
+                {titleCase(
+                  removeBracketsAroundText(
+                    itemInCategory.description
+                      .replace(/,(?=[^\s])/g, ", ")
+                      .trim()
+                  )
+                )}
+              </Text>
+            )}
+          </View>
+          <View style={{ flex: 1, alignItems: "flex-end" }} centerContent>
+            <Text>{itemInCategory.price},00 kn</Text>
+          </View>
+        </TouchableOpacity>
+      ))}
+    </View>
   );
 });
 
-const FlatlistHeader = observer(() => {
+const FlatlistHeader = observer(function FlatlistHeader(props: {
+  restaurant: typeof restaurantData[0];
+}) {
   return (
     <>
       <Image
@@ -61,7 +110,7 @@ const FlatlistHeader = observer(() => {
 
       <View paddingLarge>
         <Text sizeLarge weightBold>
-          Fast food Forever
+          {props.restaurant.title}
         </Text>
       </View>
 
@@ -77,7 +126,7 @@ const FlatlistHeader = observer(() => {
           />
           <Spacer />
           <Text sizeMediumSmall weightLight>
-            prilaz Kikova 5, 52220, Labin
+            {props.restaurant.address}
           </Text>
         </View>
         <View flexDirectionRow alignItemsCenter>
@@ -88,7 +137,7 @@ const FlatlistHeader = observer(() => {
           />
           <Spacer />
           <Text sizeMediumSmall weightLight>
-            092-246-0606
+            {props.restaurant.phone.replace(/ /g, "-").replace(/385-/g, "0")}
           </Text>
         </View>
         <Spacer large />
@@ -126,31 +175,11 @@ const FlatlistHeader = observer(() => {
           </Text>
         </View>
         <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingLarge>
-          <Text weightSemiBold>BURGER</Text>
-          <Text weightSemiBold>POMMES</Text>
-        </View>
-      </View>
-      <View
-        paddingHorizontalLarge
-        paddingVerticalMedium
-        style={{ borderBottomWidth: 1, borderBottomColor: "#EEEEEE" }}
-        flexDirectionRow
-        alignItemsCenter
-      >
-        <Text sizeLarge weightBold>
-          Burger
-        </Text>
-        <View
-          style={{
-            flex: 1,
-            alignItems: "flex-end",
-          }}
-        >
-          <Icon
-            size={C.fontSizeLarge}
-            name="menu-down-outline"
-            color={C.colorBackgroundDark}
-          />
+          {props.restaurant.tags.map((tag: string) => (
+            <Text weightSemiBold key={tag}>
+              {tag.toUpperCase()}
+            </Text>
+          ))}
         </View>
       </View>
     </>
@@ -158,26 +187,68 @@ const FlatlistHeader = observer(() => {
 });
 
 export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
-  const store = useStore();
-  const query = useInfiniteQuery(["peopleList"], ({ pageParam }) => {
-    return store.personStore.readPersonList({ page: pageParam });
-  });
-
+  const route = useRoute();
   const insets = useSafeAreaInsets();
 
-  return (
-    <Screen preventScroll>
-      <View style={{ paddingBottom: 10 }}>
-        <StandardFlatList
-          query={query}
-          contentContainerStyle={{
-            paddingBottom: insets.bottom,
-          }}
-          keyExtractor={(person) => String(person)}
-          renderItem={({ item }) => <PersonListItem person={item} />}
-          ListHeaderComponent={FlatlistHeader}
-        />
+  const { restaurant } = route.params as {
+    restaurant: typeof restaurantData[0];
+  };
+
+  const specificMenu = menuData.find((menu) => menu.title === restaurant.title);
+  if (!specificMenu) throw new Error("Missing specificMenu");
+
+  const specificMenuGrouped = _.groupBy(specificMenu.menu, "category");
+
+  const menu2 = specificMenuGrouped as Dictionary<[MenuItem]>;
+
+  const query = useQuery(["menuList"], () => {
+    return Promise.resolve(menu2);
+  });
+
+  const menu = query.data; /*as {
+    category: string;
+    name: string;
+    price: number;
+    description: string;
+  }[];*/
+
+  // if (!menu) throw new Error("Missing menu");
+
+  const arr = [];
+
+  for (const key in menu) {
+    arr.push({ category: key, categoryItems: menu[key] });
+  }
+
+  const arr2 = arr as { category: string; categoryItems: [MenuItem] }[];
+
+  if (query.isLoading || query.isIdle) {
+    return (
+      <View flex centerContent paddingExtraLarge>
+        <Spinner />
       </View>
-    </Screen>
-  );
+    );
+  } else if (query.isError) {
+    return (
+      <View flex centerContent paddingExtraLarge>
+        <Spinner />
+      </View>
+    );
+  } else {
+    return (
+      <Screen preventScroll>
+        <View>
+          <FlatList
+            data={arr2}
+            contentContainerStyle={{
+              paddingBottom: insets.bottom,
+            }}
+            keyExtractor={(menuItem) => String(JSON.stringify(menuItem))}
+            renderItem={({ item }) => <MenuListItem menuCategory={item} />}
+            ListHeaderComponent={<FlatlistHeader restaurant={restaurant} />}
+          />
+        </View>
+      </Screen>
+    );
+  }
 });
