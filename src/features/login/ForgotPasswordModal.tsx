@@ -18,8 +18,8 @@ const S = StyleSheet.create({
   },
   forgotPasswordPopup: {
     position: "absolute",
-    top: "50%",
-    width: "90%",
+    alignSelf: "center",
+    top: "45%",
     backgroundColor: C.colorBackgroundLight,
     borderColor: C.colorBackgroundDarkLighter,
     borderWidth: 1,
@@ -42,7 +42,7 @@ export const ForgotPasswordModal = observer(function ForgotPasswordModal({
             Za oporavak lozinke kontaktirajte administratora
           </Text>
         </View>
-        <View>
+        <View paddingMedium>
           <IconButton
             iconSize={C.fontSizeLarge}
             iconName="close"

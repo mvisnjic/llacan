@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet } from "react-native";
 import { Button } from "~/components/Button";
 import { Modal } from "~/components/ModalProvider";
@@ -8,6 +8,7 @@ import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { TextInput } from "~/components/TextInput";
 import { View } from "~/components/View";
+import { ForgotPasswordModal } from "./ForgotPasswordModal";
 import { useLoginForm } from "./useLoginForm";
 
 function useStyle() {
@@ -56,6 +57,7 @@ function useStyle() {
 export const LoginForm = observer(function LoginForm() {
   const { fields, isSubmitting, isValid /* submitForm */ } = useLoginForm();
   const navigation = useNavigation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const S = useStyle();
   return (
     <View>
@@ -85,6 +87,13 @@ export const LoginForm = observer(function LoginForm() {
         </View>
       </View>
       <View style={{ backgroundColor: "#070707" }}>
+        {isModalVisible && (
+          <ForgotPasswordModal
+            onClosePress={() => {
+              setIsModalVisible(false);
+            }}
+          />
+        )}
         <View paddingLarge>
           <Text
             weightBold
@@ -146,7 +155,7 @@ export const LoginForm = observer(function LoginForm() {
 
           <Text
             onPress={() => {
-              console.warn("TODO");
+              setIsModalVisible(true);
             }}
             colorTheme
             weightSemiBold
