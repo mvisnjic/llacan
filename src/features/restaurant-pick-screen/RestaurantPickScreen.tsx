@@ -159,7 +159,6 @@ export const RestaurantPickScreen = observer(function RestaurantPickScreen() {
           />
         </Button>
       </View>
-      {/* <Text>{JSON.stringify(restaurants)}</Text> */}
       <Spacer extraLarge />
 
       <View style={{ flex: 1 }}>
