@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
 import { Image, StyleSheet } from "react-native";
@@ -31,16 +30,26 @@ function useStyle() {
       color: "#DADADA",
     },
     mySelectionContainer: {
-      borderBottomWidth: 1,
-      borderBottomColor: "#EEEEEE",
-      justifyContent: "space-between",
+      borderWidth: 1,
+      borderColor: "#EEEEEE",
+      marginHorizontal: 16,
     },
+    buttonWidth: {
+      width: "100%",
+    },
+    textDijeliPommes: {
+      opacity: 0.6,
+    },
+    Pomfri: {
+      height: 40,
+      width: 40,
+    },
+    containerPomfri: {},
   });
 }
 
-export const SelectionScreen = observer(function RestaurantMenuScreen() {
+export const SecondSelectionScreen = observer(function RestaurantMenuScreen() {
   const S = useStyle();
-  const navigation = useNavigation();
   return (
     <Screen preventScroll>
       <View>
@@ -79,19 +88,12 @@ export const SelectionScreen = observer(function RestaurantMenuScreen() {
             </View>
           </View>
         </View>
-        <View
-          paddingLarge
-          flexDirectionRow
-          alignItemsCenter
-          style={S.mySelectionContainer}
-        >
+        <View paddingLarge alignItemsCenter style={S.mySelectionContainer}>
           <Text sizeMediumLarge weightSemiBold>
             Moj odabir
           </Text>
-          <Button
-            title="Odaberi za sebe"
-            onPress={() => navigation.navigate("SecondSelectionScreen")}
-          />
+          <Spacer large />
+          <Button title="Odaberi za sebe" style={S.buttonWidth} />
         </View>
         <View
           paddingLarge
@@ -102,6 +104,26 @@ export const SelectionScreen = observer(function RestaurantMenuScreen() {
           <Text sizeMediumLarge weightSemiBold>
             Ostali(0)
           </Text>
+        </View>
+
+        <View paddingLarge flexDirectionColumn style={S.mySelectionContainer}>
+          <View alignItemsCenter>
+            <Text sizeMediumLarge weightSemiBold>
+              Pommes party(0)
+            </Text>
+
+            <Text style={S.textDijeliPommes} sizeExtraSmall>
+              Dijeli pommes sa kolegama
+            </Text>
+            <View flexDirectionRow style={S.containerPomfri}>
+              <Image
+                style={S.Pomfri}
+                source={require("~/features/second-selection-screen/images/Pomfr.png")}
+              />
+            </View>
+          </View>
+          <Spacer large />
+          <Button title="Odaberi za sebe" style={S.buttonWidth} />
         </View>
       </View>
     </Screen>

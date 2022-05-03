@@ -14,6 +14,7 @@ import { HomeScreen } from "~/features/home-screen/HomeScreen";
 import { LoginScreen } from "~/features/login/LoginScreen";
 import { RestaurantMenuScreen } from "~/features/restaurant-menu-screen/RestaurantMenuScreen";
 import { RestaurantPickScreen } from "~/features/restaurant-pick-screen/RestaurantPickScreen";
+import { SecondSelectionScreen } from "~/features/second-selection-screen/SecondSelectionScreen";
 import { SelectionScreen } from "~/features/selection-screen/SelectionScreen";
 import { useStore } from "~/mobx/utils/useStore";
 import { TopLevelStackParams } from "./RouterTypes";
@@ -55,6 +56,11 @@ export const Router = observer(function Router({
           component={RestaurantMenuScreen}
         />
         <Stack.Screen name="SelectionScreen" component={SelectionScreen} />
+
+        <Stack.Screen
+          name="SecondSelectionScreen"
+          component={SecondSelectionScreen}
+        />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
 
         <Stack.Screen name="DropdownExample" component={DropdownExample} />

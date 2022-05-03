@@ -3,6 +3,8 @@ import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { Image, StyleSheet } from "react-native";
 import { Button } from "~/components/Button";
+// import { Icon } from "~/components/Icon";
+// import { IconButton } from "~/components/IconButton";
 import { Modal } from "~/components/ModalProvider";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
@@ -14,25 +16,13 @@ import { useLoginForm } from "./useLoginForm";
 function useStyle() {
   return StyleSheet.create({
     sloganContainer: {
-      paddingTop: 32,
-      paddingLeft: 32,
-      paddingRight: 32,
-    },
-    containerTextLlacan: {
-      marginEnd: 237,
+      padding: 32,
+      paddingBottom: 0,
     },
     textLlacan: {
-      fontSize: 32,
-      lineHeight: 38,
       backgroundColor: "#000000",
       color: "#ffffff",
-      padding: 3,
-    },
-    textYellowL: {
-      fontSize: 32,
-      lineHeight: 38,
-      backgroundColor: "#000000",
-      padding: 2,
+      padding: 6,
     },
     hamburger: {
       width: 182,
@@ -62,12 +52,14 @@ export const LoginForm = observer(function LoginForm() {
   return (
     <View>
       <View style={S.sloganContainer}>
-        <Text weightBold style={{ fontSize: 32, lineHeight: 38 }}>
-          S ovom aplikacijom nikad nećeš ostati
-        </Text>
-        <View style={S.containerTextLlacan}>
-          <Text weightBold style={S.textLlacan}>
-            <Text colorTheme weightBold style={S.textYellowL}>
+        <View paddingHorizontalSmall>
+          <Text weightBold sizeExtraLarge>
+            S ovom aplikacijom nikad nećeš ostati
+          </Text>
+        </View>
+        <View flexDirectionRow>
+          <Text weightBold sizeExtraLarge style={S.textLlacan}>
+            <Text colorTheme weightBold sizeExtraLarge>
               l
             </Text>
             lačan
@@ -100,7 +92,7 @@ export const LoginForm = observer(function LoginForm() {
             alignCenter
             colorTheme
             sizeExtraExtraLarge
-            style={{ lineHeight: 40, marginTop: 48 }}
+            style={{ marginTop: 48 }}
           >
             Prijavi se
           </Text>
@@ -124,7 +116,6 @@ export const LoginForm = observer(function LoginForm() {
             onSubmitEditing={fields.email.onSubmitEditing}
           />
           <Spacer small />
-
           <TextInput
             label="Password"
             placeholder="********"
@@ -141,6 +132,7 @@ export const LoginForm = observer(function LoginForm() {
             error={fields.password.error}
             onSubmitEditing={fields.password.onSubmitEditing}
           />
+
           <Spacer small />
 
           <Button

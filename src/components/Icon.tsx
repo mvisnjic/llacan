@@ -16,7 +16,9 @@ export interface IconProps {
     | "home-outline"
     | "circle-outline"
     | "menu-down-outline"
-    | "close";
+    | "close"
+    | "eye-outline"
+    | "eye-off-outline";
 
   color?: string;
   size?: number;
