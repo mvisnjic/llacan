@@ -39,15 +39,15 @@ export const Router = observer(function Router({
         screenOptions={{ header: (props) => <Header {...props} /> }}
       >
         <Stack.Screen
-          name="RestaurantPickScreen"
-          component={RestaurantPickScreen}
-          options={{ title: "RestaurantPickScreen" }}
-        />
-
-        <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
           options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="RestaurantPickScreen"
+          component={RestaurantPickScreen}
+          options={{ title: "RestaurantPickScreen" }}
         />
 
         <Stack.Screen

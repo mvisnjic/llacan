@@ -10,10 +10,9 @@ export type MainTabParams = {
 
 // TopLevelStack
 export type TopLevelStackParams = {
-  MainTab: MainTabParams;
+  LoginScreen: MainTabParams;
   FormExample: undefined;
   RestaurantMenuScreen: { restaurant: any };
-  LoginScreen: MainTabParams;
   RestaurantPickScreen: undefined;
   DropdownExample: undefined;
   HomeScreen: undefined;
