@@ -11,6 +11,7 @@ import React from "react";
 import { Header } from "~/components/Header";
 import { DropdownExample } from "~/features/dropdown/DropdownExample";
 import { HomeScreen } from "~/features/home-screen/HomeScreen";
+import { ItemDetailsScreen } from "~/features/item-details-screen/ItemDetailsScreen";
 import { LoginScreen } from "~/features/login/LoginScreen";
 import { RestaurantMenuScreen } from "~/features/restaurant-menu-screen/RestaurantMenuScreen";
 import { RestaurantPickScreen } from "~/features/restaurant-pick-screen/RestaurantPickScreen";
@@ -55,6 +56,9 @@ export const Router = observer(function Router({
           name="RestaurantMenuScreen"
           component={RestaurantMenuScreen}
         />
+
+        <Stack.Screen name="ItemDetailsScreen" component={ItemDetailsScreen} />
+
         <Stack.Screen name="SelectionScreen" component={SelectionScreen} />
 
         <Stack.Screen
