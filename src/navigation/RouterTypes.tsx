@@ -13,6 +13,7 @@ export type TopLevelStackParams = {
   LoginScreen: MainTabParams;
   FormExample: undefined;
   RestaurantMenuScreen: { restaurant: any };
+  ItemDetailsScreen: { menuItem: any };
   RestaurantPickScreen: undefined;
   DropdownExample: undefined;
   HomeScreen: undefined;

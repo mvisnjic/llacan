@@ -71,7 +71,11 @@ const MenuListItem = observer(function MenuListItem({
             borderBottomColor: "#EEEEEE",
             minHeight: 60,
           }}
-          onPress={() => navigation.navigate("SelectionScreen")}
+          onPress={() =>
+            navigation.navigate("ItemDetailsScreen", {
+              menuItem: itemInCategory,
+            })
+          }
         >
           <View style={{ maxWidth: "75%" }}>
             <Text sizeMedium weightSemiBold numberOfLines={1}>
