@@ -25,11 +25,6 @@ export const HomeScreen = observer(function HomeScreen() {
         />
 
         <Spacer />
-
-        <Button
-          title="Restaurant Menu Screen"
-          onPress={() => navigation.navigate("RestaurantMenuScreen")}
-        />
       </View>
     </Screen>
   );
