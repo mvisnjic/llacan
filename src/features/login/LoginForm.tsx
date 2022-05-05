@@ -3,8 +3,7 @@ import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { Image, StyleSheet } from "react-native";
 import { Button } from "~/components/Button";
-// import { Icon } from "~/components/Icon";
-// import { IconButton } from "~/components/IconButton";
+import { IconButton, IconButtonProps } from "~/components/IconButton";
 import { Modal } from "~/components/ModalProvider";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
@@ -48,6 +47,9 @@ export const LoginForm = observer(function LoginForm() {
   const { fields, isSubmitting, isValid /* submitForm */ } = useLoginForm();
   const navigation = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [iconName, setIconName] =
+    useState<IconButtonProps["iconName"]>("eye-outline");
+  const [passwordVisible, setPasswordVisible] = useState(true);
   const S = useStyle();
   return (
     <View>
@@ -68,7 +70,7 @@ export const LoginForm = observer(function LoginForm() {
       </View>
 
       <View style={{ flexDirection: "row" }}>
-        <View style={{}}>
+        <View>
           <Image
             style={S.hamburger}
             source={require("./images/hamburger.png")}
@@ -119,7 +121,7 @@ export const LoginForm = observer(function LoginForm() {
           <TextInput
             label="Password"
             placeholder="********"
-            secureTextEntry
+            secureTextEntry={passwordVisible}
             returnKeyType="go"
             autoCapitalize="none"
             spellCheck={false}
@@ -131,6 +133,24 @@ export const LoginForm = observer(function LoginForm() {
             caption={fields.password.caption}
             error={fields.password.error}
             onSubmitEditing={fields.password.onSubmitEditing}
+            rightComponent={() => (
+              <View>
+                <IconButton
+                  onPress={() => {
+                    if (iconName == "eye-outline") {
+                      setIconName("eye-off-outline");
+                      setPasswordVisible(false);
+                    }
+                    if (iconName == "eye-off-outline") {
+                      setIconName("eye-outline");
+                      setPasswordVisible(true);
+                    }
+                  }}
+                  iconName={iconName}
+                  iconColor="black"
+                />
+              </View>
+            )}
           />
 
           <Spacer small />
