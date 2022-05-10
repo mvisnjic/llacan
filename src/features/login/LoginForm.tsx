@@ -10,6 +10,8 @@ import { Text } from "~/components/Text";
 import { TextInput } from "~/components/TextInput";
 import { View } from "~/components/View";
 import { ForgotPasswordModal } from "./ForgotPasswordModal";
+import Kico from "./images/kico";
+import LloydsLogo from "./images/lloyds-logo";
 import { useLoginForm } from "./useLoginForm";
 
 function useStyle() {
@@ -32,10 +34,6 @@ function useStyle() {
       left: 32,
       right: 32,
       bottom: 32,
-    },
-    logo: {
-      width: 120,
-      height: 15,
     },
     forgotPassword: {
       alignSelf: "center",
@@ -77,7 +75,7 @@ export const LoginForm = observer(function LoginForm() {
           />
         </View>
         <View style={S.logoContainer}>
-          <Image style={S.logo} source={require("./images/lloydsLogo.png")} />
+          <LloydsLogo />
         </View>
       </View>
       <View style={{ backgroundColor: "#070707" }}>
@@ -176,7 +174,7 @@ export const LoginForm = observer(function LoginForm() {
             Zaboravili ste lozinku?
           </Text>
         </View>
-        <Image style={{ width: 48 }} source={require("./images/kico.png")} />
+        <Kico />
         <View />
       </View>
     </View>
