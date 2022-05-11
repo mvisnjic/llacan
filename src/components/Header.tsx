@@ -1,4 +1,5 @@
 import { BottomTabHeaderProps } from "@react-navigation/bottom-tabs";
+import { StackActions } from "@react-navigation/native";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import { observer } from "mobx-react";
 import React from "react";
@@ -10,6 +11,7 @@ import { shadow } from "~/utils/shadow";
 import { IconButton } from "./IconButton";
 import { Spacer } from "./Spacer";
 import { Text } from "./Text";
+import { TouchableOpacity } from "./TouchableOpacity";
 import { View } from "./View";
 
 const headerHeight = 56;
@@ -110,7 +112,12 @@ export const Header = observer(
             </Text>
           </View>
           {isLoggedIn && (
-            <View justifyContentCenter flexDirectionRow style={S.headerRight}>
+            <TouchableOpacity
+              justifyContentCenter
+              flexDirectionRow
+              style={S.headerRight}
+              onPress={() => navigation.dispatch(StackActions.popToTop())}
+            >
               {HeaderRight}
               <View style={styles.circle} />
               <Text
@@ -125,7 +132,7 @@ export const Header = observer(
               >
                 User
               </Text>
-            </View>
+            </TouchableOpacity>
           )}
         </View>
       </View>
