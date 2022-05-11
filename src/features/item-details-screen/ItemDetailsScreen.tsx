@@ -65,8 +65,9 @@ export const ItemDetailsScreen = observer(function ItemDetailsScreen() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { menuItem } = route.params as {
+  const { menuItem, restaurant } = route.params as {
     menuItem: any;
+    restaurant: any;
   };
 
   return (
@@ -99,7 +100,15 @@ export const ItemDetailsScreen = observer(function ItemDetailsScreen() {
       <View paddingHorizontalLarge style={S.orderButton}>
         <Button
           title={"Dodaj za " + menuItem.price + ",00 kn"}
-          onPress={() => navigation.navigate("SelectionScreen")}
+          onPress={() =>
+            restaurant.hasPommes
+              ? navigation.navigate("SecondSelectionScreen", {
+                  restaurant: restaurant,
+                })
+              : navigation.navigate("SelectionScreen", {
+                  restaurant: restaurant,
+                })
+          }
         />
       </View>
     </Screen>

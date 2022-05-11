@@ -13,12 +13,12 @@ export type TopLevelStackParams = {
   LoginScreen: MainTabParams;
   FormExample: undefined;
   RestaurantMenuScreen: { restaurant: any };
-  ItemDetailsScreen: { menuItem: any };
+  ItemDetailsScreen: { menuItem: any; restaurant: any };
   RestaurantPickScreen: undefined;
   DropdownExample: undefined;
   HomeScreen: undefined;
-  SelectionScreen: undefined;
-  SecondSelectionScreen: undefined;
+  SelectionScreen: { restaurant: any };
+  SecondSelectionScreen: { restaurant: any };
 };
 
 // End navigator params definitions
