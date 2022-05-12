@@ -8,6 +8,7 @@ import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
+import Pomes from "~/features/second-selection-screen/images/PomesIcon";
 import { styleConstants as C } from "~/style/styleConstants";
 
 function useStyle() {
@@ -45,19 +46,15 @@ function useStyle() {
       height: 40,
       width: 40,
     },
-    containerPomfri: {},
+    justifySpaceEvenly: {
+      justifyContent: "space-evenly",
+    },
   });
 }
 
-export const SecondSelectionScreen = observer(function RestaurantMenuScreen() {
+export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
   const S = useStyle();
-  const navigation = useNavigation();
-  const route = useRoute();
-
-  const { restaurant } = route.params as {
-    restaurant: any;
-  };
-
+  
   return (
     <Screen preventScroll>
       <View>
@@ -122,24 +119,34 @@ export const SecondSelectionScreen = observer(function RestaurantMenuScreen() {
           </Text>
         </View>
 
-        <View paddingLarge flexDirectionColumn style={S.mySelectionContainer}>
-          <View alignItemsCenter>
-            <Text sizeMediumLarge weightSemiBold>
-              Pommes party(0)
-            </Text>
+        <View paddingLarge style={S.mySelectionContainer}>
+          <View
+            alignItemsCenter
+            paddingHorizontalExtraLarge
+            flexDirectionRow
+            style={S.justifySpaceEvenly}
+          >
+            <View>
+              <Pomes />
+            </View>
+            <Spacer />
+            <View alignItemsCenter>
+              <Text sizeMediumLarge weightSemiBold>
+                Pommes party(0)
+              </Text>
 
-            <Text style={S.textDijeliPommes} sizeExtraSmall>
-              Dijeli pommes sa kolegama
-            </Text>
-            <View flexDirectionRow style={S.containerPomfri}>
-              <Image
-                style={S.Pomfri}
-                source={require("~/features/second-selection-screen/images/Pomfr.png")}
-              />
+              <Text style={S.textDijeliPommes} sizeExtraSmall>
+                Dijeli pommes sa kolegama
+              </Text>
+            </View>
+            <Spacer />
+            <View>
+              <Pomes />
             </View>
           </View>
+
           <Spacer large />
-          <Button title="Odaberi za sebe" style={S.buttonWidth} />
+          <Button title="Kreiraj party!" style={S.buttonWidth} />
         </View>
       </View>
     </Screen>

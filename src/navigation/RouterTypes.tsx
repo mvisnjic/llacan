@@ -19,6 +19,7 @@ export type TopLevelStackParams = {
   HomeScreen: undefined;
   SelectionScreen: { restaurant: any };
   SecondSelectionScreen: { restaurant: any };
+  PastOrdersScreen: undefined;
 };
 
 // End navigator params definitions

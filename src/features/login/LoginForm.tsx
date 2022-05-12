@@ -3,13 +3,14 @@ import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { Image, StyleSheet } from "react-native";
 import { Button } from "~/components/Button";
-import { IconButton, IconButtonProps } from "~/components/IconButton";
+import { IconButton } from "~/components/IconButton";
 import { Modal } from "~/components/ModalProvider";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { TextInput } from "~/components/TextInput";
 import { View } from "~/components/View";
 import { ForgotPasswordModal } from "./ForgotPasswordModal";
+import LloydsLogo from "./images/lloyds-logo";
 import { useLoginForm } from "./useLoginForm";
 
 function useStyle() {
@@ -33,10 +34,6 @@ function useStyle() {
       right: 32,
       bottom: 32,
     },
-    logo: {
-      width: 120,
-      height: 15,
-    },
     forgotPassword: {
       alignSelf: "center",
     },
@@ -47,10 +44,14 @@ export const LoginForm = observer(function LoginForm() {
   const { fields, isSubmitting, isValid /* submitForm */ } = useLoginForm();
   const navigation = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [iconName, setIconName] =
-    useState<IconButtonProps["iconName"]>("eye-outline");
   const [passwordVisible, setPasswordVisible] = useState(true);
   const S = useStyle();
+  const iconName = passwordVisible ? "eye-outline" : "eye-off-outline";
+  const togglePasswordVisible = () => {
+    setPasswordVisible((currentPasswordVisible) => {
+      return !currentPasswordVisible;
+    });
+  };
   return (
     <View>
       <View style={S.sloganContainer}>
@@ -77,7 +78,7 @@ export const LoginForm = observer(function LoginForm() {
           />
         </View>
         <View style={S.logoContainer}>
-          <Image style={S.logo} source={require("./images/lloydsLogo.png")} />
+          <LloydsLogo />
         </View>
       </View>
       <View style={{ backgroundColor: "#070707" }}>
@@ -137,14 +138,7 @@ export const LoginForm = observer(function LoginForm() {
               <View>
                 <IconButton
                   onPress={() => {
-                    if (iconName == "eye-outline") {
-                      setIconName("eye-off-outline");
-                      setPasswordVisible(false);
-                    }
-                    if (iconName == "eye-off-outline") {
-                      setIconName("eye-outline");
-                      setPasswordVisible(true);
-                    }
+                    togglePasswordVisible();
                   }}
                   iconName={iconName}
                   iconColor="black"
@@ -176,7 +170,7 @@ export const LoginForm = observer(function LoginForm() {
             Zaboravili ste lozinku?
           </Text>
         </View>
-        <Image style={{ width: 48 }} source={require("./images/kico.png")} />
+        <Image source={require("./images/kico.png")} style={{ width: 50 }} />
         <View />
       </View>
     </View>

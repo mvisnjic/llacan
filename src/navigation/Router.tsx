@@ -13,6 +13,7 @@ import { DropdownExample } from "~/features/dropdown/DropdownExample";
 import { HomeScreen } from "~/features/home-screen/HomeScreen";
 import { ItemDetailsScreen } from "~/features/item-details-screen/ItemDetailsScreen";
 import { LoginScreen } from "~/features/login/LoginScreen";
+import { PastOrdersScreen } from "~/features/past-orders/PastOrdersScreen";
 import { RestaurantMenuScreen } from "~/features/restaurant-menu-screen/RestaurantMenuScreen";
 import { RestaurantPickScreen } from "~/features/restaurant-pick-screen/RestaurantPickScreen";
 import { SecondSelectionScreen } from "~/features/second-selection-screen/SecondSelectionScreen";
@@ -65,8 +66,9 @@ export const Router = observer(function Router({
           name="SecondSelectionScreen"
           component={SecondSelectionScreen}
         />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="PastOrdersScreen" component={PastOrdersScreen} />
 
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="DropdownExample" component={DropdownExample} />
       </Stack.Navigator>
     </NavigationContainer>
