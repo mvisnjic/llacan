@@ -54,7 +54,12 @@ function useStyle() {
 
 export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
   const S = useStyle();
-  
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  const { restaurant } = route.params as {
+    restaurant: any;
+  };
   return (
     <Screen preventScroll>
       <View>
