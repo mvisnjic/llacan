@@ -38,7 +38,7 @@ function useStyle() {
   });
 }
 
-export const SelectionScreen = observer(function RestaurantMenuScreen() {
+export const SelectionScreen = observer(function SelectionScreen() {
   const S = useStyle();
   const navigation = useNavigation();
   return (

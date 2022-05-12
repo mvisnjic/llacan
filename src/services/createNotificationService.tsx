@@ -1,4 +1,4 @@
-import { Platform, Alert } from "react-native";
+import { Alert } from "react-native";
 import OneSignal, { OSNotification } from "react-native-onesignal";
 import Permissions, { RESULTS } from "react-native-permissions";
 
@@ -19,7 +19,7 @@ export const createNotificationService = () => {
 
   OneSignal.setRequiresUserPrivacyConsent(false);
   OneSignal.setLocationShared(false);
-
+  /* 
   Permissions.checkNotifications().then(({ status, settings }) => {
     const granted = Platform.select({
       ios:
@@ -34,7 +34,7 @@ export const createNotificationService = () => {
     return granted
       ? notificationPermissionStatuses.GRANTED
       : notificationPermissionStatuses.DENIED;
-  });
+  }); */
 
   OneSignal.setNotificationOpenedHandler((event) =>
     onOpened(event.notification)

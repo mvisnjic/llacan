@@ -132,7 +132,7 @@ export const RestaurantPickScreen = observer(function RestaurantPickScreen() {
   const restaurants = query.data;
 
   const insets = useSafeAreaInsets();
-
+  const navigation = useNavigation();
   return (
     <Screen preventScroll>
       <Spacer large />
@@ -151,7 +151,14 @@ export const RestaurantPickScreen = observer(function RestaurantPickScreen() {
         centerContent
         style={{ alignItems: "flex-end" }}
       >
-        <Button outline title="Prošle narudžbe" paddingHorizontalLarge>
+        <Button
+          outline
+          title="Prošle narudžbe"
+          paddingHorizontalLarge
+          onPress={() => {
+            navigation.navigate("PastOrdersScreen");
+          }}
+        >
           <Icon
             size={C.fontSizeLarge}
             name="clock-outline"

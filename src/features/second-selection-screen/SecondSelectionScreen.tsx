@@ -51,7 +51,7 @@ function useStyle() {
   });
 }
 
-export const SecondSelectionScreen = observer(function RestaurantMenuScreen() {
+export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
   const S = useStyle();
 
   return (
@@ -120,6 +120,7 @@ export const SecondSelectionScreen = observer(function RestaurantMenuScreen() {
             <View>
               <Pomes />
             </View>
+            <Spacer />
             <View alignItemsCenter>
               <Text sizeMediumLarge weightSemiBold>
                 Pommes party(0)
@@ -129,6 +130,7 @@ export const SecondSelectionScreen = observer(function RestaurantMenuScreen() {
                 Dijeli pommes sa kolegama
               </Text>
             </View>
+            <Spacer />
             <View>
               <Pomes />
             </View>
