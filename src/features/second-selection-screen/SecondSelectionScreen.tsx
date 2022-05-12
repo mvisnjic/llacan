@@ -1,3 +1,4 @@
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
 import { Image, StyleSheet } from "react-native";
@@ -53,7 +54,7 @@ function useStyle() {
 
 export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
   const S = useStyle();
-
+  
   return (
     <Screen preventScroll>
       <View>
@@ -97,7 +98,15 @@ export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
             Moj odabir
           </Text>
           <Spacer large />
-          <Button title="Odaberi za sebe" style={S.buttonWidth} />
+          <Button
+            title="Odaberi za sebe"
+            style={S.buttonWidth}
+            onPress={() =>
+              navigation.navigate("RestaurantMenuScreen", {
+                restaurant: restaurant,
+              })
+            }
+          />
         </View>
         <View
           paddingLarge

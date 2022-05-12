@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
 import { Image, StyleSheet } from "react-native";
@@ -41,6 +41,12 @@ function useStyle() {
 export const SelectionScreen = observer(function SelectionScreen() {
   const S = useStyle();
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const { restaurant } = route.params as {
+    restaurant: any;
+  };
+
   return (
     <Screen preventScroll>
       <View>
@@ -90,7 +96,11 @@ export const SelectionScreen = observer(function SelectionScreen() {
           </Text>
           <Button
             title="Odaberi za sebe"
-            onPress={() => navigation.navigate("SecondSelectionScreen")}
+            onPress={() =>
+              navigation.navigate("RestaurantMenuScreen", {
+                restaurant: restaurant,
+              })
+            }
           />
         </View>
         <View

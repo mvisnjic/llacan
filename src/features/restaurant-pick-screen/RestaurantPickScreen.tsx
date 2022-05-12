@@ -118,7 +118,18 @@ const RestaurantListItem = observer(function RestaurantListItem({
           }
         />
         <Spacer />
-        <Button title={allOrdersAreActive ? "Pridruži se" : "Nova narudžba"} />
+        <Button
+          title={allOrdersAreActive ? "Pridruži se" : "Nova narudžba"}
+          onPress={() =>
+            restaurant.hasPommes
+              ? navigation.navigate("SecondSelectionScreen", {
+                  restaurant: restaurant,
+                })
+              : navigation.navigate("SelectionScreen", {
+                  restaurant: restaurant,
+                })
+          }
+        />
       </View>
     </View>
   );

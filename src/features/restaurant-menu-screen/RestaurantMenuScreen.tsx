@@ -27,10 +27,12 @@ interface MenuItem {
 
 interface MenuListItemProps {
   menuCategory: { category: string; categoryItems: [MenuItem] };
+  restaurant: any;
 }
 
 const MenuListItem = observer(function MenuListItem({
   menuCategory,
+  restaurant,
 }: MenuListItemProps) {
   const navigation = useNavigation();
   return (
@@ -74,6 +76,7 @@ const MenuListItem = observer(function MenuListItem({
           onPress={() =>
             navigation.navigate("ItemDetailsScreen", {
               menuItem: itemInCategory,
+              restaurant: restaurant,
             })
           }
         >
@@ -248,7 +251,9 @@ export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
               paddingBottom: insets.bottom,
             }}
             keyExtractor={(menuItem) => String(JSON.stringify(menuItem))}
-            renderItem={({ item }) => <MenuListItem menuCategory={item} />}
+            renderItem={({ item }) => (
+              <MenuListItem menuCategory={item} restaurant={restaurant} />
+            )}
             ListHeaderComponent={<FlatlistHeader restaurant={restaurant} />}
           />
         </View>
