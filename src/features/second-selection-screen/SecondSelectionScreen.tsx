@@ -8,6 +8,7 @@ import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
+import { restaurantData } from "~/features/restaurant-pick-screen/restaurantData";
 import Pomes from "~/features/second-selection-screen/images/PomesIcon";
 import { styleConstants as C } from "~/style/styleConstants";
 
@@ -58,7 +59,7 @@ export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
   const route = useRoute();
 
   const { restaurant } = route.params as {
-    restaurant: any;
+    restaurant: typeof restaurantData[0];
   };
   return (
     <Screen preventScroll>
@@ -70,7 +71,7 @@ export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
           />
           <View style={S.textContainer}>
             <Text sizeExtraLarge weightBold colorLight>
-              Fast food Forever
+              {restaurant.title}
             </Text>
             <Spacer />
             <View flexDirectionRow alignItemsCenter>
@@ -81,7 +82,7 @@ export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
               />
               <Spacer />
               <Text sizeMediumSmall weightLight colorLight>
-                prilaz Kikova 5, 52220, Labin
+                {restaurant.address}
               </Text>
             </View>
             <Spacer />
@@ -93,7 +94,7 @@ export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
               />
               <Spacer />
               <Text sizeMediumSmall weightLight colorLight>
-                092-246-0606
+                {restaurant.phone.replace(/ /g, "-").replace(/385-/g, "0")}
               </Text>
             </View>
           </View>

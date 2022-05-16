@@ -8,6 +8,7 @@ import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
+import { restaurantData } from "~/features/restaurant-pick-screen/restaurantData";
 import { styleConstants as C } from "~/style/styleConstants";
 
 function useStyle() {
@@ -44,7 +45,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
   const route = useRoute();
 
   const { restaurant } = route.params as {
-    restaurant: any;
+    restaurant: typeof restaurantData[0];
   };
 
   return (
@@ -57,7 +58,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
           />
           <View style={S.textContainer}>
             <Text sizeExtraLarge weightBold colorLight>
-              Fast food Forever
+              {restaurant.title}
             </Text>
             <Spacer />
             <View flexDirectionRow alignItemsCenter>
@@ -68,7 +69,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
               />
               <Spacer />
               <Text sizeMediumSmall weightLight colorLight>
-                prilaz Kikova 5, 52220, Labin
+                {restaurant.address}
               </Text>
             </View>
             <Spacer />
@@ -80,7 +81,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
               />
               <Spacer />
               <Text sizeMediumSmall weightLight colorLight>
-                092-246-0606
+                {restaurant.phone.replace(/ /g, "-").replace(/385-/g, "0")}
               </Text>
             </View>
           </View>
