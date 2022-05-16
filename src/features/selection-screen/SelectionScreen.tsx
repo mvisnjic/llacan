@@ -10,6 +10,7 @@ import { Text } from "~/components/Text";
 import { View } from "~/components/View";
 import { restaurantData } from "~/features/restaurant-pick-screen/restaurantData";
 import { styleConstants as C } from "~/style/styleConstants";
+import { formatPhoneNumber } from "~/utils/formatPhoneNumber";
 
 function useStyle() {
   return StyleSheet.create({
@@ -81,7 +82,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
               />
               <Spacer />
               <Text sizeMediumSmall weightLight colorLight>
-                {restaurant.phone.replace(/ /g, "-").replace(/385-/g, "0")}
+                {formatPhoneNumber(restaurant.phone)}
               </Text>
             </View>
           </View>

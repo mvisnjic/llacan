@@ -11,6 +11,7 @@ import { View } from "~/components/View";
 import { restaurantData } from "~/features/restaurant-pick-screen/restaurantData";
 import Pomes from "~/features/second-selection-screen/images/PomesIcon";
 import { styleConstants as C } from "~/style/styleConstants";
+import { formatPhoneNumber } from "~/utils/formatPhoneNumber";
 
 function useStyle() {
   return StyleSheet.create({
@@ -94,7 +95,7 @@ export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
               />
               <Spacer />
               <Text sizeMediumSmall weightLight colorLight>
-                {restaurant.phone.replace(/ /g, "-").replace(/385-/g, "0")}
+                {formatPhoneNumber(restaurant.phone)}
               </Text>
             </View>
           </View>
