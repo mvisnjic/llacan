@@ -42,6 +42,12 @@ const S = StyleSheet.create({
     maxWidth: 170,
   },
   titleText: { flex: 1 },
+  circle: {
+    width: 40,
+    height: 40,
+    borderRadius: 100 / 2,
+    backgroundColor: C.colorBackgroundTheme,
+  },
 });
 
 type HeaderProps = NativeStackHeaderProps | BottomTabHeaderProps;
@@ -119,7 +125,7 @@ export const Header = observer(
               onPress={() => navigation.dispatch(StackActions.popToTop())}
             >
               {HeaderRight}
-              <View style={styles.circle} />
+              <View style={S.circle} />
               <Text
                 colorLight
                 sizeMedium
@@ -139,12 +145,3 @@ export const Header = observer(
     );
   }
 );
-
-const styles = StyleSheet.create({
-  circle: {
-    width: 40,
-    height: 40,
-    borderRadius: 100 / 2,
-    backgroundColor: C.colorBackgroundTheme,
-  },
-});

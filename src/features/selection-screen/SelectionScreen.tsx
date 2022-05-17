@@ -1,14 +1,17 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { observer } from "mobx-react";
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet } from "react-native";
 import { Button } from "~/components/Button";
 import { Icon } from "~/components/Icon";
+import { IconButton } from "~/components/IconButton";
 import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
+import { restaurantData } from "~/features/restaurant-pick-screen/restaurantData";
 import { styleConstants as C } from "~/style/styleConstants";
+import { formatPhoneNumber } from "~/utils/formatPhoneNumber";
 
 function useStyle() {
   return StyleSheet.create({
@@ -35,6 +38,12 @@ function useStyle() {
       borderBottomColor: "#EEEEEE",
       justifyContent: "space-between",
     },
+    circle: {
+      width: 40,
+      height: 40,
+      borderRadius: 100 / 2,
+      backgroundColor: C.colorBackgroundTheme,
+    },
   });
 }
 
@@ -43,9 +52,12 @@ export const SelectionScreen = observer(function SelectionScreen() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { restaurant } = route.params as {
-    restaurant: any;
+  const { restaurant, order } = route.params as {
+    restaurant: typeof restaurantData[0];
+    order: { name: string; price: number; condiments: string[] };
   };
+
+  const [orderInCart, setOrderInCart] = useState(order);
 
   return (
     <Screen preventScroll>
@@ -57,7 +69,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
           />
           <View style={S.textContainer}>
             <Text sizeExtraLarge weightBold colorLight>
-              Fast food Forever
+              {restaurant.title}
             </Text>
             <Spacer />
             <View flexDirectionRow alignItemsCenter>
@@ -68,7 +80,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
               />
               <Spacer />
               <Text sizeMediumSmall weightLight colorLight>
-                prilaz Kikova 5, 52220, Labin
+                {restaurant.address}
               </Text>
             </View>
             <Spacer />
@@ -80,7 +92,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
               />
               <Spacer />
               <Text sizeMediumSmall weightLight colorLight>
-                092-246-0606
+                {formatPhoneNumber(restaurant.phone)}
               </Text>
             </View>
           </View>
@@ -96,6 +108,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
           </Text>
           <Button
             title="Odaberi za sebe"
+            disabled={!!orderInCart}
             onPress={() =>
               navigation.navigate("RestaurantMenuScreen", {
                 restaurant: restaurant,
@@ -103,6 +116,54 @@ export const SelectionScreen = observer(function SelectionScreen() {
             }
           />
         </View>
+        {orderInCart && (
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderBottomColor: "#EEEEEE",
+              display: "flex",
+            }}
+            paddingMedium
+            flexDirectionRow
+          >
+            <View centerContent style={{ width: 70 }}>
+              <View style={S.circle} />
+              <Text
+                sizeMedium
+                weightSemiBold
+                ellipsizeMode="tail"
+                numberOfLines={1}
+              >
+                User
+              </Text>
+            </View>
+            <Spacer />
+            <View>
+              <View flexDirectionRow>
+                <Text sizeMediumLarge weightSemiBold style={{ width: 220 }}>
+                  {orderInCart.name}
+                </Text>
+                <View centerContent>
+                  <Text sizeMediumLarge alignCenter>
+                    {orderInCart.price},00 kn
+                  </Text>
+                </View>
+              </View>
+              <View flexDirectionRow>
+                <Text sizeMediumSmall style={{ width: 220 }}>
+                  {orderInCart.condiments.join(", ")}
+                </Text>
+                <IconButton
+                  iconName="trash-can-outline"
+                  iconColor={C.colorTextDanger}
+                  centerContent
+                  style={{ flex: 1 }}
+                  onPress={() => setOrderInCart(undefined)}
+                />
+              </View>
+            </View>
+          </View>
+        )}
         <View
           paddingLarge
           flexDirectionRow

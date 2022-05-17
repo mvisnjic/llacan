@@ -107,6 +107,11 @@ export const ItemDetailsScreen = observer(function ItemDetailsScreen() {
                 })
               : navigation.navigate("SelectionScreen", {
                   restaurant: restaurant,
+                  order: {
+                    name: menuItem.name,
+                    price: menuItem.price,
+                    condiments: condiments,
+                  },
                 })
           }
         />

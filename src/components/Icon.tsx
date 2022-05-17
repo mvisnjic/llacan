@@ -18,7 +18,8 @@ export interface IconProps {
     | "menu-down-outline"
     | "close"
     | "eye-outline"
-    | "eye-off-outline";
+    | "eye-off-outline"
+    | "trash-can-outline";
 
   color?: string;
   size?: number;
