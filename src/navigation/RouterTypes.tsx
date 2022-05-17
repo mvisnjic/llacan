@@ -17,7 +17,7 @@ export type TopLevelStackParams = {
   RestaurantPickScreen: undefined;
   DropdownExample: undefined;
   HomeScreen: undefined;
-  SelectionScreen: { restaurant: any };
+  SelectionScreen: { restaurant: any; order: any };
   SecondSelectionScreen: { restaurant: any };
   PastOrdersScreen: undefined;
 };
