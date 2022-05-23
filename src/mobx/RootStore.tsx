@@ -6,6 +6,7 @@ import { UIStore } from "./UIStore";
 import { ConfigStore } from "./entities/config/ConfigStore";
 import { NotificationStore } from "./entities/notification/NotificationStore";
 import { PersonStore } from "./entities/person/PersonStore";
+import { RestaurantStore } from "./entities/restaurant/RestaurantStore";
 import { UserStore } from "./entities/user/UserStore";
 
 export const RootStore = types.model("RootStore", {
@@ -17,6 +18,7 @@ export const RootStore = types.model("RootStore", {
   uiStore: types.optional(UIStore, {}),
   navigationStore: types.optional(NavigationStore, {}),
   notificationStore: types.optional(NotificationStore, {}),
+  restaurantStore: types.optional(RestaurantStore, {}),
 });
 
 export interface RootStoreInstance extends Instance<typeof RootStore> {}

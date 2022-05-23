@@ -12,22 +12,12 @@ import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
 import { RestaurantInstance } from "~/mobx/entities/restaurant/Restaurant";
+import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
 import { shadow } from "~/utils/shadow";
-import { restaurantData } from "./restaurantData";
 
 interface RestaurantListItemProps {
   restaurant: RestaurantInstance;
-}
-
-interface Restaurant {
-  id: string;
-  title: string;
-  phone: string;
-  address: string;
-  sms_accept: boolean;
-  hasPommes: boolean;
-  tags: any;
 }
 
 const allOrdersAreActive = true;
@@ -136,14 +126,17 @@ const RestaurantListItem = observer(function RestaurantListItem({
 });
 
 export const RestaurantPickScreen = observer(function RestaurantPickScreen() {
-  const query = useQuery(["peopleList"], () => {
-    return Promise.resolve<Restaurant[]>(restaurantData);
+  const store = useStore();
+
+  const query = useQuery(["restaurantList"], () => {
+    return store.restaurantStore.readRestaurantList();
   });
 
   const restaurants = query.data;
 
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
+
   return (
     <Screen preventScroll>
       <Spacer large />
