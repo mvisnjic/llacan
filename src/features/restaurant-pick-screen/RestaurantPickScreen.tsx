@@ -128,11 +128,11 @@ const RestaurantListItem = observer(function RestaurantListItem({
 export const RestaurantPickScreen = observer(function RestaurantPickScreen() {
   const store = useStore();
 
-  const query = useQuery(["restaurantList"], () => {
+  const restaurantQuery = useQuery(["restaurantList"], () => {
     return store.restaurantStore.readRestaurantList();
   });
 
-  const restaurants = query.data;
+  const restaurants = restaurantQuery.data;
 
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
