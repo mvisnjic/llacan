@@ -76,7 +76,7 @@ export const ItemDetailsScreen = observer(function ItemDetailsScreen() {
         <Text alignCenter sizeExtraLarge weightBold>
           {menuItem.name}
         </Text>
-        {menuItem.description && (
+        {menuItem.description !== "" && (
           <>
             <Spacer />
             <Text alignCenter>
