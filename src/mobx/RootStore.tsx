@@ -4,6 +4,7 @@ import { I18n } from "./I18n";
 import { NavigationStore } from "./NavigationStore";
 import { UIStore } from "./UIStore";
 import { ConfigStore } from "./entities/config/ConfigStore";
+import { MenuStore } from "./entities/menu/MenuStore";
 import { NotificationStore } from "./entities/notification/NotificationStore";
 import { PersonStore } from "./entities/person/PersonStore";
 import { RestaurantStore } from "./entities/restaurant/RestaurantStore";
@@ -19,6 +20,7 @@ export const RootStore = types.model("RootStore", {
   navigationStore: types.optional(NavigationStore, {}),
   notificationStore: types.optional(NotificationStore, {}),
   restaurantStore: types.optional(RestaurantStore, {}),
+  menuStore: types.optional(MenuStore, {}),
 });
 
 export interface RootStoreInstance extends Instance<typeof RootStore> {}

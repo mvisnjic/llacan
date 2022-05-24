@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
-import _, { Dictionary } from "lodash";
+import { Dictionary } from "lodash";
 import { observer } from "mobx-react";
 import React from "react";
 import { FlatList, Image } from "react-native";
@@ -12,11 +12,11 @@ import { Spinner } from "~/components/Spinner";
 import { Text } from "~/components/Text";
 import { TouchableOpacity } from "~/components/TouchableOpacity";
 import { View } from "~/components/View";
+import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
 import { removeBracketsAroundText } from "~/utils/removeBracketsAroundText";
 import { titleCase } from "../../utils/titleCase";
 import { restaurantData } from "../restaurant-pick-screen/restaurantData";
-import { menuData } from "./menuData";
 
 interface MenuItem {
   category: string;
@@ -84,7 +84,7 @@ const MenuListItem = observer(function MenuListItem({
             <Text sizeMedium weightSemiBold numberOfLines={1}>
               {itemInCategory.name.trim()}
             </Text>
-            {itemInCategory.description && (
+            {itemInCategory.description !== "" && (
               <Text sizeExtraSmall numberOfLines={2}>
                 {titleCase(
                   removeBracketsAroundText(
@@ -196,46 +196,38 @@ const FlatlistHeader = observer(function FlatlistHeader(props: {
 export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
   const route = useRoute();
   const insets = useSafeAreaInsets();
+  const store = useStore();
 
   const { restaurant } = route.params as {
     restaurant: typeof restaurantData[0];
   };
 
-  const specificMenu = menuData.find((menu) => menu.title === restaurant.title);
-  if (!specificMenu) throw new Error("Missing specificMenu");
-
-  const specificMenuGrouped = _.groupBy(specificMenu.menu, "category");
-
-  const menu2 = specificMenuGrouped as Dictionary<[MenuItem]>;
-
-  const query = useQuery(["menuList"], () => {
-    return Promise.resolve(menu2);
+  const menuQuery = useQuery(["menuList"], () => {
+    return store.menuStore.readMenuList(restaurant.title);
   });
 
-  const menu = query.data; /*as {
-    category: string;
-    name: string;
-    price: number;
-    description: string;
-  }[];*/
+  const menu = menuQuery.data as unknown as Dictionary<[MenuItem]>;
 
-  // if (!menu) throw new Error("Missing menu");
-
-  const arr = [];
-
+  const menuObjectConvertedToArray = [];
   for (const key in menu) {
-    arr.push({ category: key, categoryItems: menu[key] });
+    menuObjectConvertedToArray.push({
+      category: key,
+      categoryItems: menu[key],
+    });
   }
 
-  const arr2 = arr as { category: string; categoryItems: [MenuItem] }[];
+  const menuArrayCastToCorrectType = menuObjectConvertedToArray as {
+    category: string;
+    categoryItems: [MenuItem];
+  }[];
 
-  if (query.isLoading || query.isIdle) {
+  if (menuQuery.isLoading || menuQuery.isIdle) {
     return (
       <View flex centerContent paddingExtraLarge>
         <Spinner />
       </View>
     );
-  } else if (query.isError) {
+  } else if (menuQuery.isError) {
     return (
       <View flex centerContent paddingExtraLarge>
         <Spinner />
@@ -246,7 +238,7 @@ export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
       <Screen preventScroll>
         <View>
           <FlatList
-            data={arr2}
+            data={menuArrayCastToCorrectType}
             contentContainerStyle={{
               paddingBottom: insets.bottom,
             }}
