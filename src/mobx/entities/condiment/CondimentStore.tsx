@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree";
 import { menuData } from "~/features/restaurant-menu-screen/menuData";
-import { Condiment } from "./Condiment";
+import { Condiment, CondimentInstance } from "./Condiment";
 
 export interface CondimentStoreInstance
   extends Instance<typeof CondimentStore> {}
@@ -29,13 +29,13 @@ export const CondimentStore = types
     },
   }))
   .actions((self) => ({
-    readCondimentsList() {
+    readCondimentsList(): CondimentInstance[] {
       const condimentMenu = menuData.find(
         (menu) => menu.title === "Basic Condiments"
       );
       if (!condimentMenu) throw new Error("Missing condimentMenu");
       const response = self.process(condimentMenu.menu);
-      return response;
+      return response as any;
     },
     selectCondiment(condimentName: string) {
       const selectedCondiment = self.map.get(condimentName);

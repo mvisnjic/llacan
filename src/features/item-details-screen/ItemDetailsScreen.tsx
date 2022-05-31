@@ -11,7 +11,7 @@ import { Spinner } from "~/components/Spinner";
 import { Text } from "~/components/Text";
 import { TouchableOpacity } from "~/components/TouchableOpacity";
 import { View } from "~/components/View";
-import { Condiment } from "~/mobx/entities/condiment/Condiment";
+import { CondimentInstance } from "~/mobx/entities/condiment/Condiment";
 import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
 import { removeBracketsAroundText } from "~/utils/removeBracketsAroundText";
@@ -33,7 +33,7 @@ function useStyle() {
 const CondimentItem = observer(function CondimentItem({
   condiment,
 }: {
-  condiment: typeof Condiment;
+  condiment: CondimentInstance;
 }) {
   const colorOfBackground = condiment.isChosen
     ? C.colorBackgroundThemeSoft
@@ -104,13 +104,11 @@ export const ItemDetailsScreen = observer(function ItemDetailsScreen() {
           <Text weightSemiBold>Odaberite dodatke</Text>
           <Spacer />
           {condiments &&
-            condiments.map(
-              (condiment: { name: string; isSelected: boolean }) => (
-                <View key={condiment.name} paddingSmall>
-                  <CondimentItem condiment={condiment} />
-                </View>
-              )
-            )}
+            condiments.map((condiment) => (
+              <View key={condiment.name} paddingSmall>
+                <CondimentItem condiment={condiment} />
+              </View>
+            ))}
         </View>
         <View paddingHorizontalLarge style={S.orderButton}>
           <Button
