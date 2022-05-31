@@ -48,7 +48,9 @@ function useStyle() {
   });
 }
 
-export const Header = observer(function Header(props: { restaurant: any }) {
+export const Header = observer(function Header(props: {
+  restaurant: typeof restaurantData[0];
+}) {
   const S = useStyle();
   const { restaurant } = props;
 
@@ -92,12 +94,16 @@ export const Header = observer(function Header(props: { restaurant: any }) {
 });
 
 export const MySelection = observer(function MySelection(props: {
-  restaurant: any;
-  orderInCart: any;
-  navigation: any;
+  restaurant: typeof restaurantData[0];
+  orderInCart: {
+    name: string;
+    price: number;
+    condiments: string[];
+  };
 }) {
   const S = useStyle();
-  const { orderInCart, navigation, restaurant } = props;
+  const navigation = useNavigation();
+  const { orderInCart, restaurant } = props;
 
   return (
     <View
@@ -123,8 +129,18 @@ export const MySelection = observer(function MySelection(props: {
 });
 
 export const UserOrder = observer(function UserOrder(props: {
-  orderInCart: any;
-  setOrderInCart: any;
+  orderInCart: {
+    name: string;
+    price: number;
+    condiments: string[];
+  };
+  setOrderInCart: React.Dispatch<
+    React.SetStateAction<{
+      name: string;
+      price: number;
+      condiments: string[];
+    }>
+  >;
 }) {
   const S = useStyle();
   const store = useStore();
@@ -193,7 +209,6 @@ export const OtherUserOrderCount = observer(function OtherUserOrderCount() {
 });
 
 export const SelectionScreen = observer(function SelectionScreen() {
-  const navigation = useNavigation();
   const route = useRoute();
 
   const { restaurant, order } = route.params as {
@@ -206,11 +221,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
   return (
     <Screen preventScroll>
       <Header restaurant={restaurant} />
-      <MySelection
-        orderInCart={orderInCart}
-        navigation={navigation}
-        restaurant={restaurant}
-      />
+      <MySelection orderInCart={orderInCart} restaurant={restaurant} />
       {orderInCart && (
         <UserOrder orderInCart={orderInCart} setOrderInCart={setOrderInCart} />
       )}
