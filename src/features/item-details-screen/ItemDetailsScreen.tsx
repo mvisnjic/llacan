@@ -35,7 +35,6 @@ const CondimentItem = observer(function CondimentItem({
 }: {
   condiment: typeof Condiment;
 }) {
-  // const store = useStore();
   const colorOfBackground = condiment.isChosen
     ? C.colorBackgroundThemeSoft
     : C.colorBackgroundLightDark;
@@ -43,7 +42,6 @@ const CondimentItem = observer(function CondimentItem({
   return (
     <View style={{ backgroundColor: colorOfBackground, borderRadius: 40 }}>
       <TouchableOpacity
-        // onPress={() => store.condimentStore.selectCondiment(condiment.name)}
         onPress={() => condiment.chooseCondiment()}
         paddingHorizontalLarge
         paddingVerticalMedium
@@ -60,8 +58,6 @@ export const ItemDetailsScreen = observer(function ItemDetailsScreen() {
   const route = useRoute();
   const store = useStore();
 
-  // store.condimentStore.resetSelectedState();
-
   const { menuItem, restaurant } = route.params as {
     menuItem: any;
     restaurant: any;
@@ -71,11 +67,7 @@ export const ItemDetailsScreen = observer(function ItemDetailsScreen() {
     return store.condimentStore.readCondimentsList();
   });
 
-  // if (!condimentsQuery.data) throw new Error("Missing condimentsQuery");
-
   const condiments = condimentsQuery.data;
-  console.log("condiments:", condiments);
-  // if (!condiments) throw new Error("Missing condiments");
 
   if (condimentsQuery.isLoading || condimentsQuery.isIdle) {
     return (

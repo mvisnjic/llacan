@@ -13,22 +13,16 @@ export interface CondimentStoreSnapshotOut
 export const CondimentStore = types
   .model("CondimentStore", {
     map: types.map(Condiment),
-    // selectedMap: types.map(Condiment),
   })
   .actions((self) => ({
     resetState() {
       self.map.clear();
     },
 
-    // resetSelectedState() {
-    //   self.selectedMap.clear();
-    // },
-
     process(data: any) {
       const dataList = _.castArray(data);
       const mapped = dataList.map((e) => {
         const f = { name: e, isSelected: false };
-        // console.log("f:", f);
         return self.map.put(f);
       });
       return Array.isArray(data) ? mapped : mapped[0];
@@ -47,16 +41,23 @@ export const CondimentStore = types
       const selectedCondiment = self.map.get(condimentName);
       if (selectedCondiment) {
         selectedCondiment.chooseCondiment();
-        // selectedCondiment.isChosen
-        //   ? self.selectedMap.put(selectedCondiment)
-        //   : self.selectedMap.delete(selectedCondiment.name);
       } else {
         console.log("Condiment doesn't exist");
       }
     },
+  }))
+  .views((self) => ({
+    get condimentsAsStrings() {
+      return Array.from(self.map).map((condiment) => condiment[0]);
+    },
+    get selectedCondiments() {
+      return new Map(
+        Array.from(self.map).filter(([_k, v]) => v.isChosen === true)
+      );
+    },
+    get selectedCondimentsAsStrings() {
+      return Array.from(self.map)
+        .filter(([_k, v]) => v.isChosen === true)
+        .map((condiment) => condiment[0]);
+    },
   }));
-// .views((self) => ({
-//   selectedCondiments() {
-//     return self.map.filter((condiment) => condiment.isChosen === true);
-//   },
-// }));

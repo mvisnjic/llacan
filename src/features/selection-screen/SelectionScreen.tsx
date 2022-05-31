@@ -10,6 +10,7 @@ import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
 import { restaurantData } from "~/features/restaurant-pick-screen/restaurantData";
+import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
 import { formatPhoneNumber } from "~/utils/formatPhoneNumber";
 
@@ -51,6 +52,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
   const S = useStyle();
   const navigation = useNavigation();
   const route = useRoute();
+  const store = useStore();
 
   const { restaurant, order } = route.params as {
     restaurant: typeof restaurantData[0];
@@ -151,7 +153,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
               </View>
               <View flexDirectionRow>
                 <Text sizeMediumSmall style={{ width: 220 }}>
-                  {orderInCart.condiments.join(", ")}
+                  {store.condimentStore.selectedCondimentsAsStrings.join(", ")}
                 </Text>
                 <IconButton
                   iconName="trash-can-outline"

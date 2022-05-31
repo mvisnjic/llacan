@@ -108,6 +108,7 @@ const MenuListItem = observer(function MenuListItem({
 const FlatlistHeader = observer(function FlatlistHeader(props: {
   restaurant: typeof restaurantData[0];
 }) {
+  const store = useStore();
   return (
     <>
       <Image
@@ -162,8 +163,7 @@ const FlatlistHeader = observer(function FlatlistHeader(props: {
         </View>
         <View style={{ borderColor: "#EEEEEE", borderWidth: 1 }} paddingLarge>
           <Text sizeMediumSmall>
-            kečap, ajvar, majoneza, kiseli krastavci, zelena salata, rajčica,
-            luk, chilli
+            {store.condimentStore.condimentsAsStrings.join(", ")}
           </Text>
         </View>
       </View>
