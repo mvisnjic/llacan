@@ -1,21 +1,30 @@
 import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
+import { StyleSheet } from "react-native";
 import { Button } from "~/components/Button";
 import { Icon } from "~/components/Icon";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
 import { styleConstants as C } from "~/style/styleConstants";
-import {
-  RestaurantListItemProps,
-  useStyle,
-  allOrdersAreActive,
-} from "./RestaurantPickScreen";
+import { shadow } from "~/utils/shadow";
+import { RestaurantListItemProps } from "./RestaurantPickScreen";
 
 export const RestaurantListItem = observer(function RestaurantListItem({
   restaurant,
 }: RestaurantListItemProps) {
+  function useStyle() {
+    return StyleSheet.create({
+      container: {
+        backgroundColor: restaurant.activeOrder
+          ? C.colorBackgroundThemeSofter
+          : C.colorBackgroundLight,
+        ...shadow(5),
+      },
+    });
+  }
+
   const S = useStyle();
   const navigation = useNavigation();
 
@@ -60,14 +69,16 @@ export const RestaurantListItem = observer(function RestaurantListItem({
             <Icon
               size={C.fontSizeLarge}
               name="circle-outline"
-              color={allOrdersAreActive ? "#2DCB48" : C.colorBackgroundLight}
+              color={
+                restaurant.activeOrder ? "#2DCB48" : C.colorBackgroundLight
+              }
             />
             <Spacer large />
             <Text
               sizeMedium
               weightLight
               style={{
-                color: allOrdersAreActive
+                color: restaurant.activeOrder
                   ? C.colorBackgroundDark
                   : C.colorBackgroundLight,
               }}
@@ -88,7 +99,7 @@ export const RestaurantListItem = observer(function RestaurantListItem({
         />
         <Spacer />
         <Button
-          title={allOrdersAreActive ? "Pridruži se" : "Nova narudžba"}
+          title={restaurant.activeOrder ? "Pridruži se" : "Nova narudžba"}
           onPress={() =>
             restaurant.hasPommes
               ? navigation.navigate("SecondSelectionScreen", {
