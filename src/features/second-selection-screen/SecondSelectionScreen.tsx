@@ -157,7 +157,7 @@ export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
           <Button
             title="Kreiraj party!"
             style={S.buttonWidth}
-            onPress={() => restaurant.activateOrder()}
+            // onPress={() => restaurant.activateOrder()}
           />
         </View>
       </View>
