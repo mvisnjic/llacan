@@ -4,6 +4,7 @@ import { IconButton } from "~/components/IconButton";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
+import { RestaurantInstance } from "~/mobx/entities/restaurant/Restaurant";
 import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
 import { useStyle } from "./SelectionScreen";
@@ -24,10 +25,11 @@ export const UserOrder = observer(function UserOrder(props: {
       | undefined
     >
   >;
+  restaurant: RestaurantInstance;
 }) {
   const S = useStyle();
   const store = useStore();
-  const { orderInCart, setOrderInCart } = props;
+  const { orderInCart, setOrderInCart, restaurant } = props;
 
   return (
     <View
@@ -66,7 +68,10 @@ export const UserOrder = observer(function UserOrder(props: {
             iconColor={C.colorTextDanger}
             centerContent
             style={{ flex: 1 }}
-            onPress={() => setOrderInCart(undefined)}
+            onPress={() => {
+              restaurant.removeOrder();
+              setOrderInCart(undefined);
+            }}
           />
         </View>
       </View>

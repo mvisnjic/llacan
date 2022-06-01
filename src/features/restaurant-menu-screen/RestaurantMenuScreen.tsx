@@ -13,16 +13,11 @@ import { useStore } from "~/mobx/utils/useStore";
 import { FlatlistHeader } from "./FlatlistHeader";
 import { MenuListItem } from "./MenuListItem";
 
-interface MenuItem {
+export interface MenuItem {
   category: string;
   name: string;
   price: number;
   description: string;
-}
-
-export interface MenuListItemProps {
-  menuCategory: { category: string; categoryItems: [MenuItem] };
-  restaurant: any;
 }
 
 export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {

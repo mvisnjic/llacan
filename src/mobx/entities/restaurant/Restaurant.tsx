@@ -1,11 +1,11 @@
 import { types, Instance, SnapshotIn, SnapshotOut } from "mobx-state-tree";
-// import { MenuItem } from "../menu/Menu";
+import { MenuItem, MenuItemInstance } from "../menu/Menu";
 
 export interface RestaurantInstance extends Instance<typeof Restaurant> {}
 export interface RestaurantSnapshotIn extends SnapshotIn<typeof Restaurant> {}
 export interface RestaurantSnapshotOut extends SnapshotOut<typeof Restaurant> {}
 
-const { string, identifier, boolean, array /*, maybe*/ } = types;
+const { string, identifier, boolean, array, reference, maybe } = types;
 
 export const Restaurant = types
   .model("Restaurant", {
@@ -16,10 +16,15 @@ export const Restaurant = types
     sms_accept: boolean,
     hasPommes: boolean,
     tags: array(string),
-    activeOrder: false,
+    activeOrder: maybe(reference(MenuItem)),
   })
   .actions((self) => ({
-    activateOrder() {
-      self.activeOrder = !self.activeOrder;
+    addOrder(menuItem: MenuItemInstance) {
+      // console.warn("ORDER ADDED!");
+      self.activeOrder = menuItem;
+    },
+    removeOrder() {
+      // console.warn("ORDER REMOVED!");
+      self.activeOrder = undefined;
     },
   }));

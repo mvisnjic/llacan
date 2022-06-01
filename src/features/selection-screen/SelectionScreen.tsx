@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Screen } from "~/components/Screen";
-import { restaurantData } from "~/features/restaurant-pick-screen/restaurantData";
+import { RestaurantInstance } from "~/mobx/entities/restaurant/Restaurant";
 import { styleConstants as C } from "~/style/styleConstants";
 import { Header } from "./Header";
 import { MySelection } from "./MySelection";
@@ -48,7 +48,7 @@ export const SelectionScreen = observer(function SelectionScreen() {
   const route = useRoute();
 
   const { restaurant, order } = route.params as {
-    restaurant: typeof restaurantData[0];
+    restaurant: RestaurantInstance;
     order: { name: string; price: number; condiments: string[] };
   };
 
@@ -61,7 +61,11 @@ export const SelectionScreen = observer(function SelectionScreen() {
       <Header restaurant={restaurant} />
       <MySelection orderInCart={orderInCart} restaurant={restaurant} />
       {orderInCart && (
-        <UserOrder orderInCart={orderInCart} setOrderInCart={setOrderInCart} />
+        <UserOrder
+          orderInCart={orderInCart}
+          setOrderInCart={setOrderInCart}
+          restaurant={restaurant}
+        />
       )}
       <OtherUserOrderCount />
       {/* TODO lista narudzbi ostalih usera */}

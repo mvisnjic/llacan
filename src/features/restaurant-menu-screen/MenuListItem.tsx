@@ -5,10 +5,16 @@ import { Icon } from "~/components/Icon";
 import { Text } from "~/components/Text";
 import { TouchableOpacity } from "~/components/TouchableOpacity";
 import { View } from "~/components/View";
+import { RestaurantInstance } from "~/mobx/entities/restaurant/Restaurant";
 import { styleConstants as C } from "~/style/styleConstants";
 import { removeBracketsAroundText } from "~/utils/removeBracketsAroundText";
 import { titleCase } from "../../utils/titleCase";
-import { MenuListItemProps } from "./RestaurantMenuScreen";
+import { MenuItem } from "./RestaurantMenuScreen";
+
+export interface MenuListItemProps {
+  menuCategory: { category: string; categoryItems: [MenuItem] };
+  restaurant: RestaurantInstance;
+}
 
 export const MenuListItem = observer(function MenuListItem({
   menuCategory,
@@ -53,12 +59,13 @@ export const MenuListItem = observer(function MenuListItem({
             borderBottomColor: "#EEEEEE",
             minHeight: 60,
           }}
-          onPress={() =>
+          onPress={() => {
+            restaurant.addOrder(itemInCategory);
             navigation.navigate("ItemDetailsScreen", {
               menuItem: itemInCategory,
               restaurant: restaurant,
-            })
-          }
+            });
+          }}
         >
           <View style={{ maxWidth: "75%" }}>
             <Text sizeMedium weightSemiBold numberOfLines={1}>
