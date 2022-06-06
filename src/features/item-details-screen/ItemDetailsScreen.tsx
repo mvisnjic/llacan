@@ -11,7 +11,8 @@ import { Spinner } from "~/components/Spinner";
 import { Text } from "~/components/Text";
 import { TouchableOpacity } from "~/components/TouchableOpacity";
 import { View } from "~/components/View";
-import { Condiment } from "~/mobx/entities/condiment/Condiment";
+import { CondimentInstance } from "~/mobx/entities/condiment/Condiment";
+import { RestaurantInstance } from "~/mobx/entities/restaurant/Restaurant";
 import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
 import { removeBracketsAroundText } from "~/utils/removeBracketsAroundText";
@@ -30,19 +31,24 @@ function useStyle() {
   });
 }
 
-const CondimentItem = observer(function CondimentItem({
-  condiment,
-}: {
-  condiment: typeof Condiment;
+const CondimentItem = observer(function CondimentItem(props: {
+  condiment: CondimentInstance;
+  restaurant: RestaurantInstance;
 }) {
+  const { condiment, restaurant } = props;
   const colorOfBackground = condiment.isChosen
     ? C.colorBackgroundThemeSoft
     : C.colorBackgroundLightDark;
 
+  console.log("restaurant", restaurant);
+
   return (
     <View style={{ backgroundColor: colorOfBackground, borderRadius: 40 }}>
       <TouchableOpacity
-        onPress={() => condiment.chooseCondiment()}
+        onPress={() => {
+          condiment.chooseCondiment();
+          restaurant.addCondiment(condiment);
+        }}
         paddingHorizontalLarge
         paddingVerticalMedium
       >
@@ -60,7 +66,7 @@ export const ItemDetailsScreen = observer(function ItemDetailsScreen() {
 
   const { menuItem, restaurant } = route.params as {
     menuItem: any;
-    restaurant: any;
+    restaurant: RestaurantInstance;
   };
 
   const condimentsQuery = useQuery(["condimentList"], () => {
@@ -104,13 +110,11 @@ export const ItemDetailsScreen = observer(function ItemDetailsScreen() {
           <Text weightSemiBold>Odaberite dodatke</Text>
           <Spacer />
           {condiments &&
-            condiments.map(
-              (condiment: { name: string; isSelected: boolean }) => (
-                <View key={condiment.name} paddingSmall>
-                  <CondimentItem condiment={condiment} />
-                </View>
-              )
-            )}
+            condiments.map((condiment) => (
+              <View key={condiment.name} paddingSmall>
+                <CondimentItem condiment={condiment} restaurant={restaurant} />
+              </View>
+            ))}
         </View>
         <View paddingHorizontalLarge style={S.orderButton}>
           <Button

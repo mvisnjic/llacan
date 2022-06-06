@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { Instance, SnapshotIn, SnapshotOut, types } from "mobx-state-tree";
 import { restaurantData } from "~/features/restaurant-pick-screen/restaurantData";
-import { Restaurant } from "./Restaurant";
+import { Restaurant, RestaurantInstance } from "./Restaurant";
 
 export interface RestaurantStoreInstance
   extends Instance<typeof RestaurantStore> {}
@@ -28,8 +28,8 @@ export const RestaurantStore = types
     },
   }))
   .actions((self) => ({
-    readRestaurantList() {
+    readRestaurantList(): RestaurantInstance[] {
       const response = self.process(restaurantData);
-      return response;
+      return response as any;
     },
   }));

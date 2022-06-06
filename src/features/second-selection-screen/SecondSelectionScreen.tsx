@@ -8,8 +8,8 @@ import { Screen } from "~/components/Screen";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
-import { restaurantData } from "~/features/restaurant-pick-screen/restaurantData";
 import Pomes from "~/features/second-selection-screen/images/PomesIcon";
+import { RestaurantInstance } from "~/mobx/entities/restaurant/Restaurant";
 import { styleConstants as C } from "~/style/styleConstants";
 import { formatPhoneNumber } from "~/utils/formatPhoneNumber";
 
@@ -60,8 +60,9 @@ export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
   const route = useRoute();
 
   const { restaurant } = route.params as {
-    restaurant: typeof restaurantData[0];
+    restaurant: RestaurantInstance;
   };
+
   return (
     <Screen preventScroll>
       <View>
@@ -153,7 +154,11 @@ export const SecondSelectionScreen = observer(function SecondSelectionScreen() {
           </View>
 
           <Spacer large />
-          <Button title="Kreiraj party!" style={S.buttonWidth} />
+          <Button
+            title="Kreiraj party!"
+            style={S.buttonWidth}
+            // onPress={() => restaurant.activateOrder()}
+          />
         </View>
       </View>
     </Screen>
