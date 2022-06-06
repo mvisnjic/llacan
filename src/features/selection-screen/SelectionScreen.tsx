@@ -1,6 +1,6 @@
 import { useRoute } from "@react-navigation/native";
 import { observer } from "mobx-react";
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import { Screen } from "~/components/Screen";
 import { RestaurantInstance } from "~/mobx/entities/restaurant/Restaurant";
@@ -47,25 +47,21 @@ export function useStyle() {
 export const SelectionScreen = observer(function SelectionScreen() {
   const route = useRoute();
 
-  const { restaurant, order } = route.params as {
+  const { restaurant } = route.params as {
     restaurant: RestaurantInstance;
-    order: { name: string; price: number; condiments: string[] };
   };
 
-  const [orderInCart, setOrderInCart] = useState<typeof order | undefined>(
-    order
-  );
+  const orderInCart = restaurant.activeOrder;
 
   return (
     <Screen preventScroll>
       <Header restaurant={restaurant} />
-      <MySelection orderInCart={orderInCart} restaurant={restaurant} />
+      <MySelection
+        orderInCart={restaurant.activeOrder}
+        restaurant={restaurant}
+      />
       {orderInCart && (
-        <UserOrder
-          orderInCart={orderInCart}
-          setOrderInCart={setOrderInCart}
-          restaurant={restaurant}
-        />
+        <UserOrder orderInCart={orderInCart} restaurant={restaurant} />
       )}
       <OtherUserOrderCount />
       {/* TODO lista narudzbi ostalih usera */}

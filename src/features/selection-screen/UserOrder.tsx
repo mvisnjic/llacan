@@ -4,32 +4,17 @@ import { IconButton } from "~/components/IconButton";
 import { Spacer } from "~/components/Spacer";
 import { Text } from "~/components/Text";
 import { View } from "~/components/View";
+import { MenuItemInstance } from "~/mobx/entities/menu/Menu";
 import { RestaurantInstance } from "~/mobx/entities/restaurant/Restaurant";
-import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
 import { useStyle } from "./SelectionScreen";
 
 export const UserOrder = observer(function UserOrder(props: {
-  orderInCart: {
-    name: string;
-    price: number;
-    condiments: string[];
-  };
-  setOrderInCart: React.Dispatch<
-    React.SetStateAction<
-      | {
-          name: string;
-          price: number;
-          condiments: string[];
-        }
-      | undefined
-    >
-  >;
+  orderInCart: MenuItemInstance;
   restaurant: RestaurantInstance;
 }) {
   const S = useStyle();
-  const store = useStore();
-  const { orderInCart, setOrderInCart, restaurant } = props;
+  const { orderInCart, restaurant } = props;
 
   return (
     <View
@@ -61,7 +46,9 @@ export const UserOrder = observer(function UserOrder(props: {
         </View>
         <View flexDirectionRow>
           <Text sizeMediumSmall style={{ width: 220 }}>
-            {store.condimentStore.selectedCondimentsAsStrings.join(", ")}
+            {Array.from(restaurant.selectedCondiments)
+              .map((condiment) => condiment[0])
+              .join(", ")}
           </Text>
           <IconButton
             iconName="trash-can-outline"
@@ -70,7 +57,6 @@ export const UserOrder = observer(function UserOrder(props: {
             style={{ flex: 1 }}
             onPress={() => {
               restaurant.removeOrder();
-              setOrderInCart(undefined);
             }}
           />
         </View>

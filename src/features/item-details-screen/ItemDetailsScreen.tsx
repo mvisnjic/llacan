@@ -40,8 +40,6 @@ const CondimentItem = observer(function CondimentItem(props: {
     ? C.colorBackgroundThemeSoft
     : C.colorBackgroundLightDark;
 
-  console.log("restaurant", restaurant);
-
   return (
     <View style={{ backgroundColor: colorOfBackground, borderRadius: 40 }}>
       <TouchableOpacity
@@ -129,7 +127,7 @@ export const ItemDetailsScreen = observer(function ItemDetailsScreen() {
                     order: {
                       name: menuItem.name,
                       price: menuItem.price,
-                      condiments: condiments,
+                      condiments: restaurant.selectedCondiments,
                     },
                   })
             }

@@ -1,5 +1,5 @@
 import { BottomTabHeaderProps } from "@react-navigation/bottom-tabs";
-import { StackActions } from "@react-navigation/native";
+// import { StackActions } from "@react-navigation/native";
 import { NativeStackHeaderProps } from "@react-navigation/native-stack";
 import { observer } from "mobx-react";
 import React from "react";
@@ -122,7 +122,8 @@ export const Header = observer(
               justifyContentCenter
               flexDirectionRow
               style={S.headerRight}
-              onPress={() => navigation.dispatch(StackActions.popToTop())}
+              // onPress={() => navigation.dispatch(StackActions.popToTop())}
+              onPress={() => navigation.navigate("ActiveOrdersScreen")}
             >
               {HeaderRight}
               <View style={S.circle} />

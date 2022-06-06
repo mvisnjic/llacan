@@ -20,6 +20,7 @@ export type TopLevelStackParams = {
   SelectionScreen: { restaurant: any; order?: any };
   SecondSelectionScreen: { restaurant: any };
   PastOrdersScreen: undefined;
+  ActiveOrdersScreen: undefined;
 };
 
 // End navigator params definitions

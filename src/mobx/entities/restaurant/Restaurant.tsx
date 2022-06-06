@@ -31,7 +31,7 @@ export const Restaurant = types
     },
     addCondiment(condiment: CondimentInstance) {
       self.selectedCondiments.get(condiment.name)
-        ? self.selectedCondiments.put(condiment)
-        : self.selectedCondiments.delete(condiment.name);
+        ? self.selectedCondiments.delete(condiment.name)
+        : self.selectedCondiments.put(condiment);
     },
   }));

@@ -32,4 +32,11 @@ export const RestaurantStore = types
       const response = self.process(restaurantData);
       return response as any;
     },
+  }))
+  .views((self) => ({
+    get activeOrderRestaurants() {
+      return Array.from(self.map)
+        .filter((restaurant) => restaurant[1].activeOrder)
+        .map((restaurant) => restaurant[1]);
+    },
   }));
