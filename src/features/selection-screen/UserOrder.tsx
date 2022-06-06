@@ -6,7 +6,6 @@ import { Text } from "~/components/Text";
 import { View } from "~/components/View";
 import { MenuItemInstance } from "~/mobx/entities/menu/Menu";
 import { RestaurantInstance } from "~/mobx/entities/restaurant/Restaurant";
-import { useStore } from "~/mobx/utils/useStore";
 import { styleConstants as C } from "~/style/styleConstants";
 import { useStyle } from "./SelectionScreen";
 
@@ -15,7 +14,6 @@ export const UserOrder = observer(function UserOrder(props: {
   restaurant: RestaurantInstance;
 }) {
   const S = useStyle();
-  const store = useStore();
   const { orderInCart, restaurant } = props;
 
   return (
@@ -48,7 +46,9 @@ export const UserOrder = observer(function UserOrder(props: {
         </View>
         <View flexDirectionRow>
           <Text sizeMediumSmall style={{ width: 220 }}>
-            {store.condimentStore.selectedCondimentsAsStrings.join(", ")}
+            {Array.from(restaurant.selectedCondiments)
+              .map((condiment) => condiment[0])
+              .join(", ")}
           </Text>
           <IconButton
             iconName="trash-can-outline"
