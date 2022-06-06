@@ -56,6 +56,8 @@ export const SelectionScreen = observer(function SelectionScreen() {
     order
   );
 
+  console.warn(orderInCart);
+
   return (
     <Screen preventScroll>
       <Header restaurant={restaurant} />

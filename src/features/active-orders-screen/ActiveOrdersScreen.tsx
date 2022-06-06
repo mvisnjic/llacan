@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 import React from "react";
 import { StyleSheet } from "react-native";
@@ -27,6 +28,7 @@ function useStyle() {
 export const ActiveOrdersScreen = observer(function ActiveOrdersScreen() {
   const S = useStyle();
   const store = useStore();
+  const navigation = useNavigation();
 
   const { activeOrderRestaurants } = store.restaurantStore;
 
@@ -38,7 +40,24 @@ export const ActiveOrdersScreen = observer(function ActiveOrdersScreen() {
         </Text>
       </View>
       {activeOrderRestaurants.map((restaurant) => (
-        <TouchableOpacity activeOpacity={0.5} key={restaurant.id}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          key={restaurant.id}
+          onPress={() =>
+            restaurant.hasPommes
+              ? navigation.navigate("SecondSelectionScreen", {
+                  restaurant: restaurant,
+                })
+              : navigation.navigate("SelectionScreen", {
+                  restaurant: restaurant,
+                  order: {
+                    name: restaurant.activeOrder?.name,
+                    price: restaurant.activeOrder?.price,
+                    condiments: restaurant.selectedCondiments,
+                  },
+                })
+          }
+        >
           <View paddingLarge flexDirectionRow style={S.pastOrderContainer}>
             <View>
               <Text sizeMediumLarge weightSemiBold>

@@ -127,7 +127,7 @@ export const ItemDetailsScreen = observer(function ItemDetailsScreen() {
                     order: {
                       name: menuItem.name,
                       price: menuItem.price,
-                      condiments: condiments,
+                      condiments: restaurant.selectedCondiments,
                     },
                   })
             }

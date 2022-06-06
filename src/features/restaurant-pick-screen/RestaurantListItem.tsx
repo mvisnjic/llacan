@@ -107,6 +107,11 @@ export const RestaurantListItem = observer(function RestaurantListItem({
                 })
               : navigation.navigate("SelectionScreen", {
                   restaurant: restaurant,
+                  order: {
+                    name: restaurant.activeOrder?.name,
+                    price: restaurant.activeOrder?.price,
+                    condiments: restaurant.selectedCondiments,
+                  },
                 })
           }
         />
