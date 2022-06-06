@@ -93,7 +93,7 @@ export const RestaurantListItem = observer(function RestaurantListItem({
           title="Menu i info"
           onPress={() =>
             navigation.navigate("RestaurantMenuScreen", {
-              restaurant: restaurant,
+              restaurantId: restaurant.id,
             })
           }
         />

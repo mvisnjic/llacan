@@ -8,7 +8,6 @@ import { useQuery } from "react-query";
 import { Screen } from "~/components/Screen";
 import { Spinner } from "~/components/Spinner";
 import { View } from "~/components/View";
-import { RestaurantInstance } from "~/mobx/entities/restaurant/Restaurant";
 import { useStore } from "~/mobx/utils/useStore";
 import { FlatlistHeader } from "./FlatlistHeader";
 import { MenuListItem } from "./MenuListItem";
@@ -25,9 +24,9 @@ export const RestaurantMenuScreen = observer(function RestaurantMenuScreen() {
   const insets = useSafeAreaInsets();
   const store = useStore();
 
-  const { restaurant } = route.params as {
-    restaurant: RestaurantInstance;
-  };
+  const { restaurantId } = route.params;
+  const restaurant = store.restaurantStore.map.get(restaurantId);
+  if (!restaurant) throw new Error("Missing restaurant in RMS");
 
   const menuQuery = useQuery(["menuList"], () => {
     return store.menuStore.readMenuList(restaurant.title);
