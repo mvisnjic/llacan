@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { observer } from "mobx-react";
 import React from "react";
 import { Header } from "~/components/Header";
+import { ActiveOrdersScreen } from "~/features/active-orders-screen/ActiveOrdersScreen";
 import { DropdownExample } from "~/features/dropdown/DropdownExample";
 import { HomeScreen } from "~/features/home-screen/HomeScreen";
 import { ItemDetailsScreen } from "~/features/item-details-screen/ItemDetailsScreen";
@@ -67,6 +68,10 @@ export const Router = observer(function Router({
           component={SecondSelectionScreen}
         />
         <Stack.Screen name="PastOrdersScreen" component={PastOrdersScreen} />
+        <Stack.Screen
+          name="ActiveOrdersScreen"
+          component={ActiveOrdersScreen}
+        />
 
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="DropdownExample" component={DropdownExample} />

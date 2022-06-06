@@ -40,8 +40,6 @@ const CondimentItem = observer(function CondimentItem(props: {
     ? C.colorBackgroundThemeSoft
     : C.colorBackgroundLightDark;
 
-  console.log("restaurant", restaurant);
-
   return (
     <View style={{ backgroundColor: colorOfBackground, borderRadius: 40 }}>
       <TouchableOpacity
