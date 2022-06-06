@@ -23,6 +23,29 @@ function useStyle() {
   });
 }
 
+const pastOrders = [
+  {
+    id: 0,
+    restaurant: "Fast Food Forever",
+    date: "05.06.2020.",
+  },
+  {
+    id: 1,
+    restaurant: "Pizzeria Napoli",
+    date: "05.06.2020.",
+  },
+  {
+    id: 2,
+    restaurant: "Fast Food Forever",
+    date: "05.06.2020.",
+  },
+  {
+    id: 3,
+    restaurant: "Fast Food Forever",
+    date: "05.06.2020.",
+  },
+];
+
 export const PastOrdersScreen = observer(function PastOrdersScreen() {
   const S = useStyle();
   return (
@@ -32,60 +55,21 @@ export const PastOrdersScreen = observer(function PastOrdersScreen() {
           Prošle narudžbe
         </Text>
       </View>
-      <View>
-        <TouchableOpacity activeOpacity={0.5}>
+      {pastOrders.map((order) => (
+        <TouchableOpacity activeOpacity={0.5} key={order.id}>
           <View paddingLarge flexDirectionRow style={S.pastOrderContainer}>
             <View>
               <Text sizeMediumLarge weightSemiBold>
-                Fast Food Forever
+                {order.restaurant}
               </Text>
-              <Text sizeSmall>05.06.2020</Text>
+              <Text sizeSmall>{order.date}</Text>
             </View>
             <View style={S.alignCenter}>
               <Line />
             </View>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.5}>
-          <View paddingLarge flexDirectionRow style={S.pastOrderContainer}>
-            <View>
-              <Text sizeMediumLarge weightSemiBold>
-                Pizzeria Napoli
-              </Text>
-              <Text sizeSmall>05.06.2020</Text>
-            </View>
-            <View style={S.alignCenter}>
-              <Line />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.5}>
-          <View paddingLarge flexDirectionRow style={S.pastOrderContainer}>
-            <View>
-              <Text sizeMediumLarge weightSemiBold>
-                Fast Food Forever
-              </Text>
-              <Text sizeSmall>05.06.2020</Text>
-            </View>
-            <View style={S.alignCenter}>
-              <Line />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.5}>
-          <View paddingLarge flexDirectionRow style={S.pastOrderContainer}>
-            <View>
-              <Text sizeMediumLarge weightSemiBold>
-                Fast Food Forever
-              </Text>
-              <Text sizeSmall>05.06.2020</Text>
-            </View>
-            <View style={S.alignCenter}>
-              <Line />
-            </View>
-          </View>
-        </TouchableOpacity>
-      </View>
+      ))}
     </Screen>
   );
 });
